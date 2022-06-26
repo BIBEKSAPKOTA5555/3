@@ -1,0 +1,97 @@
+*{
+ margin: 0;
+    padding: 0;    
+    box-sizing: border-box;
+     font-family: 'poppins', sans-serif;
+    }
+.container{
+    width: 100%;
+    height: 100vh;
+    background-image: linear-gradient(rgba(0,0,0,0.3), transparent), url(b.jpg);
+    background-size: cover;
+    background-position: center;
+    padding: 0 8%;
+    position: relative;
+    }
+    nav{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    flex-wrap: wrap;
+     padding: 5px;
+     position: sticky;
+}
+.logo{
+    width: 190px;
+    cursor: pointer;
+}
+nav ul{
+flex: 1;
+text-align: right;
+padding-right: 30px;
+}
+nav ul li{
+    display: inline-block;
+    list-style: none;
+    margin: 10px 30px;
+
+}
+nav ul li a{
+    color: #fff;
+    text-decoration: none;
+position: relative
+;
+}
+nav ul li a::after{
+    content:' ';
+    width: 0;
+    height: 3px;
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+     transform: translateX(-50%);
+     background:#fff;
+     transition: width 0.3s ;
+}
+nav ul li a:hover::after{
+width: 50%;
+}
+.text-box{
+color: #fff;
+position: absolute;
+bottom: 8%;
+ }
+.text-box p{
+font-size: 50px;
+font-weight: 600;
+ }
+.text-box h1{
+font-size: 190px;
+line-height: 160px;
+margin-left: -10px;
+color: transparent;
+-webkit-text-stroke:1px #fff;
+background: url(iii.png);
+-webkit-background-clip: text;
+background-position: 0 0;
+animation: back 20s linear infinite;
+}
+@keyframes back{
+100%{
+background-position: 2000px 0;
+}
+}
+.text-box h3{
+font-size: 40px;
+font-weight: 600;
+}
+.social-icons{
+    position: absolute;
+    right: 4%;
+    bottom: 36%;
+}
+.social-icons img{
+    width: 50px;
+    display: block;
+    margin: 34px 35px;
+}
