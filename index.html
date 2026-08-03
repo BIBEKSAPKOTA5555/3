@@ -1,0 +1,2439 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+    <title>Bibek Sapkota - Official Website</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800;900&family=Rajdhani:wght@600;700;800&family=Outfit:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&family=Syne:wght@700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="style.css?v=700">
+    <!-- Three.js CDN for High-Performance 3D WebGL Graphics -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- EmailJS SDK for Real-Time Gmail OTP Verification -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js" defer></script>
+    <!-- Anti-DevTools & Source Code Security Engine -->
+    <script src="security.js" defer></script>
+</head>
+
+<body class="home-body">
+    <!-- High-Tech Cyber Gaming Preloader / Loading Screen -->
+    <div id="cyberPreloader" class="cyber-preloader">
+        <div class="preloader-content">
+            <div class="preloader-logo-wrapper">
+                <div class="preloader-energy-ring"></div>
+                <div class="preloader-energy-ring ring-outer"></div>
+                <img src="bs-gaming-clean.png" class="preloader-logo-img" alt="BS GAMING Emblem">
+            </div>
+            <h1 class="preloader-title gamer-font">BS GAMING</h1>
+            <p class="preloader-subtitle">BIBEK SAPKOTA • OFFICIAL WEBSITE</p>
+            
+            <div class="preloader-progress-box">
+                <div class="preloader-progress-info">
+                    <span id="preloaderStatusText" class="preloader-status-text">INITIALIZING CYBER CORE...</span>
+                    <span id="preloaderPercentText" class="preloader-percent-text">0%</span>
+                </div>
+                <div class="preloader-progress-track">
+                    <div id="preloaderProgressBar" class="preloader-progress-bar"></div>
+                </div>
+            </div>
+            
+            <div class="preloader-hint">
+                <span class="pulse-dot"></span> Click anywhere or press any key to enter
+            </div>
+        </div>
+    </div>
+    <script>
+        (function initCyberPreloader() {
+            const preloader = document.getElementById('cyberPreloader');
+            const progressBar = document.getElementById('preloaderProgressBar');
+            const percentText = document.getElementById('preloaderPercentText');
+            const statusText = document.getElementById('preloaderStatusText');
+
+            if (!preloader || !progressBar) return;
+
+            let progress = 0;
+            let isDismissed = false;
+
+            const statuses = [
+                { pct: 0, text: 'INITIALIZING CYBER CORE...' },
+                { pct: 20, text: 'LOADING 3D GRAPHICS & ASSETS...' },
+                { pct: 45, text: 'CALIBRATING RAYCASTER & PHYSICS...' },
+                { pct: 75, text: 'SYNCHRONIZING AUDIO & DATA...' },
+                { pct: 92, text: 'FINALIZING SYSTEM INTERACTION...' },
+                { pct: 100, text: 'SYSTEM READY! WELCOME' }
+            ];
+
+            function updateStatus(val) {
+                for (let i = statuses.length - 1; i >= 0; i--) {
+                    if (val >= statuses[i].pct) {
+                        if (statusText && statusText.textContent !== statuses[i].text) {
+                            statusText.textContent = statuses[i].text;
+                        }
+                        break;
+                    }
+                }
+            }
+
+            function dismissPreloader() {
+                if (isDismissed) return;
+                isDismissed = true;
+                progress = 100;
+                if (progressBar) progressBar.style.width = '100%';
+                if (percentText) percentText.textContent = '100%';
+                if (statusText) statusText.textContent = 'SYSTEM READY! WELCOME';
+
+                if (typeof playLaserSFX === 'function') {
+                    try { playLaserSFX('over'); } catch (e) {}
+                }
+
+                setTimeout(() => {
+                    preloader.classList.add('fade-out');
+                    setTimeout(() => {
+                        preloader.style.display = 'none';
+                    }, 750);
+                }, 300);
+            }
+
+            const interval = setInterval(() => {
+                if (isDismissed) {
+                    clearInterval(interval);
+                    return;
+                }
+
+                const isLoaded = document.readyState === 'complete';
+                const increment = isLoaded ? Math.random() * 18 + 12 : Math.random() * 8 + 3;
+                progress += increment;
+
+                if (progress >= 100) {
+                    progress = 100;
+                    clearInterval(interval);
+                    dismissPreloader();
+                } else {
+                    if (progressBar) progressBar.style.width = Math.floor(progress) + '%';
+                    if (percentText) percentText.textContent = Math.floor(progress) + '%';
+                    updateStatus(progress);
+                }
+            }, 60);
+
+            preloader.addEventListener('click', dismissPreloader);
+            window.addEventListener('keydown', dismissPreloader, { once: true });
+            window.addEventListener('load', () => {
+                if (progress < 90) progress = 90;
+            });
+        })();
+    </script>
+
+    <!-- Full-Screen 3D WebGL Canvas Background -->
+    <canvas id="threeCanvas" class="three-webgl-canvas"></canvas>
+
+    <!-- Hidden iframe for guaranteed background email dispatch without CORS blocking -->
+    <iframe name="email_dispatch_iframe" id="emailDispatchIframe" style="display:none;"></iframe>
+
+    <!-- Floating Ambient Glowing Orbs -->
+    <div class="ambient-orb orb-1"></div>
+    <div class="ambient-orb orb-2"></div>
+    <div class="ambient-orb orb-3"></div>
+
+    <div class="container">
+        <nav class="animated-nav">
+            <!-- 1. Left Brand Emblem & Title -->
+            <a href="index.html" class="nav-brand-link">
+                <img src="bs-gaming-clean.png" class="bs-gaming-logo" alt="BS GAMING Logo">
+                <span class="gamer-font nav-brand-text">BS GAMING</span>
+            </a>
+
+            <!-- 2. Center Social Quick Dock -->
+            <div class="top-nav-socials">
+                <a href="https://www.facebook.com/profile.php?id=100077988874834" target="_blank"
+                    onclick="openSocialApp(event, 'https://www.facebook.com/profile.php?id=100077988874834', 'fb://profile/100077988874834')"
+                    aria-label="Facebook" class="top-social-icon icon-fb"><img src="facebook.png" alt="FB"></a>
+                <a href="https://www.tiktok.com/@bibek_866284?_t=8lTCojGbjdq&_r=1" target="_blank"
+                    onclick="openSocialApp(event, 'https://www.tiktok.com/@bibek_866284?_t=8lTCojGbjdq&_r=1', 'snssdk1128://user/profile/@bibek_866284')"
+                    aria-label="TikTok" class="top-social-icon icon-tt"><img src="tik-tok.png" alt="TikTok"></a>
+                <a href="https://www.instagram.com/bibeksapkota147/?utm_source=qr" target="_blank"
+                    onclick="openSocialApp(event, 'https://www.instagram.com/bibeksapkota147/?utm_source=qr', 'instagram://user?username=bibeksapkota147')"
+                    aria-label="Instagram" class="top-social-icon icon-ig"><img src="instagram.png" alt="Instagram"></a>
+                <a href="https://www.youtube.com/channel/UCThD8PRvL7l7BVFqcWjZWUg" target="_blank"
+                    onclick="openSocialApp(event, 'https://www.youtube.com/channel/UCThD8PRvL7l7BVFqcWjZWUg', 'vnd.youtube://www.youtube.com/channel/UCThD8PRvL7l7BVFqcWjZWUg')"
+                    aria-label="YouTube" class="top-social-icon icon-yt"><img src="youtube.png" alt="YouTube"></a>
+                <a href="https://discord.gg/uQ6gWNc7N" target="_blank"
+                    onclick="openSocialApp(event, 'https://discord.gg/uQ6gWNc7N', 'discord://discord.gg/uQ6gWNc7N')"
+                    aria-label="Discord" class="top-social-icon icon-discord"><img src="discord.png" alt="Discord"></a>
+            </div>
+
+            <!-- 3. Right Navigation & Action Items -->
+            <ul class="nav-links">
+                <li><a href="index.html" class="active" data-i18n="navAbout">About</a></li>
+                <li><a href="#game" onclick="openGameModal(event)" class="gamer-font nav-btn-game">🎮 PLAY GAME</a></li>
+                <li><a href="#contact" onclick="openContactModal(event)" data-i18n="navContact">Contact</a></li>
+                <li><a href="portfolio.html" data-i18n="navPortfolio">Portfolio</a></li>
+                <li><button class="lang-btn" id="langToggleBtn" onclick="toggleLanguage()">🌐 日本語</button></li>
+            </ul>
+        </nav>
+
+        <div class="content-wrapper" id="heroContentWrapper">
+            <div class="clean-hero-wrapper" id="heroTextBox">
+                <!-- BS GAMING Official Esports Badge -->
+                <div class="bs-gaming-emblem-box">
+                    <img src="bs-gaming-clean.png" alt="BS GAMING Logo" class="bs-gaming-hero-img">
+                    <div>
+                        <span class="gamer-font"
+                            style="color:#00f2fe; font-size:1.05rem; font-weight:900; letter-spacing:2px; display:block;">BS
+                            GAMING OFFICIAL</span>
+                        <span
+                            style="font-family:'Rajdhani',sans-serif; color:#ffaa00; font-size:0.8rem; font-weight:800;">PRO
+                            ESPORTS & TECH BRAND • BIBEK SAPKOTA</span>
+                    </div>
+                </div>
+
+                <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap; margin-bottom:8px;">
+                    <span class="hud-badge hud-cyan">🎮 PLAYER 1</span>
+                    <span class="hud-badge hud-pink">⚡ LEVEL 99</span>
+                    <span class="hud-badge hud-green">🏆 S-RANK STUDENT</span>
+                </div>
+                <p class="greeting-text gamer-font" data-i18n="greeting" style="color:#00f2fe; letter-spacing:2px;">I'M
+                </p>
+                <h1 class="main-title gamer-title" data-i18n="mainTitle">BIBEK SAPKOTA</h1>
+                <h3 class="typed-text-wrapper gamer-font">
+                    <span id="typedText" style="color:#00f2fe;"></span><span class="typing-cursor">|</span>
+                </h3>
+
+                <!-- Interactive 3D Model Widget -->
+                <div class="hero-3d-model-wrapper" id="hero3DModelWrapper" style="margin-top:16px;">
+                    <canvas id="hero3DCanvas" class="hero-3d-model-canvas"></canvas>
+                    <span class="model-hint-badge" data-i18n="modelHint">✨ Drag to rotate 3D Model</span>
+                </div>
+
+                <div class="hero-cta-group" style="margin-top:18px;">
+                    <a href="portfolio.html" class="hero-btn primary-btn gamer-font"
+                        style="background:linear-gradient(135deg, #00f2fe, #ff007f); color:#ffffff; font-weight:900;"
+                        data-i18n="exploreBtn">Explore Portfolio 🚀</a>
+                    <a href="#contact" onclick="openContactModal(event)" class="hero-btn secondary-btn gamer-font"
+                        style="border-color:#00f2fe; color:#00f2fe;" data-i18n="contactBtn">Contact Me 💬</a>
+                </div>
+            </div>
+
+            <div class="hero-social-showcase"
+                style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; z-index: 2;">
+                <a href="https://www.facebook.com/profile.php?id=100077988874834" target="_blank"
+                    onclick="openSocialApp(event, 'https://www.facebook.com/profile.php?id=100077988874834', 'fb://profile/100077988874834')"
+                    rel="noopener noreferrer" class="social-pill-badge pill-fb">
+                    <img src="facebook.png" alt="Facebook"> Facebook
+                </a>
+                <a href="https://www.tiktok.com/@bibek_866284?_t=8lTCojGbjdq&_r=1" target="_blank"
+                    onclick="openSocialApp(event, 'https://www.tiktok.com/@bibek_866284?_t=8lTCojGbjdq&_r=1', 'snssdk1128://user/profile/@bibek_866284')"
+                    rel="noopener noreferrer" class="social-pill-badge pill-tt">
+                    <img src="tik-tok.png" alt="TikTok"> TikTok
+                </a>
+                <a href="https://www.instagram.com/bibeksapkota147/?utm_source=qr" target="_blank"
+                    onclick="openSocialApp(event, 'https://www.instagram.com/bibeksapkota147/?utm_source=qr', 'instagram://user?username=bibeksapkota147')"
+                    rel="noopener noreferrer" class="social-pill-badge pill-ig">
+                    <img src="instagram.png" alt="Instagram"> Instagram
+                </a>
+                <a href="https://www.youtube.com/channel/UCThD8PRvL7l7BVFqcWjZWUg" target="_blank"
+                    onclick="openSocialApp(event, 'https://www.youtube.com/channel/UCThD8PRvL7l7BVFqcWjZWUg', 'vnd.youtube://www.youtube.com/channel/UCThD8PRvL7l7BVFqcWjZWUg')"
+                    rel="noopener noreferrer" class="social-pill-badge pill-yt">
+                    <img src="youtube.png" alt="YouTube"> YouTube
+                </a>
+                <a href="https://discord.gg/uQ6gWNc7N" target="_blank"
+                    onclick="openSocialApp(event, 'https://discord.gg/uQ6gWNc7N', 'discord://discord.gg/uQ6gWNc7N')"
+                    rel="noopener noreferrer" class="social-pill-badge pill-discord">
+                    <img src="discord.png" alt="Discord"> Discord
+                </a>
+            </div>
+        </div>
+
+        <!-- BS GAMING Direct YouTube & TikTok Auto-Live Stream Hub -->
+        <section class="bs-gaming-live-hub" id="live-hub">
+            <div class="live-hub-header">
+                <div class="live-indicator-badge">
+                    <span class="live-red-dot"></span>
+                    <span class="gamer-font" style="color:#ff0055; font-weight:900; letter-spacing:1px;">🔴 LIVE STREAM BROADCAST</span>
+                </div>
+                <h2 class="gallery-section-title gamer-title" style="margin-top:6px;">BS GAMING OFFICIAL LIVE 🎮</h2>
+                <p style="font-family:'Rajdhani',sans-serif; color:#00f2fe; font-size:1rem; font-weight:700;">Broadcasts Automatically Whenever Bibek Goes Live on YouTube or TikTok</p>
+
+                <!-- Live Platform Switcher Tabs -->
+                <div class="live-tabs-wrapper">
+                    <button class="live-tab-btn active-live-tab" id="ytLiveTabBtn" onclick="switchLiveTab('yt')">
+                        <img src="youtube.png" alt="YouTube"> YouTube Live Stream
+                    </button>
+                    <button class="live-tab-btn" id="ttLiveTabBtn" onclick="switchLiveTab('tt')">
+                        <img src="tik-tok.png" alt="TikTok"> TikTok Live Stream
+                    </button>
+                </div>
+            </div>
+
+            <!-- YouTube Live Container (Click to Play - No Autoplay) -->
+            <div class="live-player-container" id="ytLiveContainer">
+                <div id="ytLivePlayerContainer" class="live-iframe" style="position:relative; cursor:pointer; background:#000; display:flex; align-items:center; justify-content:center; height:380px; border-radius:20px; overflow:hidden;" onclick="loadLiveYTPlayer()">
+                    <img src="https://img.youtube.com/vi/SGTw0e-Vdoc/hqdefault.jpg" alt="BS GAMING Live Broadcast" style="width:100%; height:100%; object-fit:cover; filter:brightness(0.85);">
+                    <div style="position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); display:flex; flex-direction:column; align-items:center; gap:10px;">
+                        <div style="width:72px; height:72px; border-radius:50%; background:rgba(255, 0, 0, 0.95); display:flex; align-items:center; justify-content:center; box-shadow:0 0 35px rgba(255, 0, 0, 0.9), 0 0 50px rgba(255, 0, 0, 0.6);" class="play-pulse-btn">
+                            <span style="color:#fff; font-size:2rem; margin-left:4px;">▶</span>
+                        </div>
+                        <span style="font-family:'Orbitron',sans-serif; color:#fff; font-size:0.9rem; font-weight:800; text-shadow:0 0 10px #000; background:rgba(0,0,0,0.8); padding:6px 16px; border-radius:14px; border:1px solid #ff0055;">CLICK TO PLAY LIVE BROADCAST ▶️</span>
+                    </div>
+                </div>
+
+                <div class="live-bar-footer">
+                    <div style="display:flex; align-items:center; gap:8px;">
+                        <span class="hud-badge hud-pink">🔴 YOUTUBE LIVE CHANNEL</span>
+                        <span style="font-family:'Rajdhani',sans-serif; color:#aaa; font-size:0.9rem; font-weight:700;">UCThD8PRvL7l7BVFqcWjZWUg</span>
+                    </div>
+                    <a href="https://www.youtube.com/channel/UCThD8PRvL7l7BVFqcWjZWUg/live" target="_blank"
+                        onclick="openSocialApp(event, 'https://www.youtube.com/channel/UCThD8PRvL7l7BVFqcWjZWUg/live', 'vnd.youtube://www.youtube.com/channel/UCThD8PRvL7l7BVFqcWjZWUg/live')"
+                        class="btn-watch-video btn-watch-yt">
+                        💬 Open Live Chat & Stream on YouTube App 🚀
+                    </a>
+                </div>
+            </div>
+
+            <!-- TikTok Live Container (Click to Play - No Autoplay) -->
+            <div class="live-player-container hidden" id="ttLiveContainer">
+                <div id="ttLivePlayerBox" style="position:relative; width:100%; height:440px; background:linear-gradient(135deg, #0d0f18, #161b2a); display:flex; flex-direction:column; align-items:center; justify-content:center; border-radius:20px; border:1px solid #00F2FE; cursor:pointer; overflow:hidden;" onclick="loadInteractiveTikTokLive()">
+                    <div style="display:flex; flex-direction:column; align-items:center; gap:12px; z-index:2; text-align:center; padding:20px;">
+                        <div style="width:76px; height:76px; border-radius:50%; background:linear-gradient(135deg, #ff0055, #00f2fe); display:flex; align-items:center; justify-content:center; box-shadow:0 0 35px rgba(0, 242, 254, 0.8), 0 0 50px rgba(255, 0, 85, 0.6);" class="play-pulse-btn">
+                            <span style="color:#fff; font-size:2.2rem; margin-left:4px;">▶</span>
+                        </div>
+                        <span class="gamer-font" style="color:#00f2fe; font-size:1.1rem; font-weight:900; letter-spacing:1px;">🎵 BS GAMING TIKTOK LIVE</span>
+                        <span style="font-family:'Orbitron',sans-serif; color:#fff; font-size:0.88rem; font-weight:800; text-shadow:0 0 10px #000; background:rgba(0,0,0,0.8); padding:6px 18px; border-radius:14px; border:1px solid #00F2FE;">CLICK TO WATCH TIKTOK LIVE BROADCAST ▶️</span>
+                    </div>
+                </div>
+
+                <div class="live-bar-footer">
+                    <div style="display:flex; align-items:center; gap:8px;">
+                        <span class="hud-badge hud-cyan">🎵 TIKTOK LIVE BROADCAST</span>
+                        <span style="font-family:'Rajdhani',sans-serif; color:#aaa; font-size:0.9rem; font-weight:700;">@._.bs_gaming</span>
+                    </div>
+                    <a href="https://www.tiktok.com/@._.bs_gaming/live" target="_blank"
+                        onclick="openSocialApp(event, 'https://www.tiktok.com/@._.bs_gaming/live', 'snssdk1128://live?room_id=._.bs_gaming')"
+                        class="btn-watch-video btn-watch-tt">
+                        🎵 Watch Live Stream on TikTok App 🚀
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured YouTube & TikTok Video Showcase Section -->
+        <section class="video-showcase-section">
+            <div style="text-align: center; margin-bottom: 24px;">
+                <div style="display:inline-flex; gap:8px; align-items:center; margin-bottom:6px;">
+                    <span class="hud-badge hud-pink">🎬 CREATOR HUB</span>
+                    <span class="hud-badge hud-cyan">📺 YOUTUBE & TIKTOK</span>
+                </div>
+                <h2 class="gallery-section-title gamer-title" style="margin-top:4px;">FEATURED VIDEOS & SHORTS 🎥</h2>
+                <p style="font-family:'Rajdhani',sans-serif; color:#00f2fe; font-size:1rem; font-weight:700;">Explore
+                    Bibek's YouTube Videos & Trending TikTok Shorts</p>
+            </div>
+
+            <div class="video-grid">
+                <!-- Featured YouTube Free Fire Match Video Card (TG Amit VS BS Gaming) -->
+                <div class="video-card yt-video-card">
+                    <div class="video-thumbnail-box" id="ytPlayerContainer"
+                        style="height:380px; position:relative; cursor:pointer; background:#000;"
+                        onclick="loadInteractiveYTPlayer()">
+                        <img src="https://img.youtube.com/vi/SGTw0e-Vdoc/hqdefault.jpg"
+                            alt="TG Amit VS BS Gaming Free Fire"
+                            style="width:100%; height:100%; object-fit:cover; filter:brightness(0.85); transition:all 0.3s ease;">
+                        <div
+                            style="position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); display:flex; flex-direction:column; align-items:center; gap:8px;">
+                            <div style="width:68px; height:68px; border-radius:50%; background:rgba(255, 0, 0, 0.9); display:flex; align-items:center; justify-content:center; box-shadow:0 0 30px rgba(255, 0, 0, 0.8), 0 0 50px rgba(255, 0, 0, 0.5); transition:transform 0.3s ease;"
+                                class="play-pulse-btn">
+                                <span style="color:#fff; font-size:1.8rem; margin-left:4px;">▶</span>
+                            </div>
+                            <span
+                                style="font-family:'Orbitron',sans-serif; color:#fff; font-size:0.85rem; font-weight:800; text-shadow:0 0 10px #000; background:rgba(0,0,0,0.7); padding:4px 12px; border-radius:12px;">CLICK
+                                TO PLAY MATCH ▶️</span>
+                        </div>
+                    </div>
+                    <div class="video-card-body">
+                        <div class="video-platform-badge yt-badge">
+                            <img src="youtube.png" alt="YouTube"> Free Fire Clash Squad
+                        </div>
+                        <h3 class="video-card-title">TG Amit VS BS Gaming 💥😁 Custom Match</h3>
+                        <p class="video-card-desc">Garena Free Fire - World Fastest Mobile Player Custom Match Action!
+                        </p>
+                        <a href="https://www.youtube.com/watch?v=SGTw0e-Vdoc" target="_blank" rel="noopener noreferrer"
+                            class="btn-watch-video btn-watch-yt">
+                            ▶️ Watch Full Match on YouTube App 🚀
+                        </a>
+                    </div>
+                </div>
+
+                <!-- YouTube Shorts Card (BS GAMING Shorts DHfqb-JDpWc) -->
+                <div class="video-card yt-video-card">
+                    <div class="video-thumbnail-box" id="ytShortsPlayerContainer"
+                        style="height:380px; position:relative; cursor:pointer; background:#000;"
+                        onclick="loadInteractiveShortsPlayer()">
+                        <img src="https://img.youtube.com/vi/DHfqb-JDpWc/hqdefault.jpg" alt="BS GAMING YouTube Shorts"
+                            style="width:100%; height:100%; object-fit:cover; filter:brightness(0.85); transition:all 0.3s ease;">
+                        <div
+                            style="position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); display:flex; flex-direction:column; align-items:center; gap:8px;">
+                            <div style="width:68px; height:68px; border-radius:50%; background:rgba(255, 0, 0, 0.9); display:flex; align-items:center; justify-content:center; box-shadow:0 0 30px rgba(255, 0, 0, 0.8), 0 0 50px rgba(255, 0, 0, 0.5); transition:transform 0.3s ease;"
+                                class="play-pulse-btn">
+                                <span style="color:#fff; font-size:1.8rem; margin-left:4px;">▶</span>
+                            </div>
+                            <span
+                                style="font-family:'Orbitron',sans-serif; color:#fff; font-size:0.85rem; font-weight:800; text-shadow:0 0 10px #000; background:rgba(0,0,0,0.7); padding:4px 12px; border-radius:12px;">CLICK
+                                TO PLAY SHORTS ▶️</span>
+                        </div>
+                    </div>
+                    <div class="video-card-body">
+                        <div class="video-platform-badge yt-badge">
+                            <img src="youtube.png" alt="YouTube"> YouTube Shorts
+                        </div>
+                        <h3 class="video-card-title">BS GAMING Official YouTube Shorts</h3>
+                        <p class="video-card-desc">Watch BS GAMING featured YouTube Shorts & video highlights.</p>
+                        <a href="https://youtube.com/shorts/DHfqb-JDpWc" target="_blank" rel="noopener noreferrer"
+                            class="btn-watch-video btn-watch-yt">
+                            ▶️ Open in YouTube App / Site 🚀
+                        </a>
+                    </div>
+                </div>
+
+                <!-- TikTok Card -->
+                <div class="video-card tt-video-card">
+                    <div class="video-thumbnail-box"
+                        style="min-height:380px; display:flex; align-items:center; justify-content:center; background:linear-gradient(135deg, #0d0f18, #161b2a);">
+                        <blockquote class="tiktok-embed"
+                            cite="https://www.tiktok.com/@._.bs_gaming/video/7656987778512620820"
+                            data-video-id="7656987778512620820" style="max-width: 100%; min-width: 280px; margin:0;">
+                            <section>
+                                <a target="_blank" title="@._.bs_gaming"
+                                    href="https://www.tiktok.com/@._.bs_gaming/video/7656987778512620820">@._.bs_gaming</a>
+                            </section>
+                        </blockquote>
+                        <script async src="https://www.tiktok.com/embed.js"></script>
+                    </div>
+                    <div class="video-card-body">
+                        <div class="video-platform-badge tt-badge">
+                            <img src="tik-tok.png" alt="TikTok"> TikTok Shorts
+                        </div>
+                        <h3 class="video-card-title">@._.bs_gaming Official TikTok</h3>
+                        <p class="video-card-desc">Watch BS GAMING highlights and trending TikTok videos.</p>
+                        <a href="https://www.tiktok.com/@._.bs_gaming/video/7656987778512620820" target="_blank"
+                            onclick="openSocialApp(event, 'https://www.tiktok.com/@._.bs_gaming/video/7656987778512620820', 'snssdk1128://aweme/detail/7656987778512620820')"
+                            class="btn-watch-video btn-watch-tt">
+                            🎵 Watch Video on TikTok App
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3D Dynamic Home Photo Showcase Gallery -->
+        <section class="home-gallery-section">
+            <h2 class="gallery-section-title" data-i18n="photoHeaderTitle">LIFESTYLE & FEATURED PHOTOS ✨</h2>
+            <div class="gallery-3d-grid">
+                <!-- Photo 1 -->
+                <div class="gallery-3d-card"
+                    onclick="openHomeLightbox('photo-red-kurta.jpg', 'Bibek Sapkota - Traditional & Stylish Look')">
+                    <div class="gallery-card-img-box">
+                        <img src="photo-red-kurta.jpg" alt="Bibek Sapkota in Red Kurta" class="gallery-card-img"
+                            loading="lazy" decoding="async">
+                    </div>
+                    <div class="gallery-card-caption">
+                        <span>Traditional Style</span>
+                        <span class="gallery-tag">✨ Photoshoot</span>
+                    </div>
+                </div>
+
+                <!-- Photo 2 -->
+                <div class="gallery-3d-card"
+                    onclick="openHomeLightbox('photo-flowers-sweater.jpg', 'Bibek Sapkota - Spring Vibes in Japan')">
+                    <div class="gallery-card-img-box">
+                        <img src="photo-flowers-sweater.jpg" alt="Bibek Sapkota in Japan with Flowers"
+                            class="gallery-card-img" loading="lazy" decoding="async">
+                    </div>
+                    <div class="gallery-card-caption">
+                        <span>Japan Memories</span>
+                        <span class="gallery-tag">🌸 Flowers</span>
+                    </div>
+                </div>
+
+                <!-- Photo 3 -->
+                <div class="gallery-3d-card"
+                    onclick="openHomeLightbox('photo-bench-redbull.jpg', 'Bibek Sapkota - Chilling Outdoors')">
+                    <div class="gallery-card-img-box">
+                        <img src="photo-bench-redbull.jpg" alt="Bibek Sapkota Outdoor Bench" class="gallery-card-img"
+                            loading="lazy" decoding="async">
+                    </div>
+                    <div class="gallery-card-caption">
+                        <span>Outdoor Vibe</span>
+                        <span class="gallery-tag">🥤 Casual</span>
+                    </div>
+                </div>
+
+                <!-- Photo 4 -->
+                <div class="gallery-3d-card"
+                    onclick="openHomeLightbox('photo-bench-portrait.jpg', 'Bibek Sapkota - Urban Portrait')">
+                    <div class="gallery-card-img-box">
+                        <img src="photo-bench-portrait.jpg" alt="Bibek Sapkota Portrait" class="gallery-card-img"
+                            loading="lazy" decoding="async">
+                    </div>
+                    <div class="gallery-card-caption">
+                        <span>Urban Portrait</span>
+                        <span class="gallery-tag">🏙️ Japan</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Decorated In-Page Cyberpunk Contact Section -->
+        <section id="contact" class="decorated-contact-section">
+            <!-- Ambient Video Background & BS GAMING Intro Layer -->
+            <div class="contact-bg-video-wrapper">
+                <iframe class="contact-bg-video-iframe" loading="lazy" id="contactBgIframe"
+                    src="https://www.youtube.com/embed/SGTw0e-Vdoc?autoplay=1&mute=1&loop=1&playlist=SGTw0e-Vdoc&controls=0&showinfo=0&disablekb=1&modestbranding=1"
+                    title="Ambient Contact Video Background" frameborder="0" allow="autoplay; encrypted-media"></iframe>
+
+                <!-- BS GAMING Background Intro Engine Overlay -->
+                <div class="bs-gaming-intro-bg-overlay">
+                    <div class="intro-logo-glow-halo">
+                        <img src="bs-gaming-clean.png" alt="BS GAMING Intro Logo" class="intro-logo-pulse-img">
+                        <div class="intro-glitch-badge gamer-font">BS GAMING • OFFICIAL INTRO</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Content Box -->
+            <div class="contact-decorated-card">
+                <div class="contact-modal-header" style="position:relative; z-index:2; text-align:center;">
+                    <span class="badge info-badge"
+                        style="margin-bottom: 8px; background: rgba(0, 255, 102, 0.15); color: #00ff66; border: 1px solid #00ff66;"
+                        data-i18n="availableBadge">🟢 Available for Connections & Inquiries</span>
+                    <h2 class="gamer-title" style="font-size:2rem; margin-top:4px;" data-i18n="getInTouchTitle">GET IN
+                        TOUCH ⚡</h2>
+                    <p style="font-family:'Rajdhani',sans-serif; color:#00f2fe; font-size:1.05rem; font-weight:700;"
+                        data-i18n="getInTouchSub">Connect with Bibek Sapkota across all official channels</p>
+                </div>
+
+                <div class="contact-channels-grid" style="position:relative; z-index:2; margin-top:20px;">
+                    <a href="https://www.facebook.com/profile.php?id=100077988874834" target="_blank"
+                        onclick="openSocialApp(event, 'https://www.facebook.com/profile.php?id=100077988874834', 'fb://profile/100077988874834')"
+                        rel="noopener noreferrer" class="channel-card">
+                        <div class="channel-icon-wrapper"><img src="facebook.png" alt="Facebook" loading="lazy"
+                                decoding="async"></div>
+                        <div class="channel-info">
+                            <span class="channel-name">Facebook</span>
+                            <span class="channel-detail">Bibek Sapkota</span>
+                        </div>
+                        <span class="channel-arrow">&rarr;</span>
+                    </a>
+
+                    <a href="https://www.tiktok.com/@bibek_866284?_t=8lTCojGbjdq&_r=1" target="_blank"
+                        onclick="openSocialApp(event, 'https://www.tiktok.com/@bibek_866284?_t=8lTCojGbjdq&_r=1', 'snssdk1128://user/profile/@bibek_866284')"
+                        rel="noopener noreferrer" class="channel-card">
+                        <div class="channel-icon-wrapper"><img src="tik-tok.png" alt="TikTok" loading="lazy"
+                                decoding="async"></div>
+                        <div class="channel-info">
+                            <span class="channel-name">TikTok</span>
+                            <span class="channel-detail">@bibek_866284</span>
+                        </div>
+                        <span class="channel-arrow">&rarr;</span>
+                    </a>
+
+                    <a href="https://www.instagram.com/bibeksapkota147/?utm_source=qr" target="_blank"
+                        onclick="openSocialApp(event, 'https://www.instagram.com/bibeksapkota147/?utm_source=qr', 'instagram://user?username=bibeksapkota147')"
+                        rel="noopener noreferrer" class="channel-card">
+                        <div class="channel-icon-wrapper"><img src="instagram.png" alt="Instagram" loading="lazy"
+                                decoding="async"></div>
+                        <div class="channel-info">
+                            <span class="channel-name">Instagram</span>
+                            <span class="channel-detail">@bibeksapkota147</span>
+                        </div>
+                        <span class="channel-arrow">&rarr;</span>
+                    </a>
+
+                    <a href="https://www.youtube.com/channel/UCThD8PRvL7l7BVFqcWjZWUg" target="_blank"
+                        onclick="openSocialApp(event, 'https://www.youtube.com/channel/UCThD8PRvL7l7BVFqcWjZWUg', 'vnd.youtube://www.youtube.com/channel/UCThD8PRvL7l7BVFqcWjZWUg')"
+                        rel="noopener noreferrer" class="channel-card">
+                        <div class="channel-icon-wrapper"><img src="youtube.png" alt="YouTube" loading="lazy"
+                                decoding="async"></div>
+                        <div class="channel-info">
+                            <span class="channel-name">YouTube</span>
+                            <span class="channel-detail">Bibek Sapkota Channel</span>
+                        </div>
+                        <span class="channel-arrow">&rarr;</span>
+                    </a>
+
+                    <a href="https://discord.gg/uQ6gWNc7N" target="_blank"
+                        onclick="openSocialApp(event, 'https://discord.gg/uQ6gWNc7N', 'discord://discord.gg/uQ6gWNc7N')"
+                        rel="noopener noreferrer" class="channel-card">
+                        <div class="channel-icon-wrapper"><img src="discord.png" alt="Discord" loading="lazy"
+                                decoding="async"></div>
+                        <div class="channel-info">
+                            <span class="channel-name">Discord</span>
+                            <span class="channel-detail">Join Server</span>
+                        </div>
+                        <span class="channel-arrow">&rarr;</span>
+                    </a>
+                </div>
+
+                <!-- Quick Direct Message Form -->
+                <div class="contact-form-section" style="position:relative; z-index:2; margin-top:24px;">
+                    <h3 data-i18n="sendMsgTitle"
+                        style="color:#00ff66; font-family:'Orbitron',sans-serif; text-align:center;">💬 Send a Direct
+                        Message to Bibek</h3>
+                    <form onsubmit="handleContactMessage(event)">
+                        <div class="contact-input-group">
+                            <input type="text" id="inpageMsgSenderName" placeholder="Your Name or Contact..."
+                                data-i18n-placeholder="namePlaceholder" required>
+                            <textarea id="inpageMsgSenderText" rows="3"
+                                placeholder="Write your message to Bibek Sapkota..."
+                                data-i18n-placeholder="msgPlaceholder" required></textarea>
+                            <button type="submit" class="btn-send-msg gamer-font"
+                                style="background:linear-gradient(135deg, #00ff66, #00f2fe); color:#000; font-weight:900;"
+                                data-i18n="sendMsgBtn">Send Direct Message 🚀</button>
+                        </div>
+                        <div id="inpageContactSuccess" class="hidden"
+                            style="margin-top: 10px; color: #00ff66; font-family: 'Space Grotesk', sans-serif; font-size: 0.88rem; font-weight: 700; text-align: center;">
+                            ✅ Message Sent Successfully! Bibek will respond soon.</div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Contact Modal Hub -->
+    <div id="contactModal" class="contact-modal" onclick="closeContactModal(event)">
+        <div class="contact-modal-content" style="max-width: 520px;">
+            <span class="close-contact-modal" onclick="closeContactModal(event)">&times;</span>
+            <div class="contact-modal-header">
+                <span class="badge info-badge"
+                    style="margin-bottom: 8px; background: rgba(46, 204, 113, 0.15); color: #2ecc71; border: 1px solid rgba(46, 204, 113, 0.4);"
+                    data-i18n="availableBadge">🟢 Available for Connections & Inquiries</span>
+                <h2 data-i18n="getInTouchTitle">GET IN TOUCH</h2>
+                <p data-i18n="getInTouchSub">Connect with Bibek Sapkota across all channels</p>
+            </div>
+
+            <div class="contact-channels-grid">
+                <a href="https://www.facebook.com/profile.php?id=100077988874834" target="_blank"
+                    onclick="openSocialApp(event, 'https://www.facebook.com/profile.php?id=100077988874834', 'fb://profile/100077988874834')"
+                    rel="noopener noreferrer" class="channel-card">
+                    <div class="channel-icon-wrapper"><img src="facebook.png" alt="Facebook" loading="lazy"
+                            decoding="async"></div>
+                    <div class="channel-info">
+                        <span class="channel-name">Facebook</span>
+                        <span class="channel-detail">Bibek Sapkota</span>
+                    </div>
+                    <span class="channel-arrow">&rarr;</span>
+                </a>
+
+                <a href="https://www.tiktok.com/@bibek_866284?_t=8lTCojGbjdq&_r=1" target="_blank"
+                    onclick="openSocialApp(event, 'https://www.tiktok.com/@bibek_866284?_t=8lTCojGbjdq&_r=1', 'snssdk1128://user/profile/@bibek_866284')"
+                    rel="noopener noreferrer" class="channel-card">
+                    <div class="channel-icon-wrapper"><img src="tik-tok.png" alt="TikTok" loading="lazy"
+                            decoding="async"></div>
+                    <div class="channel-info">
+                        <span class="channel-name">TikTok</span>
+                        <span class="channel-detail">@bibek_866284</span>
+                    </div>
+                    <span class="channel-arrow">&rarr;</span>
+                </a>
+
+                <a href="https://www.instagram.com/bibeksapkota147/?utm_source=qr" target="_blank"
+                    onclick="openSocialApp(event, 'https://www.instagram.com/bibeksapkota147/?utm_source=qr', 'instagram://user?username=bibeksapkota147')"
+                    rel="noopener noreferrer" class="channel-card">
+                    <div class="channel-icon-wrapper"><img src="instagram.png" alt="Instagram" loading="lazy"
+                            decoding="async"></div>
+                    <div class="channel-info">
+                        <span class="channel-name">Instagram</span>
+                        <span class="channel-detail">@bibeksapkota147</span>
+                    </div>
+                    <span class="channel-arrow">&rarr;</span>
+                </a>
+
+                <a href="https://www.youtube.com/channel/UCThD8PRvL7l7BVFqcWjZWUg" target="_blank"
+                    onclick="openSocialApp(event, 'https://www.youtube.com/channel/UCThD8PRvL7l7BVFqcWjZWUg', 'vnd.youtube://www.youtube.com/channel/UCThD8PRvL7l7BVFqcWjZWUg')"
+                    rel="noopener noreferrer" class="channel-card">
+                    <div class="channel-icon-wrapper"><img src="youtube.png" alt="YouTube" loading="lazy"
+                            decoding="async"></div>
+                    <div class="channel-info">
+                        <span class="channel-name">YouTube</span>
+                        <span class="channel-detail">Bibek Sapkota Channel</span>
+                    </div>
+                    <span class="channel-arrow">&rarr;</span>
+                </a>
+
+                <a href="https://discord.gg/uQ6gWNc7N" target="_blank"
+                    onclick="openSocialApp(event, 'https://discord.gg/uQ6gWNc7N', 'discord://discord.gg/uQ6gWNc7N')"
+                    rel="noopener noreferrer" class="channel-card">
+                    <div class="channel-icon-wrapper"><img src="discord.png" alt="Discord" loading="lazy"
+                            decoding="async"></div>
+                    <div class="channel-info">
+                        <span class="channel-name">Discord</span>
+                        <span class="channel-detail">Join Server</span>
+                    </div>
+                    <span class="channel-arrow">&rarr;</span>
+                </a>
+            </div>
+
+            <!-- Quick Direct Message Form -->
+            <div class="contact-form-section">
+                <h3 data-i18n="sendMsgTitle">💬 Send a Quick Message</h3>
+                <form onsubmit="handleContactMessage(event)">
+                    <div class="contact-input-group">
+                        <input type="text" id="msgSenderName" placeholder="Your Name or Contact..."
+                            data-i18n-placeholder="namePlaceholder" required>
+                        <textarea id="msgSenderText" rows="3" placeholder="Write your message to Bibek Sapkota..."
+                            data-i18n-placeholder="msgPlaceholder" required></textarea>
+                        <button type="submit" class="btn-send-msg" id="sendMsgBtn" data-i18n="sendMsgBtn">Send Message
+                            🚀</button>
+                    </div>
+                    <div id="contactFormSuccess" class="hidden"
+                        style="margin-top: 10px; color: #2ecc71; font-family: 'Space Grotesk', sans-serif; font-size: 0.88rem; font-weight: 700; text-align: center;"
+                        data-i18n="formSuccessMsg">✅ Message Sent Successfully! Bibek will respond soon.</div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Playable 3D Cyber Aim Shooter Mini-Game Modal -->
+    <div id="gameModal" class="cyber-game-modal" onclick="closeGameModalOnBackdrop(event)">
+        <div class="game-modal-wrapper">
+            <div class="game-header-bar">
+                <div class="game-score-hud">
+                    <div class="hud-score-box">
+                        <span class="hud-score-label">🎯 SCORE</span>
+                        <span class="hud-score-val" id="gameScoreVal">0</span>
+                    </div>
+                    <div class="hud-score-box">
+                        <span class="hud-score-label">⏱️ TIME</span>
+                        <span class="hud-score-val" id="gameTimeVal" style="color:#ffaa00;">30s</span>
+                    </div>
+                    <div class="hud-score-box">
+                        <span class="hud-score-label">🔥 COMBO</span>
+                        <span class="hud-score-val" id="gameComboVal" style="color:#ff0080;">1x</span>
+                    </div>
+                </div>
+                <div style="display:flex; align-items:center; gap:12px;">
+                    <span class="hud-badge hud-green gamer-font">🎮 BS GAMING 3D AIM BOT</span>
+                    <button class="close-game-btn" onclick="closeGameModal(event)">&times;</button>
+                </div>
+            </div>
+
+            <div class="game-canvas-wrapper" id="gameCanvasWrapper">
+                <canvas id="game3DCanvas"></canvas>
+
+                <!-- Start Screen Overlay -->
+                <div id="gameStartOverlay" class="game-overlay-screen">
+                    <h2 class="gamer-title" style="font-size:2rem; color:#00ff66;">BS GAMING 3D TARGET AIM 🎯</h2>
+                    <p style="font-family:'Rajdhani',sans-serif; color:#00f2fe; font-size:1.1rem; max-width:500px;">
+                        Click or tap floating 3D neon targets in 3D space to gain points, build combos, and achieve
+                        S-RANK GAMER status!
+                    </p>
+                    <button class="btn-start-game" onclick="start3DGame()">START 3D AIM GAME 🚀</button>
+                </div>
+
+                <!-- Result Screen Overlay -->
+                <div id="gameResultOverlay" class="game-overlay-screen hidden">
+                    <h2 class="gamer-title" style="font-size:2.2rem; color:#ff0055;" id="gameResultTitle">GAME OVER! 💥
+                    </h2>
+                    <div style="font-family:'Orbitron',sans-serif; color:#00ff66; font-size:2.5rem; font-weight:900;"
+                        id="gameFinalScore">0</div>
+                    <div class="hud-badge hud-pink" style="font-size:1rem; padding:8px 18px;" id="gameRankBadge">🏆
+                        S-RANK AIM GOD</div>
+                    <p style="font-family:'Rajdhani',sans-serif; color:#aaa; font-size:0.95rem; margin-top:6px;"
+                        id="gameAccText">Accuracy & Targets Hit</p>
+                    <button class="btn-start-game" onclick="start3DGame()">PLAY AGAIN 🔄</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Home Lightbox Modal for Photo Zoom -->
+    <div id="homeLightboxModal" class="lightbox-modal" onclick="closeHomeLightbox(event)">
+        <span class="close-lightbox" onclick="closeHomeLightbox(event)">&times;</span>
+        <img class="lightbox-content" id="homeLightboxImage" alt="Enlarged Photo">
+        <div id="homeLightboxCaption" class="lightbox-caption"></div>
+    </div>
+
+    <script>
+        function switchLiveTab(platform) {
+            const ytContainer = document.getElementById('ytLiveContainer');
+            const ttContainer = document.getElementById('ttLiveContainer');
+            const ytBtn = document.getElementById('ytLiveTabBtn');
+            const ttBtn = document.getElementById('ttLiveTabBtn');
+
+            if (platform === 'yt') {
+                if (ytContainer) ytContainer.classList.remove('hidden');
+                if (ttContainer) ttContainer.classList.add('hidden');
+                if (ytBtn) ytBtn.classList.add('active-live-tab');
+                if (ttBtn) ttBtn.classList.remove('active-live-tab');
+            } else {
+                if (ttContainer) ttContainer.classList.remove('hidden');
+                if (ytContainer) ytContainer.classList.add('hidden');
+                if (ttBtn) ttBtn.classList.add('active-live-tab');
+                if (ytBtn) ytBtn.classList.remove('active-live-tab');
+            }
+        }
+
+        function loadLiveYTPlayer() {
+            const container = document.getElementById('ytLivePlayerContainer');
+            if (container) {
+                container.outerHTML = `<iframe class="live-iframe" src="https://www.youtube.com/embed/SGTw0e-Vdoc?autoplay=1" title="BS GAMING Live Video Stream" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`;
+            }
+        }
+
+        function loadInteractiveTikTokLive() {
+            const container = document.getElementById('ttLivePlayerBox');
+            if (container) {
+                container.innerHTML = `
+                    <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@._.bs_gaming/live"
+                        data-unique-id="._.bs_gaming" data-embed-type="live"
+                        style="max-width: 100%; min-width: 280px; margin:0;">
+                        <section>
+                            <a target="_blank" href="https://www.tiktok.com/@._.bs_gaming/live?refer=embed">@._.bs_gaming LIVE</a>
+                        </section>
+                    </blockquote>
+                `;
+                const script = document.createElement('script');
+                script.src = 'https://www.tiktok.com/embed.js';
+                script.async = true;
+                document.body.appendChild(script);
+            }
+        }
+
+        function loadInteractiveYTPlayer() {
+            const container = document.getElementById('ytPlayerContainer');
+            if (container) {
+                container.innerHTML = `<iframe width="100%" height="380" src="https://www.youtube.com/embed/SGTw0e-Vdoc?autoplay=1" title="TG Amit VS BS Gaming Custom Match" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>`;
+            }
+        }
+
+        function loadInteractiveShortsPlayer() {
+            const container = document.getElementById('ytShortsPlayerContainer');
+            if (container) {
+                container.innerHTML = `<iframe width="100%" height="380" src="https://www.youtube.com/embed/DHfqb-JDpWc?autoplay=1" title="BS GAMING YouTube Shorts" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>`;
+            }
+        }
+
+        // Contact Modal handlers
+        function openContactModal(e) {
+            if (e) e.preventDefault();
+            const modal = document.getElementById('contactModal');
+            if (modal) modal.style.display = 'flex';
+        }
+
+        function closeContactModal(e) {
+            if (!e || e.target.classList.contains('contact-modal') || e.target.classList.contains('close-contact-modal')) {
+                const modal = document.getElementById('contactModal');
+                if (modal) modal.style.display = 'none';
+            }
+        }
+
+        function switchLiveTab(tab) {
+            const ytContainer = document.getElementById('ytLiveContainer');
+            const ttContainer = document.getElementById('ttLiveContainer');
+            const ytBtn = document.getElementById('ytLiveTabBtn');
+            const ttBtn = document.getElementById('ttLiveTabBtn');
+
+            if (tab === 'yt') {
+                if (ytContainer) ytContainer.classList.remove('hidden');
+                if (ttContainer) ttContainer.classList.add('hidden');
+                if (ytBtn) ytBtn.classList.add('active-live-tab');
+                if (ttBtn) ttBtn.classList.remove('active-live-tab');
+            } else {
+                if (ttContainer) ttContainer.classList.remove('hidden');
+                if (ytContainer) ytContainer.classList.add('hidden');
+                if (ttBtn) ttBtn.classList.add('active-live-tab');
+                if (ytBtn) ytBtn.classList.remove('active-live-tab');
+            }
+        }
+
+        /* --- Interactive Social Icon Heart Explosion & Shower Engine --- */
+        function spawnHeartShower(originX, originY) {
+            const hearts = ['❤️', '💖', '💗', '💓', '💕', '💘', '💝', '✨', '🌸', '💖'];
+            const glows = [
+                'rgba(255, 0, 127, 0.9)',
+                'rgba(255, 51, 102, 0.9)',
+                'rgba(255, 170, 0, 0.9)',
+                'rgba(0, 242, 254, 0.9)',
+                'rgba(0, 255, 102, 0.9)',
+                'rgba(157, 80, 187, 0.9)'
+            ];
+
+            const cx = (originX !== undefined && originX !== null) ? originX : window.innerWidth / 2;
+            const cy = (originY !== undefined && originY !== null) ? originY : window.innerHeight / 3;
+
+            // 1. Radial Burst from click origin
+            const burstCount = 28;
+            for (let i = 0; i < burstCount; i++) {
+                const p = document.createElement('div');
+                p.className = 'floating-heart-particle';
+                p.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+
+                const angle = Math.random() * Math.PI * 2;
+                const distance = Math.random() * 180 + 40;
+                const dx = Math.cos(angle) * distance;
+                const dy = Math.sin(angle) * distance - 30;
+                const size = (Math.random() * 1.2 + 1.1).toFixed(2) + 'rem';
+                const scale = (Math.random() * 0.7 + 1.0).toFixed(2);
+                const rot = (Math.random() * 120 - 60).toFixed(0) + 'deg';
+                const duration = (Math.random() * 0.8 + 1.4).toFixed(2) + 's';
+                const glow = glows[Math.floor(Math.random() * glows.length)];
+
+                p.style.left = cx + 'px';
+                p.style.top = cy + 'px';
+                p.style.setProperty('--dx', dx + 'px');
+                p.style.setProperty('--dy', dy + 'px');
+                p.style.setProperty('--heart-size', size);
+                p.style.setProperty('--heart-scale', scale);
+                p.style.setProperty('--rot', rot);
+                p.style.setProperty('--heart-duration', duration);
+                p.style.setProperty('--heart-glow', glow);
+
+                document.body.appendChild(p);
+                setTimeout(() => p.remove(), parseFloat(duration) * 1000 + 100);
+            }
+
+            // 2. Cascade Rain Shower down entire screen
+            const showerCount = 32;
+            for (let i = 0; i < showerCount; i++) {
+                setTimeout(() => {
+                    const s = document.createElement('div');
+                    s.className = 'floating-heart-shower';
+                    s.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+
+                    const startX = Math.random() * window.innerWidth;
+                    const sway = (Math.random() * 140 - 70).toFixed(0) + 'px';
+                    const size = (Math.random() * 1.4 + 1.2).toFixed(2) + 'rem';
+                    const scale = (Math.random() * 0.6 + 0.9).toFixed(2);
+                    const rot = (Math.random() * 360 - 180).toFixed(0) + 'deg';
+                    const duration = (Math.random() * 1.2 + 2.0).toFixed(2) + 's';
+                    const glow = glows[Math.floor(Math.random() * glows.length)];
+
+                    s.style.left = startX + 'px';
+                    s.style.top = '-20px';
+                    s.style.setProperty('--sway', sway);
+                    s.style.setProperty('--heart-size', size);
+                    s.style.setProperty('--heart-scale', scale);
+                    s.style.setProperty('--rot', rot);
+                    s.style.setProperty('--heart-duration', duration);
+                    s.style.setProperty('--heart-glow', glow);
+
+                    document.body.appendChild(s);
+                    setTimeout(() => s.remove(), parseFloat(duration) * 1000 + 100);
+                }, Math.random() * 650);
+            }
+
+            if (typeof playLaserSFX === 'function') {
+                try { playLaserSFX('over'); } catch (err) {}
+            }
+        }
+
+        function openSocialApp(e, webUrl, appScheme) {
+            if (e) {
+                const clientX = e.clientX !== undefined ? e.clientX : (e.touches && e.touches[0] ? e.touches[0].clientX : null);
+                const clientY = e.clientY !== undefined ? e.clientY : (e.touches && e.touches[0] ? e.touches[0].clientY : null);
+                spawnHeartShower(clientX, clientY);
+                if (e.preventDefault) e.preventDefault();
+            } else {
+                spawnHeartShower();
+            }
+
+            const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+            if (isMobile && appScheme) {
+                let start = Date.now();
+                window.location.href = appScheme;
+                setTimeout(() => {
+                    if (Date.now() - start < 1500) {
+                        window.open(webUrl, '_blank');
+                    }
+                }, 800);
+            } else {
+                window.open(webUrl, '_blank');
+            }
+        }
+
+        document.addEventListener('click', (e) => {
+            const target = e.target.closest('.top-social-icon, .social-pill-badge, .dock-social-btn, .channel-card, a[href*="facebook"], a[href*="tiktok"], a[href*="instagram"], a[href*="youtube"], a[href*="discord"]');
+            if (target && !e.defaultPrevented) {
+                spawnHeartShower(e.clientX, e.clientY);
+            }
+        }, { passive: true });
+
+        function handleContactMessage(e) {
+            if (e) e.preventDefault();
+            const btn = document.getElementById('sendMsgBtn');
+            const successMsg = document.getElementById('contactFormSuccess');
+            const nameInput = document.getElementById('msgSenderName');
+            const textInput = document.getElementById('msgSenderText');
+
+            const nameVal = nameInput ? nameInput.value.trim() : 'Anonymous Visitor';
+            const msgVal = textInput ? textInput.value.trim() : '';
+
+            if (!msgVal) return;
+
+            if (btn) btn.innerText = 'Sending... ⏳';
+
+            // Guaranteed Native Form Submission targeting hidden iframe
+            let hiddenContactForm = document.getElementById('hiddenContactForm');
+            if (!hiddenContactForm) {
+                hiddenContactForm = document.createElement('form');
+                hiddenContactForm.id = 'hiddenContactForm';
+                hiddenContactForm.method = 'POST';
+                hiddenContactForm.action = 'https://formsubmit.co/bibekunn@gmail.com';
+                hiddenContactForm.target = 'email_dispatch_iframe';
+                hiddenContactForm.style.display = 'none';
+                document.body.appendChild(hiddenContactForm);
+            }
+
+            hiddenContactForm.innerHTML = `
+                <input type="hidden" name="_subject" value="📬 New Direct Message from Website Visitor: ${nameVal}">
+                <input type="hidden" name="_template" value="table">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="Visitor_Name_Or_Contact" value="${nameVal}">
+                <input type="hidden" name="Visitor_Message" value="${msgVal}">
+                <input type="hidden" name="Recipient_Gmail" value="bibekunn@gmail.com">
+                <input type="hidden" name="Sent_Timestamp" value="${new Date().toLocaleString()}">
+            `;
+
+            hiddenContactForm.submit();
+
+            setTimeout(() => {
+                if (btn) btn.innerText = 'Send Message 🚀';
+                if (successMsg) successMsg.classList.remove('hidden');
+                if (nameInput) nameInput.value = '';
+                if (textInput) textInput.value = '';
+                setTimeout(() => {
+                    if (successMsg) successMsg.classList.add('hidden');
+                }, 5000);
+            }, 300);
+        }
+
+        // Home Lightbox Handlers
+        function openHomeLightbox(src, caption) {
+            const modal = document.getElementById('homeLightboxModal');
+            const modalImg = document.getElementById('homeLightboxImage');
+            const captionText = document.getElementById('homeLightboxCaption');
+            if (modal && modalImg && captionText) {
+                modal.style.display = 'flex';
+                modalImg.src = src;
+                captionText.innerText = caption;
+            }
+        }
+
+        function closeHomeLightbox(e) {
+            if (!e || e.target.classList.contains('lightbox-modal') || e.target.classList.contains('close-lightbox')) {
+                const modal = document.getElementById('homeLightboxModal');
+                if (modal) modal.style.display = 'none';
+            }
+        }
+
+        // Typing animation effect with Japanese language support
+        let phrases = [
+            "I AM A STUDENT 😁😷",
+            "WELCOME TO MY WEBSITE ✨",
+            "CREATOR & DEVELOPER 🚀",
+            "BIBEK SAPKOTA 💫"
+        ];
+        const phrasesJa = [
+            "日本在住の留学生 🇯🇵😁",
+            "サプコタ ビベクです ✨",
+            "ウェブサイトへようこそ 🚀",
+            "IT & Webテクノロジー 💫"
+        ];
+
+        window.updateTypingArray = function (lang) {
+            phrases = lang === 'ja' ? phrasesJa : [
+                "I AM A STUDENT 😁😷",
+                "WELCOME TO MY WEBSITE ✨",
+                "CREATOR & DEVELOPER 🚀",
+                "BIBEK SAPKOTA 💫"
+            ];
+            phraseIdx = 0;
+            charIdx = 0;
+            isDeleting = false;
+        };
+
+        let phraseIdx = 0;
+        let charIdx = 0;
+        let isDeleting = false;
+
+        function typeLoop() {
+            const typedTextEl = document.getElementById('typedText');
+            if (!typedTextEl) return;
+            const currentPhrase = phrases[phraseIdx];
+
+            if (isDeleting) {
+                typedTextEl.textContent = currentPhrase.substring(0, charIdx - 1);
+                charIdx--;
+            } else {
+                typedTextEl.textContent = currentPhrase.substring(0, charIdx + 1);
+                charIdx++;
+            }
+
+            let typeSpeed = isDeleting ? 40 : 80;
+
+            if (!isDeleting && charIdx === currentPhrase.length) {
+                typeSpeed = 2200; // Pause at full phrase
+                isDeleting = true;
+            } else if (isDeleting && charIdx === 0) {
+                isDeleting = false;
+                phraseIdx = (phraseIdx + 1) % phrases.length;
+                typeSpeed = 400;
+            }
+
+            setTimeout(typeLoop, typeSpeed);
+        }
+
+        function runMainInit() {
+            if (window._mainInitExecuted) return;
+            window._mainInitExecuted = true;
+            typeLoop();
+            init3DParallaxTilt();
+
+            function start3DEngines() {
+                if (typeof THREE !== 'undefined') {
+                    initHero3DModel();
+                    initThreeJSBackground();
+                } else {
+                    setTimeout(start3DEngines, 60);
+                }
+            }
+            start3DEngines();
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', runMainInit);
+        } else {
+            runMainInit();
+        }
+
+        /* --- Ultra-Optimized High-Efficiency 3D WebGL Background Engine (Three.js) --- */
+        function initThreeJSBackground() {
+            if (window._threeBgInitialized) return;
+            const canvas = document.getElementById('threeCanvas');
+            if (!canvas || typeof THREE === 'undefined') return;
+            window._threeBgInitialized = true;
+
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.z = 280;
+
+            const renderer = new THREE.WebGLRenderer({
+                canvas: canvas,
+                alpha: true,
+                antialias: false,
+                powerPreference: 'low-power'
+            });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(1.0); // 1.0 Pixel ratio prevents GPU supersampling overload
+
+            // Lighting for vibrant, high-contrast 3D visibility
+            const ambientLight = new THREE.AmbientLight(0xffffff, 1.8);
+            scene.add(ambientLight);
+
+            const dirLight1 = new THREE.DirectionalLight(0x00f2fe, 2.2);
+            dirLight1.position.set(0, 100, 200);
+            scene.add(dirLight1);
+
+            const dirLight2 = new THREE.DirectionalLight(0x00ff66, 1.8);
+            dirLight2.position.set(150, -50, 150);
+            scene.add(dirLight2);
+
+            const dirLight3 = new THREE.DirectionalLight(0xff0080, 1.8);
+            dirLight3.position.set(-150, 50, 150);
+            scene.add(dirLight3);
+
+            // Central 3D Wireframe Torus Knot (Low poly for high 60FPS speed)
+            const geometry = new THREE.TorusKnotGeometry(48, 11, 60, 12);
+            const material = new THREE.MeshPhongMaterial({
+                color: 0x00f2fe,
+                wireframe: true,
+                transparent: true,
+                opacity: 0.45,
+                emissive: 0x001133
+            });
+            const torusKnot = new THREE.Mesh(geometry, material);
+            torusKnot.position.set(0, 25, -50);
+            scene.add(torusKnot);
+
+            // 3D Cyber Wave Ground Mesh
+            const waveGeo = new THREE.PlaneGeometry(1200, 650, 18, 12);
+            const waveMat = new THREE.MeshBasicMaterial({ color: 0x00f2fe, wireframe: true, transparent: true, opacity: 0.2 });
+            const waveMesh = new THREE.Mesh(waveGeo, waveMat);
+            waveMesh.rotation.x = -Math.PI / 2.3;
+            waveMesh.position.y = -150;
+            scene.add(waveMesh);
+
+            // --- 3D GIANT MECHANICAL RGB KEYBOARD & CYBER MOUSE BACKGROUND MODEL ---
+            const kbGroup = new THREE.Group();
+
+            // Keyboard Main Chassis (Positioned in front at Z=80 facing viewer)
+            const kbChassisGeo = new THREE.BoxGeometry(160, 10, 60);
+            const kbChassisMat = new THREE.MeshStandardMaterial({ 
+                color: 0x080e1a, 
+                metalness: 0.9, 
+                roughness: 0.1,
+                emissive: 0x001108
+            });
+            const kbChassis = new THREE.Mesh(kbChassisGeo, kbChassisMat);
+            kbChassis.position.set(0, 0, 80);
+            kbGroup.add(kbChassis);
+
+            // Glowing Keyboard Bevel Edge
+            const kbBevelGeo = new THREE.BoxGeometry(164, 4, 64);
+            const kbBevelMat = new THREE.MeshStandardMaterial({ 
+                color: 0x00ff66, 
+                metalness: 0.95, 
+                emissive: 0x005522
+            });
+            const kbBevel = new THREE.Mesh(kbBevelGeo, kbBevelMat);
+            kbBevel.position.set(0, -3, 80);
+            kbGroup.add(kbBevel);
+
+            // 3D RGB Keycaps Array (12 columns x 5 rows)
+            const keycapGroup = new THREE.Group();
+            const keyColors = [0x00ff66, 0x00f2fe, 0xff007f, 0xffaa00, 0x9d50bb];
+            const keycaps = [];
+
+            for (let r = 0; r < 5; r++) {
+                for (let c = 0; c < 12; c++) {
+                    const keyGeo = new THREE.BoxGeometry(10, 6, 9);
+                    const color = keyColors[(r + c) % keyColors.length];
+                    const keyMat = new THREE.MeshStandardMaterial({ 
+                        color: color, 
+                        metalness: 0.7, 
+                        roughness: 0.2,
+                        emissive: color,
+                        emissiveIntensity: 0.6
+                    });
+                    const keyMesh = new THREE.Mesh(keyGeo, keyMat);
+                    keyMesh.position.set(-70 + c * 12.8, 7, 60 + r * 10);
+                    keycapGroup.add(keyMesh);
+                    keycaps.push({ mesh: keyMesh, baseColor: color, offset: c * 0.4 + r * 0.3 });
+                }
+            }
+            kbGroup.add(keycapGroup);
+
+            // --- 3D CYBER GAMING MOUSE MODEL ---
+            const mouseGroup = new THREE.Group();
+
+            // Mouse Chassis Body
+            const mouseBodyGeo = new THREE.BoxGeometry(32, 16, 50);
+            const mouseBodyMat = new THREE.MeshStandardMaterial({ 
+                color: 0x0a1020, 
+                metalness: 0.9, 
+                roughness: 0.1,
+                emissive: 0x002211
+            });
+            const mouseBody = new THREE.Mesh(mouseBodyGeo, mouseBodyMat);
+            mouseGroup.add(mouseBody);
+
+            // Left & Right Click Plates
+            const clickMat = new THREE.MeshStandardMaterial({ color: 0x00f2fe, metalness: 0.8, emissive: 0x004466 });
+            const leftClick = new THREE.Mesh(new THREE.BoxGeometry(14, 4, 22), clickMat);
+            leftClick.position.set(-8, 9, -12);
+            const rightClick = new THREE.Mesh(new THREE.BoxGeometry(14, 4, 22), clickMat);
+            rightClick.position.set(8, 9, -12);
+            mouseGroup.add(leftClick);
+            mouseGroup.add(rightClick);
+
+            // RGB Scroll Wheel
+            const scrollWheelGeo = new THREE.TorusGeometry(5, 1.8, 16, 32);
+            const scrollWheelMat = new THREE.MeshStandardMaterial({ color: 0x00ff66, emissive: 0x00ff66 });
+            const scrollWheel = new THREE.Mesh(scrollWheelGeo, scrollWheelMat);
+            scrollWheel.rotation.y = Math.PI / 2;
+            scrollWheel.position.set(0, 10, -14);
+            mouseGroup.add(scrollWheel);
+
+            // Position Mouse next to Keyboard in front facing viewer
+            mouseGroup.position.set(115, 0, 80);
+            kbGroup.add(mouseGroup);
+
+            // --- HIGH-DETAIL REALISTIC 3D PRO GAMER MAN AVATAR ---
+            const gamerGroup = new THREE.Group();
+
+            // Materials
+            const skinMat = new THREE.MeshStandardMaterial({ color: 0xd49b78, roughness: 0.55, metalness: 0.1 });
+            const jerseyMat = new THREE.MeshStandardMaterial({ color: 0x0f172a, roughness: 0.45, metalness: 0.3 });
+            const stripeMat = new THREE.MeshStandardMaterial({ color: 0x00f2fe, emissive: 0x0066aa, roughness: 0.2 });
+            const hairMat = new THREE.MeshStandardMaterial({ color: 0x1a120c, roughness: 0.85, metalness: 0.05 });
+            const visorMat = new THREE.MeshStandardMaterial({ color: 0x00f2fe, transparent: true, opacity: 0.82, emissive: 0x0088aa, roughness: 0.1 });
+            const gloveMat = new THREE.MeshStandardMaterial({ color: 0x1e293b, roughness: 0.3, metalness: 0.5 });
+            const eyeMat = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.1 });
+            const pupilMat = new THREE.MeshStandardMaterial({ color: 0x00f2fe, emissive: 0x00aaff });
+
+            // 1. Neck & Torso (Esports Jersey with Shoulders & Collar)
+            const neck = new THREE.Mesh(new THREE.CylinderGeometry(4.2, 4.8, 12, 24), skinMat);
+            neck.position.set(0, 48, 45);
+            gamerGroup.add(neck);
+
+            const torsoGeo = new THREE.CylinderGeometry(17, 13, 40, 24);
+            const torso = new THREE.Mesh(torsoGeo, jerseyMat);
+            torso.position.set(0, 26, 45);
+            gamerGroup.add(torso);
+
+            // Jersey Collar & Side Neon Stripes
+            const collar = new THREE.Mesh(new THREE.TorusGeometry(5.2, 1.2, 12, 24), stripeMat);
+            collar.rotation.x = Math.PI / 2;
+            collar.position.set(0, 44, 45);
+            gamerGroup.add(collar);
+
+            const stripeLeft = new THREE.Mesh(new THREE.BoxGeometry(2, 38, 2), stripeMat);
+            stripeLeft.position.set(-14, 26, 56);
+            const stripeRight = new THREE.Mesh(new THREE.BoxGeometry(2, 38, 2), stripeMat);
+            stripeRight.position.set(14, 26, 56);
+            gamerGroup.add(stripeLeft);
+            gamerGroup.add(stripeRight);
+
+            // Glowing Chest Emblem Logo (Facing Front Forward)
+            const logoEmblem = new THREE.Mesh(new THREE.OctahedronGeometry(4, 0), new THREE.MeshStandardMaterial({ color: 0x00ff66, emissive: 0x00ff66 }));
+            logoEmblem.position.set(0, 34, 58);
+            gamerGroup.add(logoEmblem);
+
+            // Shoulder Joints (Deltoids)
+            const leftShoulder = new THREE.Mesh(new THREE.SphereGeometry(6, 16, 16), jerseyMat);
+            leftShoulder.position.set(-18, 40, 45);
+            const rightShoulder = new THREE.Mesh(new THREE.SphereGeometry(6, 16, 16), jerseyMat);
+            rightShoulder.position.set(18, 40, 45);
+            gamerGroup.add(leftShoulder);
+            gamerGroup.add(rightShoulder);
+
+            // 2. Realistic Head & Facial Features
+            const headGeo = new THREE.SphereGeometry(11, 32, 32);
+            const head = new THREE.Mesh(headGeo, skinMat);
+            head.scale.set(0.95, 1.1, 1.0);
+            head.position.set(0, 60, 45);
+            gamerGroup.add(head);
+
+            // Facial Features (Nose, Eyes, Pupils pointing front forward)
+            const nose = new THREE.Mesh(new THREE.ConeGeometry(1.2, 4, 4), skinMat);
+            nose.rotation.x = -Math.PI / 6;
+            nose.position.set(0, 59, 56);
+            gamerGroup.add(nose);
+
+            const eyeGeo = new THREE.SphereGeometry(1.4, 12, 12);
+            const pupilGeo = new THREE.SphereGeometry(0.7, 12, 12);
+
+            const leftEye = new THREE.Mesh(eyeGeo, eyeMat);
+            leftEye.position.set(-3.6, 62, 55.5);
+            const leftPupil = new THREE.Mesh(pupilGeo, pupilMat);
+            leftPupil.position.set(-3.6, 62, 56.5);
+
+            const rightEye = new THREE.Mesh(eyeGeo, eyeMat);
+            rightEye.position.set(3.6, 62, 55.5);
+            const rightPupil = new THREE.Mesh(pupilGeo, pupilMat);
+            rightPupil.position.set(3.6, 62, 56.5);
+
+            gamerGroup.add(leftEye); gamerGroup.add(leftPupil);
+            gamerGroup.add(rightEye); gamerGroup.add(rightPupil);
+
+            // Stylized Cyber Hair
+            const hairBase = new THREE.Mesh(new THREE.SphereGeometry(11.2, 24, 24, 0, Math.PI * 2, 0, Math.PI * 0.55), hairMat);
+            hairBase.position.set(0, 62.5, 45);
+            gamerGroup.add(hairBase);
+
+            // Hair Spikes / Top Locks
+            for (let i = 0; i < 7; i++) {
+                const spike = new THREE.Mesh(new THREE.ConeGeometry(2, 6, 4), hairMat);
+                spike.rotation.x = (Math.random() - 0.5) * 0.5 - 0.2;
+                spike.rotation.z = (i - 3) * 0.18;
+                spike.position.set((i - 3) * 2.8, 72, 43 + Math.sin(i) * 2);
+                gamerGroup.add(spike);
+            }
+
+            // Cyber Visor / Smart Gaming Glasses (Facing Front Forward)
+            const visor = new THREE.Mesh(new THREE.BoxGeometry(20, 4.5, 3), visorMat);
+            visor.position.set(0, 62.5, 56);
+            gamerGroup.add(visor);
+
+            // 3. Pro RGB Gaming Headset with Mic Boom Arm
+            const headsetBandGeo = new THREE.TorusGeometry(13.5, 1.8, 16, 32, Math.PI);
+            const headsetMat = new THREE.MeshStandardMaterial({ color: 0x00f2fe, emissive: 0x006688 });
+            const headsetBand = new THREE.Mesh(headsetBandGeo, headsetMat);
+            headsetBand.rotation.x = Math.PI / 2;
+            headsetBand.position.set(0, 66, 45);
+            gamerGroup.add(headsetBand);
+
+            const earcupGeo = new THREE.CylinderGeometry(5.2, 5.2, 4, 16);
+            const earcupMat = new THREE.MeshStandardMaterial({ color: 0x00ff66, emissive: 0x00aa33 });
+            const leftEarcup = new THREE.Mesh(earcupGeo, earcupMat);
+            leftEarcup.rotation.z = Math.PI / 2;
+            leftEarcup.position.set(-12.8, 60, 45);
+
+            const rightEarcup = new THREE.Mesh(earcupGeo, earcupMat);
+            rightEarcup.rotation.z = Math.PI / 2;
+            rightEarcup.position.set(12.8, 60, 45);
+
+            gamerGroup.add(leftEarcup); gamerGroup.add(rightEarcup);
+
+            // Mic Boom Arm
+            const micArm = new THREE.Mesh(new THREE.CylinderGeometry(0.6, 0.6, 14, 8), headsetMat);
+            micArm.rotation.x = -Math.PI / 3;
+            micArm.rotation.z = -Math.PI / 6;
+            micArm.position.set(-11, 56, 50);
+            const micTip = new THREE.Mesh(new THREE.SphereGeometry(1.5, 8, 8), new THREE.MeshStandardMaterial({ color: 0xff0055, emissive: 0xff0055 }));
+            micTip.position.set(-8, 52, 58);
+            gamerGroup.add(micArm); gamerGroup.add(micTip);
+
+            // 4. Anatomical Arms & Hands with 5 Fingers
+            function createAnatomicalHand(isLeft) {
+                const handGroup = new THREE.Group();
+                const palm = new THREE.Mesh(new THREE.BoxGeometry(8, 2.5, 8), gloveMat);
+                handGroup.add(palm);
+
+                // 5 Fingers (Thumb, Index, Middle, Ring, Pinky)
+                const fingerOffsets = [-3.2, -1.6, 0, 1.6, 3.2];
+                fingerOffsets.forEach((xOffset, idx) => {
+                    const fingerLen = idx === 0 ? 4 : (idx === 2 ? 6.5 : 5.8);
+                    const finger = new THREE.Mesh(new THREE.CylinderGeometry(0.9, 0.7, fingerLen, 8), gloveMat);
+                    finger.rotation.x = Math.PI / 3; // Curved over keys/mouse
+                    if (idx === 0) { // Thumb
+                        finger.position.set(isLeft ? 4.5 : -4.5, 0, 2);
+                        finger.rotation.z = isLeft ? -Math.PI / 4 : Math.PI / 4;
+                    } else {
+                        finger.position.set(xOffset, -0.5, -4.5);
+                    }
+                    handGroup.add(finger);
+                });
+                return handGroup;
+            }
+
+            // Left Arm (Typing on WASD Keycaps)
+            const leftUpperArm = new THREE.Mesh(new THREE.CylinderGeometry(4, 3.5, 18, 16), gloveMat);
+            leftUpperArm.position.set(-21, 31, 34);
+            leftUpperArm.rotation.z = Math.PI / 5;
+            leftUpperArm.rotation.x = -Math.PI / 4;
+
+            const leftElbow = new THREE.Mesh(new THREE.SphereGeometry(3.5, 12, 12), gloveMat);
+            leftElbow.position.set(-27, 22, 23);
+
+            const leftForearm = new THREE.Mesh(new THREE.CylinderGeometry(3.5, 2.8, 20, 16), skinMat);
+            leftForearm.position.set(-33, 16, 10);
+            leftForearm.rotation.z = Math.PI / 4;
+            leftForearm.rotation.x = -Math.PI / 3;
+
+            gamerGroup.add(leftUpperArm); gamerGroup.add(leftElbow); gamerGroup.add(leftForearm);
+
+            const leftHand = createAnatomicalHand(true);
+            leftHand.position.set(-38, 12, -5);
+            gamerGroup.add(leftHand);
+
+            // Right Arm (Controlling Gaming Mouse)
+            const rightUpperArm = new THREE.Mesh(new THREE.CylinderGeometry(4, 3.5, 18, 16), gloveMat);
+            rightUpperArm.position.set(21, 31, 34);
+            rightUpperArm.rotation.z = -Math.PI / 5;
+            rightUpperArm.rotation.x = -Math.PI / 4;
+
+            const rightElbow = new THREE.Mesh(new THREE.SphereGeometry(3.5, 12, 12), gloveMat);
+            rightElbow.position.set(27, 22, 23);
+
+            const rightForearm = new THREE.Mesh(new THREE.CylinderGeometry(3.5, 2.8, 20, 16), skinMat);
+            rightForearm.position.set(70, 16, 14);
+            rightForearm.rotation.z = -Math.PI / 3.5;
+            rightForearm.rotation.x = -Math.PI / 3;
+
+            gamerGroup.add(rightUpperArm); gamerGroup.add(rightElbow); gamerGroup.add(rightForearm);
+
+            const rightHand = createAnatomicalHand(false);
+            rightHand.position.set(115, 12, 5);
+            gamerGroup.add(rightHand);
+
+            gamerGroup.userData = { leftHand: leftHand, rightHand: rightHand, head: head, torso: torso };
+            kbGroup.add(gamerGroup);
+
+            camera.position.set(0, 0, 200);
+
+            // Position Keyboard, Mouse & Pro Gamer Assembly Facing Straight Front & Compact Scaled
+            kbGroup.position.set(0, -65, -120);
+            kbGroup.scale.set(0.65, 0.65, 0.65);
+            kbGroup.rotation.x = 0.35; // Optimal front 3D angle showing face, jersey, keycaps & mouse
+            kbGroup.rotation.y = 0;    // Facing straight front forward
+            kbGroup.rotation.z = 0;
+            scene.add(kbGroup);
+
+            // 3D Bouncing Spheres System (Varied Sizes, Clean Smooth Spheres Without Outer Rings)
+            const ballGroup = new THREE.Group();
+            const ballColors = [0xff0055, 0x00f2fe, 0xffaa00, 0x9d50bb, 0x00ff66, 0xff0080, 0x00d5e3, 0xff3300, 0x7000ff, 0xffff00];
+            const radiiPool = [4.5, 6.5, 9.0, 12.0, 15.5, 19.0, 23.0]; // Varied sizes from small to large
+            const balls = [];
+            const isMobile = window.innerWidth < 768;
+            const ballCount = isMobile ? 12 : 22;
+
+            for (let i = 0; i < ballCount; i++) {
+                // Diverse varied size distribution
+                const baseRadius = radiiPool[i % radiiPool.length];
+                const radius = Math.max(3.5, baseRadius + (Math.random() * 3.0 - 1.5));
+                const color = ballColors[i % ballColors.length];
+
+                const ballGeo = new THREE.SphereGeometry(radius, 24, 24);
+                const ballMat = new THREE.MeshPhongMaterial({ 
+                    color: color, 
+                    shininess: 140, 
+                    transparent: true, 
+                    opacity: 0.98, 
+                    emissive: color, 
+                    emissiveIntensity: 0.95 
+                });
+                const ballMesh = new THREE.Mesh(ballGeo, ballMat);
+
+                // Inner Core Light
+                const coreGeo = new THREE.SphereGeometry(radius * 0.45, 12, 12);
+                const coreMat = new THREE.MeshBasicMaterial({ color: 0xffffff });
+                const coreMesh = new THREE.Mesh(coreGeo, coreMat);
+                ballMesh.add(coreMesh);
+
+                // Position across viewport
+                ballMesh.position.set((Math.random() - 0.5) * 420, (Math.random() - 0.5) * 280, Math.random() * 80 + 10);
+
+                balls.push({
+                    mesh: ballMesh,
+                    vx: (Math.random() > 0.5 ? 1 : -1) * (Math.random() * 1.5 + 0.9),
+                    vy: (Math.random() > 0.5 ? 1 : -1) * (Math.random() * 1.5 + 0.9),
+                    vz: (Math.random() > 0.5 ? 1 : -1) * (Math.random() * 0.6 + 0.3),
+                    rotX: (Math.random() - 0.5) * 0.04,
+                    rotY: (Math.random() - 0.5) * 0.04
+                });
+
+                ballGroup.add(ballMesh);
+            }
+            scene.add(ballGroup);
+
+            // --- 3D PARTICLE BALL BLAST & COLOR SPRAY ENGINE ---
+            const blastParticles = [];
+            const blastGroup = new THREE.Group();
+            scene.add(blastGroup);
+
+            const colorSplashes = [];
+            const splashGroup = new THREE.Group();
+            scene.add(splashGroup);
+
+            function create3DBallBlast(pos, color) {
+                // 1. Shard Particles Burst
+                const pCount = 42;
+                const pGeo = new THREE.SphereGeometry(2.0, 6, 6);
+
+                for (let i = 0; i < pCount; i++) {
+                    const pMat = new THREE.MeshBasicMaterial({ color: color, transparent: true, opacity: 1.0 });
+                    const pMesh = new THREE.Mesh(pGeo, pMat);
+                    pMesh.position.copy(pos);
+                    blastGroup.add(pMesh);
+
+                    const speed = Math.random() * 11 + 5;
+                    const theta = Math.random() * Math.PI * 2;
+                    const phi = Math.acos((Math.random() * 2) - 1);
+
+                    blastParticles.push({
+                        mesh: pMesh,
+                        vx: speed * Math.sin(phi) * Math.cos(theta),
+                        vy: speed * Math.sin(phi) * Math.sin(theta),
+                        vz: speed * Math.cos(phi),
+                        life: 1.0
+                    });
+                }
+
+                // 2. Expand 3D Color Spray Flash Ring & Light Burst in Background
+                const splashGeo = new THREE.RingGeometry(4, 12, 32);
+                const splashMat = new THREE.MeshBasicMaterial({ color: color, side: THREE.DoubleSide, transparent: true, opacity: 0.95 });
+                const splashMesh = new THREE.Mesh(splashGeo, splashMat);
+                splashMesh.position.copy(pos);
+                splashMesh.lookAt(camera.position);
+                splashGroup.add(splashMesh);
+
+                const splashLight = new THREE.PointLight(color, 12, 300);
+                splashLight.position.copy(pos);
+                scene.add(splashLight);
+
+                colorSplashes.push({
+                    mesh: splashMesh,
+                    light: splashLight,
+                    scale: 1.0,
+                    opacity: 0.95
+                });
+
+                if (typeof playLaserSFX === 'function') playLaserSFX('hit');
+            }
+
+            // Raycaster for Clicking/Touching Floating 3D Balls to Blast & Spray Colors
+            const bgRaycaster = new THREE.Raycaster();
+            const bgMouse = new THREE.Vector2();
+
+            function onBgCanvasClick(e) {
+                if (!e) return;
+                const clientX = e.clientX !== undefined ? e.clientX : (e.touches && e.touches[0] ? e.touches[0].clientX : (e.changedTouches && e.changedTouches[0] ? e.changedTouches[0].clientX : null));
+                const clientY = e.clientY !== undefined ? e.clientY : (e.touches && e.touches[0] ? e.touches[0].clientY : (e.changedTouches && e.changedTouches[0] ? e.changedTouches[0].clientY : null));
+                if (clientX === null || clientY === null) return;
+
+                const rect = canvas.getBoundingClientRect();
+                bgMouse.x = ((clientX - rect.left) / rect.width) * 2 - 1;
+                bgMouse.y = -((clientY - rect.top) / rect.height) * 2 + 1;
+
+                bgRaycaster.setFromCamera(bgMouse, camera);
+                const intersects = bgRaycaster.intersectObjects(balls.map(b => b.mesh), true);
+
+                if (intersects.length > 0) {
+                    for (let i = 0; i < intersects.length; i++) {
+                        const hitObj = intersects[i].object;
+                        const idx = balls.findIndex(b => b.mesh === hitObj || (hitObj.parent && b.mesh === hitObj.parent));
+                        if (idx !== -1) {
+                            const b = balls[idx];
+                            // BLAST 3D BALL & SPRAY COLORS IN BACKGROUND!
+                            create3DBallBlast(b.mesh.position, b.mesh.material.color.getHex());
+
+                            // Respawn Ball elsewhere with new vibrant color!
+                            const newColor = ballColors[Math.floor(Math.random() * ballColors.length)];
+                            b.mesh.material.color.setHex(newColor);
+                            if (b.mesh.children && b.mesh.children[0] && b.mesh.children[0].material) {
+                                b.mesh.children[0].material.color.setHex(newColor);
+                            }
+                            const boundX = isMobile ? 220 : 340;
+                            const boundY = isMobile ? 160 : 230;
+                            b.mesh.position.set(
+                                (Math.random() - 0.5) * (boundX * 1.8),
+                                (Math.random() - 0.5) * (boundY * 1.8),
+                                (Math.random() - 0.5) * 300
+                            );
+                            break;
+                        }
+                    }
+                }
+            }
+
+            canvas.addEventListener('click', onBgCanvasClick);
+            window.addEventListener('pointerdown', onBgCanvasClick, { passive: true });
+            window.addEventListener('click', onBgCanvasClick, { passive: true });
+            window.addEventListener('touchstart', (e) => {
+                if (e.touches && e.touches[0]) {
+                    onBgCanvasClick(e.touches[0]);
+                }
+            }, { passive: true });
+
+            // Mouse Parallax Camera Control
+            let mouseX = 0, mouseY = 0;
+            if (!isMobile) {
+                window.addEventListener('mousemove', (e) => {
+                    mouseX = (e.clientX - window.innerWidth / 2) * 0.1;
+                    mouseY = (e.clientY - window.innerHeight / 2) * 0.1;
+                }, { passive: true });
+            }
+
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            }, { passive: true });
+
+            let time = 0;
+            let lastTime = 0;
+            let frameCount = 0;
+            const targetInterval = 28; // Capped at ~35 FPS (Reduces CPU & GPU power by ~75%)
+
+            function animate3D(now) {
+                if (document.hidden) {
+                    setTimeout(() => requestAnimationFrame(animate3D), 400);
+                    return;
+                }
+                requestAnimationFrame(animate3D);
+
+                if (now - lastTime < targetInterval) return;
+                lastTime = now;
+                time += 0.015;
+                frameCount++;
+
+                torusKnot.rotation.x += 0.003;
+                torusKnot.rotation.y += 0.005;
+                waveMesh.rotation.z += 0.0006;
+
+                // Animate 3D RGB Keycaps wave & floating 3D Keyboard motion
+                const timeNow = time * 2;
+                keycaps.forEach(k => {
+                    k.mesh.material.emissiveIntensity = 0.3 + (Math.sin(timeNow + k.offset) + 1) * 0.45;
+                    k.mesh.position.y = 7 + Math.sin(timeNow + k.offset) * 0.8;
+                });
+                // Keep 3D Gamer assembly facing straight front with gentle floating motion
+                kbGroup.rotation.y = 0;
+                kbGroup.position.y = -65 + Math.sin(timeNow * 0.8) * 2.0;
+
+                // Animate 3D Realistic Gamer avatar (typing WASD, moving mouse, head tracking & breathing)
+                if (gamerGroup.userData.leftHand) {
+                    gamerGroup.userData.leftHand.position.y = 12 + Math.sin(timeNow * 5) * 1.8;
+                    gamerGroup.userData.rightHand.position.x = 115 + Math.cos(timeNow * 2.5) * 2.8;
+                    gamerGroup.userData.head.rotation.y = Math.sin(timeNow * 1.5) * 0.12;
+                    gamerGroup.userData.head.rotation.x = Math.cos(timeNow * 1.8) * 0.06;
+                    if (gamerGroup.userData.torso) {
+                        gamerGroup.userData.torso.position.y = 26 + Math.sin(timeNow * 1.2) * 0.5;
+                    }
+                }
+
+                // Animate 3D Balls - NATURAL PHYSICAL WALL BOUNCE WITH INSTANT IMPACT COLOR SPRAY!
+                const boundX = isMobile ? 220 : 340;
+                const boundY = isMobile ? 160 : 230;
+                const boundZ = 100;
+
+                balls.forEach(b => {
+                    b.mesh.rotation.x += b.rotX;
+                    b.mesh.rotation.y += b.rotY;
+                    b.mesh.position.x += b.vx;
+                    b.mesh.position.y += b.vy;
+                    b.mesh.position.z += b.vz;
+
+                    // 1. Natural Horizontal Wall Collision & Instant Reflection
+                    if (Math.abs(b.mesh.position.x) >= boundX) {
+                        b.mesh.position.x = Math.sign(b.mesh.position.x) * boundX;
+                        b.vx *= -1; // Reflect velocity naturally!
+                        create3DBallBlast(b.mesh.position, b.mesh.material.color.getHex()); // Instant Wall Impact Color Spray!
+                    }
+
+                    // 2. Natural Vertical Wall Collision & Instant Reflection
+                    if (Math.abs(b.mesh.position.y) >= boundY) {
+                        b.mesh.position.y = Math.sign(b.mesh.position.y) * boundY;
+                        b.vy *= -1; // Reflect velocity naturally!
+                        create3DBallBlast(b.mesh.position, b.mesh.material.color.getHex()); // Instant Wall Impact Color Spray!
+                    }
+
+                    // 3. Depth Bounds Reflection
+                    if (Math.abs(b.mesh.position.z) >= boundZ) {
+                        b.mesh.position.z = Math.sign(b.mesh.position.z) * boundZ;
+                        b.vz *= -1;
+                    }
+                });
+
+                // Animate 3D Particle Explosion Blasts Shards
+                for (let i = blastParticles.length - 1; i >= 0; i--) {
+                    const p = blastParticles[i];
+                    p.mesh.position.x += p.vx;
+                    p.mesh.position.y += p.vy;
+                    p.mesh.position.z += p.vz;
+                    p.vx *= 0.92;
+                    p.vy *= 0.92;
+                    p.vz *= 0.92;
+                    p.life -= 0.035;
+                    p.mesh.material.opacity = Math.max(0, p.life);
+
+                    if (p.life <= 0) {
+                        blastGroup.remove(p.mesh);
+                        blastParticles.splice(i, 1);
+                    }
+                }
+
+                // Animate 3D Color Spray Flashes expanding across background
+                for (let i = colorSplashes.length - 1; i >= 0; i--) {
+                    const s = colorSplashes[i];
+                    s.scale += 2.8;
+                    s.opacity -= 0.045;
+                    s.mesh.scale.set(s.scale, s.scale, 1);
+                    s.mesh.material.opacity = Math.max(0, s.opacity);
+                    s.light.intensity = Math.max(0, s.opacity * 14);
+
+                    if (s.opacity <= 0) {
+                        splashGroup.remove(s.mesh);
+                        scene.remove(s.light);
+                        colorSplashes.splice(i, 1);
+                    }
+                }
+
+                camera.position.x += (mouseX - camera.position.x) * 0.03;
+                camera.position.y += (-mouseY - camera.position.y) * 0.03;
+                camera.lookAt(scene.position);
+
+                renderer.render(scene, camera);
+            }
+            requestAnimationFrame(animate3D);
+        }
+
+        /* --- 🎮 3D Cyber Aim Shooter Mini-Game Engine --- */
+        let gameScore = 0;
+        let gameCombo = 1;
+        let gameTimeLeft = 30;
+        let gameTimerInterval = null;
+        let isGameRunning = false;
+        let gameScene, gameCamera, gameRenderer;
+        let gameTargets = [];
+        let raycaster, mousePos;
+
+        function openGameModal(e) {
+            if (e) e.preventDefault();
+            const modal = document.getElementById('gameModal');
+            if (modal) {
+                modal.style.display = 'flex';
+                init3DGameEngine();
+            }
+        }
+
+        function closeGameModal(e) {
+            if (e) e.preventDefault();
+            const modal = document.getElementById('gameModal');
+            if (modal) modal.style.display = 'none';
+            stop3DGame();
+        }
+
+        function closeGameModalOnBackdrop(e) {
+            if (e && e.target.classList.contains('cyber-game-modal')) {
+                closeGameModal(e);
+            }
+        }
+
+        // Web Audio API Arcade Laser Sound Effects Generator
+        function playLaserSFX(type) {
+            try {
+                const AudioCtx = window.AudioContext || window.webkitAudioContext;
+                if (!AudioCtx) return;
+                const ctx = new AudioCtx();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+
+                if (type === 'hit') {
+                    osc.type = 'sawtooth';
+                    osc.frequency.setValueAtTime(440, ctx.currentTime);
+                    osc.frequency.exponentialRampToValueAtTime(110, ctx.currentTime + 0.15);
+                    gain.gain.setValueAtTime(0.3, ctx.currentTime);
+                    gain.gain.linearRampToValueAtTime(0.01, ctx.currentTime + 0.15);
+                    osc.start();
+                    osc.stop(ctx.currentTime + 0.15);
+                } else if (type === 'over') {
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(600, ctx.currentTime);
+                    osc.frequency.linearRampToValueAtTime(200, ctx.currentTime + 0.4);
+                    gain.gain.setValueAtTime(0.3, ctx.currentTime);
+                    gain.gain.linearRampToValueAtTime(0.01, ctx.currentTime + 0.4);
+                    osc.start();
+                    osc.stop(ctx.currentTime + 0.4);
+                }
+            } catch (err) { }
+        }
+
+        function init3DGameEngine() {
+            const canvas = document.getElementById('game3DCanvas');
+            const wrapper = document.getElementById('gameCanvasWrapper');
+            if (!canvas || !wrapper || typeof THREE === 'undefined' || gameRenderer) return;
+
+            const width = wrapper.clientWidth || 800;
+            const height = wrapper.clientHeight || 480;
+
+            gameScene = new THREE.Scene();
+            gameCamera = new THREE.PerspectiveCamera(60, width / height, 0.1, 1000);
+            gameCamera.position.z = 12;
+
+            gameRenderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+            gameRenderer.setSize(width, height);
+            gameRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+
+            raycaster = new THREE.Raycaster();
+            mousePos = new THREE.Vector2();
+
+            // Ambient & Point Lighting
+            const ambLight = new THREE.AmbientLight(0xffffff, 0.8);
+            gameScene.add(ambLight);
+
+            const dirLight = new THREE.DirectionalLight(0x00ff66, 1.2);
+            dirLight.position.set(5, 5, 10);
+            gameScene.add(dirLight);
+
+            // Handle Clicks / Taps on 3D Targets
+            canvas.addEventListener('pointerdown', onGameCanvasClick, false);
+
+            function renderGameLoop() {
+                requestAnimationFrame(renderGameLoop);
+                if (isGameRunning) {
+                    gameTargets.forEach(t => {
+                        t.mesh.rotation.x += t.rotSpeedX;
+                        t.mesh.rotation.y += t.rotSpeedY;
+                        t.mesh.position.x += Math.sin(Date.now() * 0.003 + t.id) * 0.015;
+                        t.mesh.position.y += Math.cos(Date.now() * 0.003 + t.id) * 0.015;
+                    });
+                }
+                gameRenderer.render(gameScene, gameCamera);
+            }
+            renderGameLoop();
+        }
+
+        function spawn3DTarget() {
+            if (!gameScene || typeof THREE === 'undefined') return;
+            const targetColors = [0x00ff66, 0x00f2fe, 0xff0080, 0xffaa00, 0x9d50bb];
+            const color = targetColors[Math.floor(Math.random() * targetColors.length)];
+
+            // Create 3D Polyhedron Target Mesh
+            const geometries = [
+                new THREE.IcosahedronGeometry(0.8, 0),
+                new THREE.OctahedronGeometry(0.85, 0),
+                new THREE.TorusGeometry(0.65, 0.25, 12, 24)
+            ];
+            const geo = geometries[Math.floor(Math.random() * geometries.length)];
+            const mat = new THREE.MeshStandardMaterial({
+                color: color,
+                wireframe: Math.random() > 0.4,
+                roughness: 0.3,
+                metalness: 0.8,
+                emissive: color,
+                emissiveIntensity: 0.5
+            });
+
+            const mesh = new THREE.Mesh(geo, mat);
+            mesh.position.set(
+                (Math.random() - 0.5) * 14,
+                (Math.random() - 0.5) * 8,
+                (Math.random() - 0.5) * 4
+            );
+
+            gameScene.add(mesh);
+            gameTargets.push({
+                id: Math.random(),
+                mesh: mesh,
+                rotSpeedX: (Math.random() - 0.5) * 0.04,
+                rotSpeedY: (Math.random() - 0.5) * 0.04
+            });
+        }
+
+        function onGameCanvasClick(e) {
+            if (!isGameRunning || !gameRenderer) return;
+            const rect = gameRenderer.domElement.getBoundingClientRect();
+            mousePos.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+            mousePos.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+
+            raycaster.setFromCamera(mousePos, gameCamera);
+            const intersects = raycaster.intersectObjects(gameTargets.map(t => t.mesh));
+
+            if (intersects.length > 0) {
+                const hitObj = intersects[0].object;
+                const idx = gameTargets.findIndex(t => t.mesh === hitObj);
+                if (idx !== -1) {
+                    gameScene.remove(hitObj);
+                    gameTargets.splice(idx, 1);
+
+                    playLaserSFX('hit');
+
+                    // Score calculation & combo tracking
+                    gameScore += 100 * gameCombo;
+                    gameCombo += 1;
+                    updateGameHUD();
+
+                    // Spawn new 3D target
+                    spawn3DTarget();
+                }
+            } else {
+                // Reset combo on miss
+                gameCombo = 1;
+                updateGameHUD();
+            }
+        }
+
+        function updateGameHUD() {
+            const scoreEl = document.getElementById('gameScoreVal');
+            const comboEl = document.getElementById('gameComboVal');
+            const timeEl = document.getElementById('gameTimeVal');
+            if (scoreEl) scoreEl.innerText = gameScore;
+            if (comboEl) comboEl.innerText = gameCombo + 'x';
+            if (timeEl) timeEl.innerText = gameTimeLeft + 's';
+        }
+
+        function start3DGame() {
+            isGameRunning = true;
+            gameScore = 0;
+            gameCombo = 1;
+            gameTimeLeft = 30;
+            updateGameHUD();
+
+            const startOverlay = document.getElementById('gameStartOverlay');
+            const resultOverlay = document.getElementById('gameResultOverlay');
+            if (startOverlay) startOverlay.classList.add('hidden');
+            if (resultOverlay) resultOverlay.classList.add('hidden');
+
+            // Clear existing targets
+            if (gameScene) {
+                gameTargets.forEach(t => gameScene.remove(t.mesh));
+                gameTargets = [];
+            }
+
+            // Spawn 5 initial targets
+            for (let i = 0; i < 5; i++) {
+                spawn3DTarget();
+            }
+
+            clearInterval(gameTimerInterval);
+            gameTimerInterval = setInterval(() => {
+                gameTimeLeft--;
+                updateGameHUD();
+                if (gameTimeLeft <= 0) {
+                    end3DGame();
+                }
+            }, 1000);
+        }
+
+        function stop3DGame() {
+            isGameRunning = false;
+            clearInterval(gameTimerInterval);
+        }
+
+        function end3DGame() {
+            stop3DGame();
+            playLaserSFX('over');
+
+            const resultOverlay = document.getElementById('gameResultOverlay');
+            const scoreDisplay = document.getElementById('gameFinalScore');
+            const rankBadge = document.getElementById('gameRankBadge');
+
+            if (scoreDisplay) scoreDisplay.innerText = gameScore + ' PTS';
+
+            let rank = '🏆 S-RANK AIM GOD';
+            if (gameScore < 1000) rank = '🥉 BRONZE AIMER';
+            else if (gameScore < 2500) rank = '🥈 SILVER SHOOTER';
+            else if (gameScore < 4500) rank = '🥇 GOLD PRO AIMER';
+
+            if (rankBadge) rankBadge.innerText = rank;
+            if (resultOverlay) resultOverlay.classList.remove('hidden');
+        }
+
+        /* --- Interactive Drag-to-Rotate 3D Earth Globe Widget --- */
+        function initHero3DModel() {
+            const canvas = document.getElementById('hero3DCanvas');
+            const wrapper = document.getElementById('hero3DModelWrapper');
+            if (!canvas) return;
+
+            if (typeof THREE === 'undefined') return;
+            if (window._heroModelInitialized) return;
+            window._heroModelInitialized = true;
+            window._hero2DFallbackActive = false;
+
+            const width = (wrapper && wrapper.clientWidth) ? wrapper.clientWidth : 260;
+            const height = (wrapper && wrapper.clientHeight) ? wrapper.clientHeight : 260;
+
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(50, width / height, 0.1, 1000);
+            camera.position.set(0, 0, 5.5);
+            camera.lookAt(0, 0, 0);
+
+            const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+            renderer.setSize(width, height);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+            // 3D Lighting for depth & metallic reflections
+            const ambientLight = new THREE.AmbientLight(0xffffff, 1.4);
+            scene.add(ambientLight);
+
+            const pointLight1 = new THREE.PointLight(0xffffff, 2.5, 50);
+            pointLight1.position.set(5, 5, 10);
+            scene.add(pointLight1);
+
+            const pointLight2 = new THREE.PointLight(0x00f2fe, 2.0, 50);
+            pointLight2.position.set(-5, -5, 10);
+            scene.add(pointLight2);
+
+            // --- 3D EARTH GLOBE MODEL ---
+            function createEarthTexture() {
+                const cvs = document.createElement('canvas');
+                cvs.width = 1024; cvs.height = 512;
+                const ctx = cvs.getContext('2d');
+
+                // Deep ocean gradient
+                const ocean = ctx.createLinearGradient(0, 0, 0, 512);
+                ocean.addColorStop(0,   '#0a1a3a');
+                ocean.addColorStop(0.3, '#0d2d5e');
+                ocean.addColorStop(0.7, '#0d2d5e');
+                ocean.addColorStop(1,   '#0a1a3a');
+                ctx.fillStyle = ocean;
+                ctx.fillRect(0, 0, 1024, 512);
+
+                // Lat/lon grid
+                ctx.strokeStyle = 'rgba(0,180,255,0.18)';
+                ctx.lineWidth = 1;
+                for (let lon = 0; lon < 1024; lon += 1024/12) {
+                    ctx.beginPath(); ctx.moveTo(lon, 0); ctx.lineTo(lon, 512); ctx.stroke();
+                }
+                for (let lat = 0; lat < 512; lat += 512/6) {
+                    ctx.beginPath(); ctx.moveTo(0, lat); ctx.lineTo(1024, lat); ctx.stroke();
+                }
+
+                // Helper: draw continent blob
+                function continent(points, fill, glow) {
+                    ctx.beginPath();
+                    ctx.moveTo(points[0][0], points[0][1]);
+                    for (let i = 1; i < points.length; i++) ctx.lineTo(points[i][0], points[i][1]);
+                    ctx.closePath();
+                    ctx.fillStyle = fill;
+                    ctx.shadowColor = glow;
+                    ctx.shadowBlur = 10;
+                    ctx.fill();
+                    ctx.shadowBlur = 0;
+                }
+
+                const land  = 'rgba(34,139,34,0.95)';
+                const land2 = 'rgba(60,160,40,0.9)';
+                const land3 = 'rgba(85,107,47,0.9)';
+                const desert = 'rgba(194,154,80,0.9)';
+                const ice   = 'rgba(220,235,255,0.95)';
+                const glow  = '#00ff88';
+
+                // North America
+                continent([[110,80],[200,70],[230,100],[240,160],[200,210],[160,230],[120,210],[90,170],[80,130]], land, glow);
+                // South America
+                continent([[175,240],[215,230],[235,260],[230,330],[200,380],[165,360],[155,300],[160,260]], land2, glow);
+                // Europe
+                continent([[430,60],[490,55],[520,80],[510,110],[480,120],[450,105],[430,85]], land3, glow);
+                // Africa
+                continent([[440,125],[510,115],[540,150],[550,230],[530,310],[490,350],[450,330],[420,270],[415,190],[430,140]], desert, glow);
+                // Asia (main body)
+                continent([[510,55],[650,45],[720,60],[750,90],[740,150],[700,180],[640,190],[580,170],[540,140],[520,100],[510,70]], land, glow);
+                // India
+                continent([[600,165],[630,158],[645,185],[630,220],[605,215],[590,190]], land2, glow);
+                // Southeast Asia
+                continent([[680,160],[730,150],[760,175],[740,200],[700,195],[675,175]], land, glow);
+                // Australia
+                continent([[730,285],[810,270],[850,300],[840,360],[790,380],[730,355],[710,320]], desert, glow);
+                // Antarctica
+                continent([[0,460],[1024,460],[1024,512],[0,512]], ice, '#aaddff');
+                // Greenland
+                continent([[205,45],[255,35],[270,65],[250,90],[210,85],[195,60]], ice, '#aaddff');
+
+                // Ocean shimmer highlights
+                ctx.globalAlpha = 0.07;
+                for (let i = 0; i < 18; i++) {
+                    const x = Math.random() * 1024, y = Math.random() * 512;
+                    const r = ctx.createRadialGradient(x, y, 0, x, y, 60 + Math.random() * 80);
+                    r.addColorStop(0, '#88ddff'); r.addColorStop(1, 'transparent');
+                    ctx.fillStyle = r;
+                    ctx.fillRect(0, 0, 1024, 512);
+                }
+                ctx.globalAlpha = 1;
+
+                return new THREE.CanvasTexture(cvs);
+            }
+
+            function createCloudTexture() {
+                const cvs = document.createElement('canvas');
+                cvs.width = 512; cvs.height = 256;
+                const ctx = cvs.getContext('2d');
+                ctx.clearRect(0, 0, 512, 256);
+                ctx.fillStyle = 'rgba(255,255,255,0)';
+                ctx.fillRect(0, 0, 512, 256);
+                // Scattered cloud patches
+                for (let i = 0; i < 28; i++) {
+                    const x = Math.random() * 512, y = Math.random() * 256;
+                    const rx = 18 + Math.random() * 40, ry = 8 + Math.random() * 18;
+                    const g = ctx.createRadialGradient(x, y, 0, x, y, Math.max(rx, ry));
+                    g.addColorStop(0, 'rgba(255,255,255,0.75)');
+                    g.addColorStop(1, 'rgba(255,255,255,0)');
+                    ctx.save();
+                    ctx.scale(1, ry / rx);
+                    ctx.beginPath();
+                    ctx.arc(x, y * (rx / ry), rx, 0, Math.PI * 2);
+                    ctx.fillStyle = g;
+                    ctx.fill();
+                    ctx.restore();
+                }
+                return new THREE.CanvasTexture(cvs);
+            }
+
+            const earthTexture = createEarthTexture();
+            const cloudTexture = createCloudTexture();
+
+            // Earth sphere
+            const earthGeo = new THREE.SphereGeometry(1.85, 64, 64);
+            const earthMat = new THREE.MeshStandardMaterial({
+                map: earthTexture,
+                roughness: 0.7,
+                metalness: 0.05,
+                emissive: new THREE.Color(0x001122),
+                emissiveIntensity: 0.3
+            });
+            const earthMesh = new THREE.Mesh(earthGeo, earthMat);
+
+            // Cloud layer (slightly larger sphere on top)
+            const cloudGeo = new THREE.SphereGeometry(1.90, 40, 40);
+            const cloudMat = new THREE.MeshStandardMaterial({
+                map: cloudTexture,
+                transparent: true,
+                opacity: 0.55,
+                depthWrite: false
+            });
+            const cloudMesh = new THREE.Mesh(cloudGeo, cloudMat);
+
+            // Atmosphere glow (BackSide oversphere)
+            const atmosGeo = new THREE.SphereGeometry(2.05, 32, 32);
+            const atmosMat = new THREE.MeshBasicMaterial({
+                color: 0x4488ff,
+                transparent: true,
+                opacity: 0.09,
+                side: THREE.BackSide
+            });
+            const atmosMesh = new THREE.Mesh(atmosGeo, atmosMat);
+
+            // Inner glow light
+            const innerGlow = new THREE.PointLight(0x4488ff, 2.5, 6);
+            innerGlow.position.set(0, 0, 0);
+
+            // Golden equator ring
+            const goldRingGeo = new THREE.TorusGeometry(2.3, 0.045, 16, 100);
+            const goldRingMat = new THREE.MeshStandardMaterial({
+                color: 0xffaa00, metalness: 0.95, roughness: 0.05, emissive: 0xaa6600
+            });
+            const goldRingMesh = new THREE.Mesh(goldRingGeo, goldRingMat);
+            goldRingMesh.rotation.x = Math.PI / 2;
+
+            // Cyan orbit ring (tilted like a satellite path)
+            const cyanRingGeo = new THREE.TorusGeometry(2.6, 0.03, 16, 100);
+            const cyanRingMat = new THREE.MeshStandardMaterial({
+                color: 0x00f2fe, metalness: 0.95, roughness: 0.05
+            });
+            const cyanRingMesh = new THREE.Mesh(cyanRingGeo, cyanRingMat);
+            cyanRingMesh.rotation.x = Math.PI / 6;
+            cyanRingMesh.rotation.y = Math.PI / 4;
+
+            // Pink orbit ring
+            const pinkRingGeo = new THREE.TorusGeometry(2.85, 0.022, 16, 100);
+            const pinkRingMat = new THREE.MeshStandardMaterial({
+                color: 0xff007f, metalness: 0.95, roughness: 0.05, emissive: 0x550033
+            });
+            const pinkRingMesh = new THREE.Mesh(pinkRingGeo, pinkRingMat);
+            pinkRingMesh.rotation.x = Math.PI / 5;
+            pinkRingMesh.rotation.y = Math.PI / 3;
+
+            const modelGroup = new THREE.Group();
+            modelGroup.add(earthMesh);
+            modelGroup.add(cloudMesh);
+            modelGroup.add(atmosMesh);
+            modelGroup.add(innerGlow);
+            modelGroup.add(goldRingMesh);
+            modelGroup.add(cyanRingMesh);
+            modelGroup.add(pinkRingMesh);
+            scene.add(modelGroup);
+
+            // Dynamic Spin Acceleration Physics Engine
+            let isDragging = false;
+            let previousMousePosition = { x: 0, y: 0 };
+            let spinVelY = 0.025;
+            let spinVelX = 0.008;
+
+            function onPointerStart(e) {
+                isDragging = true;
+                const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+                const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+                previousMousePosition = { x: clientX, y: clientY };
+            }
+
+            function onPointerMove(e) {
+                if (!isDragging) return;
+                const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+                const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+                const deltaMove = { x: clientX - previousMousePosition.x, y: clientY - previousMousePosition.y };
+
+                spinVelY += deltaMove.x * 0.008;
+                spinVelX += deltaMove.y * 0.008;
+
+                previousMousePosition = { x: clientX, y: clientY };
+            }
+
+            function onPointerEnd() { isDragging = false; }
+
+            if (wrapper) {
+                wrapper.addEventListener('mousedown', onPointerStart);
+                wrapper.addEventListener('mousemove', onPointerMove);
+                window.addEventListener('mouseup', onPointerEnd);
+
+                wrapper.addEventListener('touchstart', onPointerStart, { passive: true });
+                wrapper.addEventListener('touchmove', onPointerMove, { passive: true });
+                window.addEventListener('touchend', onPointerEnd);
+            }
+
+            let lastHeroTime = 0;
+            const heroTargetInterval = 28;
+
+            function renderModel(now) {
+                if (document.hidden || window.scrollY > 900) {
+                    setTimeout(() => requestAnimationFrame(renderModel), 400);
+                    return;
+                }
+                requestAnimationFrame(renderModel);
+
+                if (now - lastHeroTime < heroTargetInterval) return;
+                lastHeroTime = now;
+
+                // Rotate Earth globe
+                earthMesh.rotation.y += spinVelY;
+                earthMesh.rotation.x += spinVelX * 0.3;
+
+                // Clouds drift slightly faster than Earth
+                cloudMesh.rotation.y += spinVelY * 1.15;
+
+                // Orbit Rings spin
+                goldRingMesh.rotation.y += 0.008;
+                cyanRingMesh.rotation.z -= 0.015;
+                pinkRingMesh.rotation.z += 0.009;
+
+                // Smooth Physics Friction Decay
+                if (!isDragging) {
+                    spinVelY *= 0.985;
+                    spinVelX *= 0.985;
+                    if (Math.abs(spinVelY) < 0.015) spinVelY = Math.sign(spinVelY || 1) * 0.015;
+                    if (Math.abs(spinVelX) < 0.005) spinVelX = Math.sign(spinVelX || 1) * 0.005;
+                }
+
+                renderer.render(scene, camera);
+            }
+            requestAnimationFrame(renderModel);
+        }
+
+        /* --- Guaranteed 2D Canvas Cyber Orb Fallback (Runs if Three.js CDN is offline/slow) --- */
+        function init2DCyberOrbFallback(canvas, wrapper) {
+            const ctx = canvas.getContext('2d');
+            if (!ctx) return;
+
+            let width = canvas.width = (wrapper && wrapper.clientWidth) ? wrapper.clientWidth : 260;
+            let height = canvas.height = (wrapper && wrapper.clientHeight) ? wrapper.clientHeight : 260;
+            let angleX = 0.5, angleY = 0;
+            let isDragging = false;
+            let prevMouse = { x: 0, y: 0 };
+            let velX = 0, velY = 0;
+
+            function onStart(e) {
+                isDragging = true;
+                const cX = e.touches ? e.touches[0].clientX : e.clientX;
+                const cY = e.touches ? e.touches[0].clientY : e.clientY;
+                prevMouse = { x: cX, y: cY };
+            }
+            function onMove(e) {
+                if (!isDragging) return;
+                const cX = e.touches ? e.touches[0].clientX : e.clientX;
+                const cY = e.touches ? e.touches[0].clientY : e.clientY;
+                velY = (cX - prevMouse.x) * 0.01;
+                velX = (cY - prevMouse.y) * 0.01;
+                angleY += velY;
+                angleX += velX;
+                prevMouse = { x: cX, y: cY };
+            }
+            function onEnd() { isDragging = false; }
+
+            if (wrapper) {
+                wrapper.addEventListener('mousedown', onStart);
+                wrapper.addEventListener('mousemove', onMove);
+                window.addEventListener('mouseup', onEnd);
+                wrapper.addEventListener('touchstart', onStart, { passive: true });
+                wrapper.addEventListener('touchmove', onMove, { passive: true });
+                window.addEventListener('touchend', onEnd);
+            }
+
+            let lastFallbackTime = 0;
+            function drawOrb(now) {
+                if (!window._hero2DFallbackActive) return;
+                if (document.hidden || window.scrollY > 900) {
+                    setTimeout(() => requestAnimationFrame(drawOrb), 400);
+                    return;
+                }
+                requestAnimationFrame(drawOrb);
+
+                if (now - lastFallbackTime < 28) return;
+                lastFallbackTime = now;
+
+                ctx.clearRect(0, 0, width, height);
+
+                if (!isDragging) {
+                    velX *= 0.95;
+                    velY *= 0.95;
+                    angleY += 0.012 + velY;
+                    angleX += 0.005 + velX;
+                }
+
+                const cx = width / 2;
+                const cy = height / 2;
+                const radius = Math.min(width, height) * 0.32;
+
+                ctx.save();
+                ctx.translate(cx, cy);
+
+                // Outer Glowing Neon Orbit 1
+                ctx.beginPath();
+                ctx.ellipse(0, 0, radius * 1.1, radius * 0.4, angleY, 0, Math.PI * 2);
+                ctx.strokeStyle = '#00ff66';
+                ctx.lineWidth = 2.5;
+                ctx.stroke();
+
+                // Outer Glowing Neon Orbit 2
+                ctx.beginPath();
+                ctx.ellipse(0, 0, radius * 1.25, radius * 0.35, -angleY * 1.3, 0, Math.PI * 2);
+                ctx.strokeStyle = '#00f2fe';
+                ctx.lineWidth = 2;
+                ctx.stroke();
+
+                // Inner Core Glowing Gradient Orb
+                const grad = ctx.createRadialGradient(0, 0, 5, 0, 0, radius * 0.6);
+                grad.addColorStop(0, '#00f2fe');
+                grad.addColorStop(0.5, '#00ff66');
+                grad.addColorStop(1, 'rgba(0, 255, 102, 0)');
+                ctx.fillStyle = grad;
+                ctx.beginPath();
+                ctx.arc(0, 0, radius * 0.6, 0, Math.PI * 2);
+                ctx.fill();
+
+                ctx.restore();
+            }
+            requestAnimationFrame(drawOrb);
+        }
+
+        /* --- Smooth Responsive 3D Card & Title Parallax Tilt Engine --- */
+        function init3DParallaxTilt() {
+            const targetSelector = '.gallery-3d-card, #heroTextBox, .glass-card, .game-mode-card, .cert-card, .stat-box, .main-title, .gallery-section-title, .gamer-title, .nav-brand-link, .bs-gaming-emblem-box';
+            const cards = document.querySelectorAll(targetSelector);
+
+            cards.forEach(card => {
+                card.style.transformStyle = 'preserve-3d';
+
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left - rect.width / 2;
+                    const y = e.clientY - rect.top - rect.height / 2;
+                    const tiltX = (y / (rect.height / 2)) * -12;
+                    const tiltY = (x / (rect.width / 2)) * 12;
+
+                    card.style.transition = 'none';
+                    card.style.transform = `perspective(1000px) rotateX(${tiltX.toFixed(2)}deg) rotateY(${tiltY.toFixed(2)}deg) translateY(-6px) scale(1.025)`;
+                });
+
+                card.addEventListener('mouseleave', () => {
+                    card.style.transition = 'transform 0.5s ease-out, box-shadow 0.3s ease, border-color 0.3s ease';
+                    card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px) scale(1)`;
+                });
+            });
+        }
+    </script>
+    <!-- Ultra-High Visibility Floating Social Dock -->
+    <!-- Floating Quick Social Dock -->
+    <div class="floating-social-dock">
+        <a href="https://www.facebook.com/profile.php?id=100077988874834" target="_blank"
+            onclick="openSocialApp(event, 'https://www.facebook.com/profile.php?id=100077988874834', 'fb://profile/100077988874834')"
+            class="dock-social-btn dock-fb" aria-label="Facebook">
+            <img src="facebook.png" alt="Facebook">
+            <span class="dock-tooltip">Facebook Profile</span>
+        </a>
+        <a href="https://www.tiktok.com/@bibek_866284?_t=8lTCojGbjdq&_r=1" target="_blank"
+            onclick="openSocialApp(event, 'https://www.tiktok.com/@bibek_866284?_t=8lTCojGbjdq&_r=1', 'snssdk1128://user/profile/@bibek_866284')"
+            class="dock-social-btn dock-tt" aria-label="TikTok">
+            <img src="tik-tok.png" alt="TikTok">
+            <span class="dock-tooltip">TikTok @bibek_866284</span>
+        </a>
+        <a href="https://www.instagram.com/bibeksapkota147/?utm_source=qr" target="_blank"
+            onclick="openSocialApp(event, 'https://www.instagram.com/bibeksapkota147/?utm_source=qr', 'instagram://user?username=bibeksapkota147')"
+            class="dock-social-btn dock-ig" aria-label="Instagram">
+            <img src="instagram.png" alt="Instagram">
+            <span class="dock-tooltip">Instagram @bibeksapkota147</span>
+        </a>
+        <a href="https://www.youtube.com/channel/UCThD8PRvL7l7BVFqcWjZWUg" target="_blank"
+            onclick="openSocialApp(event, 'https://www.youtube.com/channel/UCThD8PRvL7l7BVFqcWjZWUg', 'vnd.youtube://www.youtube.com/channel/UCThD8PRvL7l7BVFqcWjZWUg')"
+            class="dock-social-btn dock-yt" aria-label="YouTube">
+            <img src="youtube.png" alt="YouTube">
+            <span class="dock-tooltip">YouTube Channel</span>
+        </a>
+        <a href="https://discord.gg/uQ6gWNc7N" target="_blank"
+            onclick="openSocialApp(event, 'https://discord.gg/uQ6gWNc7N', 'discord://discord.gg/uQ6gWNc7N')"
+            class="dock-social-btn dock-discord" aria-label="Discord">
+            <img src="discord.png" alt="Discord">
+            <span class="dock-tooltip">Discord Community</span>
+        </a>
+    </div>
+
+    <div id="google_translate_element" style="display:none;"></div>
+    <script src="translator.js" defer></script>
+    <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" async
+        defer></script>
+</body>
+
+</html>

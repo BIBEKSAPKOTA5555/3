@@ -1,0 +1,2119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+    <title>Portfolio - Bibek Sapkota</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800;900&family=Rajdhani:wght@600;700;800&family=Outfit:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&family=Syne:wght@700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="style.css?v=700">
+    <!-- Three.js CDN for High-Performance 3D WebGL Graphics -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
+    <!-- EmailJS SDK for Real-Time Gmail OTP Verification -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js" defer></script>
+    <!-- Anti-DevTools & Source Code Security Engine -->
+    <script src="security.js" defer></script>
+</head>
+
+<body class="portfolio-body" oncopy="return false" oncut="return false" oncontextmenu="return false" onselectstart="return false">
+    <!-- High-Tech Cyber Gaming Preloader / Loading Screen -->
+    <div id="cyberPreloader" class="cyber-preloader">
+        <div class="preloader-content">
+            <div class="preloader-logo-wrapper">
+                <div class="preloader-energy-ring"></div>
+                <div class="preloader-energy-ring ring-outer"></div>
+                <img src="bs-gaming-clean.png" class="preloader-logo-img" alt="BS GAMING Emblem">
+            </div>
+            <h1 class="preloader-title gamer-font">BS GAMING</h1>
+            <p class="preloader-subtitle">BIBEK SAPKOTA • PORTFOLIO HUBS</p>
+            
+            <div class="preloader-progress-box">
+                <div class="preloader-progress-info">
+                    <span id="preloaderStatusText" class="preloader-status-text">INITIALIZING CYBER CORE...</span>
+                    <span id="preloaderPercentText" class="preloader-percent-text">0%</span>
+                </div>
+                <div class="preloader-progress-track">
+                    <div id="preloaderProgressBar" class="preloader-progress-bar"></div>
+                </div>
+            </div>
+            
+            <div class="preloader-hint">
+                <span class="pulse-dot"></span> Click anywhere or press any key to enter
+            </div>
+        </div>
+    </div>
+    <script>
+        (function initCyberPreloader() {
+            const preloader = document.getElementById('cyberPreloader');
+            const progressBar = document.getElementById('preloaderProgressBar');
+            const percentText = document.getElementById('preloaderPercentText');
+            const statusText = document.getElementById('preloaderStatusText');
+
+            if (!preloader || !progressBar) return;
+
+            let progress = 0;
+            let isDismissed = false;
+
+            const statuses = [
+                { pct: 0, text: 'INITIALIZING CYBER CORE...' },
+                { pct: 20, text: 'LOADING 3D GRAPHICS & ASSETS...' },
+                { pct: 45, text: 'CALIBRATING RAYCASTER & PHYSICS...' },
+                { pct: 75, text: 'SYNCHRONIZING AUDIO & DATA...' },
+                { pct: 92, text: 'FINALIZING SYSTEM INTERACTION...' },
+                { pct: 100, text: 'SYSTEM READY! WELCOME' }
+            ];
+
+            function updateStatus(val) {
+                for (let i = statuses.length - 1; i >= 0; i--) {
+                    if (val >= statuses[i].pct) {
+                        if (statusText && statusText.textContent !== statuses[i].text) {
+                            statusText.textContent = statuses[i].text;
+                        }
+                        break;
+                    }
+                }
+            }
+
+            function dismissPreloader() {
+                if (isDismissed) return;
+                isDismissed = true;
+                progress = 100;
+                if (progressBar) progressBar.style.width = '100%';
+                if (percentText) percentText.textContent = '100%';
+                if (statusText) statusText.textContent = 'SYSTEM READY! WELCOME';
+
+                if (typeof playLaserSFX === 'function') {
+                    try { playLaserSFX('over'); } catch (e) {}
+                }
+
+                setTimeout(() => {
+                    preloader.classList.add('fade-out');
+                    setTimeout(() => {
+                        preloader.style.display = 'none';
+                    }, 750);
+                }, 300);
+            }
+
+            const interval = setInterval(() => {
+                if (isDismissed) {
+                    clearInterval(interval);
+                    return;
+                }
+
+                const isLoaded = document.readyState === 'complete';
+                const increment = isLoaded ? Math.random() * 18 + 12 : Math.random() * 8 + 3;
+                progress += increment;
+
+                if (progress >= 100) {
+                    progress = 100;
+                    clearInterval(interval);
+                    dismissPreloader();
+                } else {
+                    if (progressBar) progressBar.style.width = Math.floor(progress) + '%';
+                    if (percentText) percentText.textContent = Math.floor(progress) + '%';
+                    updateStatus(progress);
+                }
+            }, 60);
+
+            preloader.addEventListener('click', dismissPreloader);
+            window.addEventListener('keydown', dismissPreloader, { once: true });
+            window.addEventListener('load', () => {
+                if (progress < 90) progress = 90;
+            });
+        })();
+    </script>
+
+    <!-- Full-Screen 3D WebGL Canvas Background -->
+    <canvas id="threePortfolioCanvas" class="three-webgl-canvas"></canvas>
+
+    <!-- Hidden iframe for guaranteed background email dispatch without CORS blocking -->
+    <iframe name="email_dispatch_iframe" id="emailDispatchIframe" style="display:none;"></iframe>
+
+    <!-- Interactive Particle & Weather Fallback Canvas -->
+    <canvas id="particleCanvas" class="particle-2d-canvas"></canvas>
+
+    <!-- Anti-Screenshot & Screen Capture Protection Shield -->
+    <div id="antiScreenshotShield" class="anti-screenshot-shield hidden">
+        <div class="shield-box">
+            <div class="shield-icon">🛡️</div>
+            <h2>SECURITY SHIELD ACTIVE</h2>
+            <p>Screen capture, window screenshots, and tab switching are blocked to protect Bibek Sapkota's verified identity & credentials.</p>
+            <span class="shield-badge">🔒 Anti-Capture & OCR Protection</span>
+        </div>
+    </div>
+
+    <!-- Password Protection Gate Overlay -->
+    <div id="passwordGate" class="password-gate" onclick="closePasswordGateOnBackdrop(event)">
+        <div class="password-card">
+            <button type="button" class="close-gate-btn" onclick="closePasswordGate(event)" aria-label="Close Password Gate">✕</button>
+            <div class="lock-icon">🔒</div>
+            <h2 data-i18n="gateTitle">Protected Portfolio</h2>
+            <p data-i18n="gateSub">Please enter the password to access Bibek's portfolio.</p>
+
+            <form onsubmit="unlockPortfolio(event)">
+                <div class="password-input-group">
+                    <input type="password" id="portfolioPasscode" placeholder="Enter password..."
+                        data-i18n-placeholder="passPlaceholder" autocomplete="current-password" required>
+                    <button type="button" class="toggle-pass-btn" onclick="togglePasswordVisibility()"
+                        aria-label="Toggle Password Visibility">👁️</button>
+                </div>
+                <div id="passError" class="pass-error hidden" data-i18n="passError">❌ Incorrect password! Please try again.</div>
+                <button type="submit" class="btn-unlock" data-i18n="unlockBtn">Unlock Portfolio 🔓</button>
+                <button type="button" class="btn-otp-request" id="gateOtpBtn" onclick="sendGmailOTP('gate', event)">📧
+                    Send 6-Digit OTP to Gmail (bibekunn@gmail.com)</button>
+                <div id="gateOtpStatus" class="otp-status-box hidden"></div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Document Image Passcode Modal -->
+    <div id="imagePasswordModal" class="password-gate" onclick="closeImageGateOnBackdrop(event)" style="display:none; z-index: 1550;">
+        <div class="password-card">
+            <button type="button" class="close-gate-btn" onclick="closeImagePasswordGate(event)" aria-label="Close Image Gate">✕</button>
+            <div class="lock-icon">🔑</div>
+            <h2 data-i18n="imageGateTitle">Document Image Security Lock</h2>
+            <p data-i18n="imageGateSub">Please enter the document password to unblur & view clear documents.</p>
+
+            <form onsubmit="unlockDocumentImages(event)">
+                <div class="password-input-group">
+                    <input type="password" id="imagePasscode" placeholder="Enter document password..."
+                        data-i18n-placeholder="imagePassPlaceholder" autocomplete="current-password" required>
+                    <button type="button" class="toggle-pass-btn" onclick="toggleImagePassVisibility()"
+                        aria-label="Toggle Password Visibility">👁️</button>
+                </div>
+                <div id="imagePassError" class="pass-error hidden" data-i18n="imagePassError">❌ Incorrect document password! Please try again.</div>
+                <button type="submit" class="btn-unlock" data-i18n="unblurImagesBtn">Unblur Documents 🔑</button>
+                <button type="button" class="btn-otp-request" id="imageOtpBtn" onclick="sendGmailOTP('image', event)">📧
+                    Send 6-Digit OTP to Gmail (bibekunn@gmail.com)</button>
+                <div id="imageOtpStatus" class="otp-status-box hidden"></div>
+            </form>
+        </div>
+    </div>
+
+    <div class="container portfolio-container">
+        <!-- Navigation -->
+        <nav>
+            <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
+                <a href="index.html" onclick="lockPortfolio()" style="display:flex; align-items:center; gap:12px; text-decoration:none;">
+                    <img src="bs-gaming-clean.png" class="bs-gaming-logo" alt="BS GAMING Logo">
+                    <span class="gamer-font" style="color:#00f2fe; font-size:1.1rem; font-weight:900; letter-spacing:2px; text-shadow:0 0 10px #00f2fe;">BS GAMING</span>
+                </a>
+                
+                <!-- Top Social Media Quick Icons -->
+                <div class="top-nav-socials">
+                    <a href="https://www.facebook.com/profile.php?id=100077988874834" target="_blank" onclick="openSocialApp(event, 'https://www.facebook.com/profile.php?id=100077988874834', 'fb://profile/100077988874834')" aria-label="Facebook" class="top-social-icon icon-fb"><img src="facebook.png" alt="FB"></a>
+                    <a href="https://www.tiktok.com/@bibek_866284?_t=8lTCojGbjdq&_r=1" target="_blank" onclick="openSocialApp(event, 'https://www.tiktok.com/@bibek_866284?_t=8lTCojGbjdq&_r=1', 'snssdk1128://user/profile/@bibek_866284')" aria-label="TikTok" class="top-social-icon icon-tt"><img src="tik-tok.png" alt="TikTok"></a>
+                    <a href="https://www.instagram.com/bibeksapkota147/?utm_source=qr" target="_blank" onclick="openSocialApp(event, 'https://www.instagram.com/bibeksapkota147/?utm_source=qr', 'instagram://user?username=bibeksapkota147')" aria-label="Instagram" class="top-social-icon icon-ig"><img src="instagram.png" alt="Instagram"></a>
+                    <a href="https://www.youtube.com/channel/UCThD8PRvL7l7BVFqcWjZWUg" target="_blank" onclick="openSocialApp(event, 'https://www.youtube.com/channel/UCThD8PRvL7l7BVFqcWjZWUg', 'vnd.youtube://www.youtube.com/channel/UCThD8PRvL7l7BVFqcWjZWUg')" aria-label="YouTube" class="top-social-icon icon-yt"><img src="youtube.png" alt="YouTube"></a>
+                    <a href="https://discord.gg/uQ6gWNc7N" target="_blank" onclick="openSocialApp(event, 'https://discord.gg/uQ6gWNc7N', 'discord://discord.gg/uQ6gWNc7N')" aria-label="Discord" class="top-social-icon icon-discord"><img src="discord.png" alt="Discord"></a>
+                </div>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html" onclick="lockPortfolio()" data-i18n="navHome">Home</a></li>
+                <li><a href="portfolio.html" class="active" data-i18n="navPortfolio">Portfolio</a></li>
+                <li><a href="#contact" onclick="openContactModal(event)" data-i18n="navContact">Contact</a></li>
+                <li><button class="lang-btn" id="langToggleBtn" onclick="toggleLanguage()">🌐 日本語</button></li>
+            </ul>
+        </nav>
+
+        <!-- Main Portfolio Content -->
+        <main class="portfolio-main">
+            <header class="section-title">
+                <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;">
+                    <div>
+                        <div style="display:flex; gap:6px; margin-bottom:4px;">
+                            <span class="hud-badge hud-cyan">🎮 PLAYER DOSSIER</span>
+                            <span class="hud-badge hud-pink">🔒 SECURE VAULT</span>
+                        </div>
+                        <p class="subtitle gamer-font" style="color:#00f2fe; letter-spacing:2px;" data-i18n="portfolioSubtitle">VERIFIED IDENTITY & ACADEMIC CREDENTIALS</p>
+                        <h1 class="gamer-title" data-i18n="portfolioTitle">PORTFOLIO</h1>
+                    </div>
+                    <button onclick="lockPortfolio()" class="btn-lock-page gamer-font" style="border-color:#ff0055; color:#ff0055;" data-i18n="lockPageBtn">🔒 Lock Page</button>
+                </div>
+                <div class="title-underline" style="background:linear-gradient(90deg, #00f2fe, #9d50bb, #ff0055);"></div>
+            </header>
+
+            <div class="portfolio-grid">
+                <!-- Document Viewer Card -->
+                <div class="portfolio-card doc-card">
+                    <div class="card-header">
+                        <div>
+                            <h2 data-i18n="docCardTitle">Official Verification Documents</h2>
+                            <p class="card-desc" style="margin-bottom:0; margin-top:4px;" data-i18n="docCardSub">All
+                                Official Identity, Passport, Visa, Residence & Academic Records</p>
+                        </div>
+                        <span class="badge verified-badge" data-i18n="verifiedBadge">✓ Verified Identity</span>
+                    </div>
+
+                    <!-- Quick Jump Category Navigation Bar -->
+                    <div class="doc-category-switcher" style="margin-top:16px;">
+                        <button class="cat-btn" onclick="scrollToSection('citizenshipSection')"
+                            data-i18n="catCitizenship">🇳🇵 Citizenship</button>
+                        <button class="cat-btn" onclick="scrollToSection('passportSection')" data-i18n="catPassport">🛂
+                            Passport</button>
+                        <button class="cat-btn" onclick="scrollToSection('japanVisaSection')"
+                            data-i18n="catJapanVisa">✈️ Japan Visa</button>
+                        <button class="cat-btn" onclick="scrollToSection('japanResidenceSection')"
+                            data-i18n="catResidenceCard">🇯🇵 Residence Card</button>
+                        <button class="cat-btn" onclick="scrollToSection('yuchoSection')" data-i18n="catYuchoBank">🏦
+                            Yucho Bank</button>
+                        <button class="cat-btn" onclick="scrollToSection('academicSection')" data-i18n="catAcademic">🎓
+                            Academic</button>
+                    </div>
+
+                    <!-- All Documents Stream (100% Visible) -->
+                    <div class="doc-stream-container" id="docDisplay"
+                        style="margin-top:20px; display:flex; flex-direction:column; gap:36px;">
+
+                        <!-- Section 1: Citizenship Certificate -->
+                        <div class="doc-stream-section" id="citizenshipSection">
+                            <div class="section-badge-header" style="margin-bottom:14px;">
+                                <h3 style="font-family:'Space Grotesk',sans-serif; color:#ffaa00; font-size:1.25rem; font-weight:700;"
+                                    data-i18n="titleCitizenship">🇳🇵 Citizenship Certificate</h3>
+                                <p style="font-size:0.85rem; color:#aaa; margin-top:2px;" data-i18n="subCitizenship">
+                                    Nepal Government Issued Official Citizenship Certificate</p>
+                            </div>
+                            <div class="doc-images-container dual-view">
+                                <div class="doc-image-wrapper">
+                                    <img src="citizenship-front.jpg" alt="Citizenship Front Document" class="doc-img doc-img-locked"
+                                        style="filter: blur(45px) !important; -webkit-filter: blur(45px) !important; transition: filter 0.5s ease;"
+                                        loading="lazy" decoding="async"
+                                        onclick="handleDocClick(event, 'citizenship-front.jpg', 'Citizenship Certificate - Front')">
+                                    <div class="doc-lock-overlay" onclick="openImagePasswordGate(event)">
+                                        <span class="doc-lock-icon">🔒</span>
+                                        <span class="doc-lock-text" data-i18n="docLockedNotice">🔒 Password Protected Document</span>
+                                        <span class="doc-lock-subtext" data-i18n="clickToUnblur">Click to Enter Password & Unblur 🔑</span>
+                                    </div>
+                                    <div class="img-caption-box">
+                                        <span class="img-caption" data-i18n="captionCitizenshipFront">Citizenship
+                                            Certificate (Front Side)</span>
+                                        <button
+                                            onclick="requestDownload('citizenship-front.jpg', 'Bibek_Sapkota_Citizenship_Front.jpg', event)"
+                                            class="doc-download-btn" data-i18n="dlFrontJpg">🔒 Download Front
+                                            JPG</button>
+                                    </div>
+                                </div>
+                                <div class="doc-image-wrapper">
+                                    <img src="citizenship-back.jpg" alt="Citizenship Back Document" class="doc-img doc-img-locked"
+                                        style="filter: blur(45px) !important; -webkit-filter: blur(45px) !important; transition: filter 0.5s ease;"
+                                        loading="lazy" decoding="async"
+                                        onclick="handleDocClick(event, 'citizenship-back.jpg', 'Citizenship Certificate - Back')">
+                                    <div class="doc-lock-overlay" onclick="openImagePasswordGate(event)">
+                                        <span class="doc-lock-icon">🔒</span>
+                                        <span class="doc-lock-text" data-i18n="docLockedNotice">🔒 Password Protected Document</span>
+                                        <span class="doc-lock-subtext" data-i18n="clickToUnblur">Click to Enter Password & Unblur 🔑</span>
+                                    </div>
+                                    <div class="img-caption-box">
+                                        <span class="img-caption" data-i18n="captionCitizenshipBack">Citizenship
+                                            Certificate (Back Side)</span>
+                                        <button
+                                            onclick="requestDownload('citizenship-back.jpg', 'Bibek_Sapkota_Citizenship_Back.jpg', event)"
+                                            class="doc-download-btn" data-i18n="dlBackJpg">🔒 Download Back JPG</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Section 2: Passport Document -->
+                        <div class="doc-stream-section" id="passportSection"
+                            style="padding-top:16px; border-top:1px dashed rgba(255,255,255,0.15);">
+                            <div class="section-badge-header" style="margin-bottom:14px;">
+                                <h3 style="font-family:'Space Grotesk',sans-serif; color:#ffaa00; font-size:1.25rem; font-weight:700;"
+                                    data-i18n="titlePassport">🛂 Nepal Passport (BA0178497)</h3>
+                                <p style="font-size:0.85rem; color:#aaa; margin-top:2px;" data-i18n="subPassport">
+                                    Government of Nepal Ministry of Foreign Affairs Official Passport</p>
+                            </div>
+                            <div class="doc-details-grid sensitive-locked" style="margin-bottom:16px; filter: blur(16px) !important; -webkit-filter: blur(16px) !important; transition: filter 0.5s ease;">
+                                <div class="doc-detail-item">
+                                    <span class="doc-detail-label" data-i18n="passportNoLabel">Passport No.</span>
+                                    <span class="doc-detail-val" style="color:#ffaa00;">BA0178497</span>
+                                </div>
+                                <div class="doc-detail-item">
+                                    <span class="doc-detail-label">Country Code</span>
+                                    <span class="doc-detail-val">NPL (Nepal 🇳🇵)</span>
+                                </div>
+                                <div class="doc-detail-item">
+                                    <span class="doc-detail-label">Date of Issue</span>
+                                    <span class="doc-detail-val">07 AUG 2023</span>
+                                </div>
+                                <div class="doc-detail-item">
+                                    <span class="doc-detail-label">Date of Expiry</span>
+                                    <span class="doc-detail-val" style="color:#2ecc71;">06 AUG 2033</span>
+                                </div>
+                                <div class="doc-detail-item">
+                                    <span class="doc-detail-label">Issuing Authority</span>
+                                    <span class="doc-detail-val">MOFA, Department of Passports</span>
+                                </div>
+                            </div>
+                            <div class="doc-image-wrapper single-view">
+                                <img src="passport.jpg" alt="Nepal Passport Document BA0178497" class="doc-img doc-img-locked"
+                                    style="filter: blur(45px) !important; -webkit-filter: blur(45px) !important; transition: filter 0.5s ease;"
+                                    loading="lazy" decoding="async"
+                                    onclick="handleDocClick(event, 'passport.jpg', 'Official Nepal Passport - BA0178497')">
+                                <div class="doc-lock-overlay" onclick="openImagePasswordGate(event)">
+                                    <span class="doc-lock-icon">🔒</span>
+                                    <span class="doc-lock-text" data-i18n="docLockedNotice">🔒 Password Protected Document</span>
+                                    <span class="doc-lock-subtext" data-i18n="clickToUnblur">Click to Enter Password & Unblur 🔑</span>
+                                </div>
+                                <div class="img-caption-box">
+                                    <span class="img-caption" data-i18n="captionPassport">Official Nepal Passport
+                                        (BA0178497)</span>
+                                    <button
+                                        onclick="requestDownload('passport.jpg', 'Bibek_Sapkota_Passport_BA0178497.jpg', event)"
+                                        class="doc-download-btn" data-i18n="dlPassportJpg">🔒 Download Passport
+                                        JPG</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Section 3: Japan Visa Section -->
+                        <div class="doc-stream-section" id="japanVisaSection"
+                            style="padding-top:16px; border-top:1px dashed rgba(255,255,255,0.15);">
+                            <div class="section-badge-header" style="margin-bottom:14px;">
+                                <h3 style="font-family:'Space Grotesk',sans-serif; color:#ffaa00; font-size:1.25rem; font-weight:700;"
+                                    data-i18n="titleVisa">✈️ Japan Student Visa & Landing Permission</h3>
+                                <p style="font-size:0.85rem; color:#aaa; margin-top:2px;" data-i18n="subVisa">Official
+                                    Japan Embassy Student Visa Sticker & Narita Airport Landing Stamp</p>
+                            </div>
+                            <div class="doc-details-grid sensitive-locked" style="margin-bottom:16px; filter: blur(16px) !important; -webkit-filter: blur(16px) !important; transition: filter 0.5s ease;">
+                                <div class="doc-detail-item">
+                                    <span class="doc-detail-label">Visa Title / Category</span>
+                                    <span class="doc-detail-val" style="color:#2ecc71;">JAPAN VISA - (G) AS
+                                        STUDENT</span>
+                                </div>
+                                <div class="doc-detail-item">
+                                    <span class="doc-detail-label" data-i18n="passportNoLabel">Passport No.</span>
+                                    <span class="doc-detail-val" style="color:#ffaa00;">BA0178497</span>
+                                </div>
+                                <div class="doc-detail-item">
+                                    <span class="doc-detail-label">Place & Date of Issue</span>
+                                    <span class="doc-detail-val">KATHMANDU (07 MAR 2025)</span>
+                                </div>
+                                <div class="doc-detail-item">
+                                    <span class="doc-detail-label">Duration of Stay</span>
+                                    <span class="doc-detail-val" style="color:#2ecc71;">1 YEAR 3 MONTHS</span>
+                                </div>
+                                <div class="doc-detail-item">
+                                    <span class="doc-detail-label">Landing Permission</span>
+                                    <span class="doc-detail-val">20 MAR 2025 (Until: 20 JUN 2026 at Narita)</span>
+                                </div>
+                                <div class="doc-detail-item">
+                                    <span class="doc-detail-label">Nepal Departure Stamp</span>
+                                    <span class="doc-detail-val">19 MAR 2025 (TIA - KTM)</span>
+                                </div>
+                            </div>
+                            <div class="doc-image-wrapper single-view">
+                                <img src="japan-visa.jpg" alt="Official Japan Student Visa Document" class="doc-img doc-img-locked"
+                                    style="filter: blur(45px) !important; -webkit-filter: blur(45px) !important; transition: filter 0.5s ease;"
+                                    loading="lazy" decoding="async"
+                                    onclick="handleDocClick(event, 'japan-visa.jpg', 'Official Japan Student Visa & Landing Permission Sticker')">
+                                <div class="doc-lock-overlay" onclick="openImagePasswordGate(event)">
+                                    <span class="doc-lock-icon">🔒</span>
+                                    <span class="doc-lock-text" data-i18n="docLockedNotice">🔒 Password Protected Document</span>
+                                    <span class="doc-lock-subtext" data-i18n="clickToUnblur">Click to Enter Password & Unblur 🔑</span>
+                                </div>
+                                <div class="img-caption-box">
+                                    <span class="img-caption" data-i18n="captionVisa">Japan Student Visa & Landing
+                                        Permission Sticker</span>
+                                    <button
+                                        onclick="requestDownload('japan-visa.jpg', 'Bibek_Sapkota_Japan_Visa.jpg', event)"
+                                        class="doc-download-btn" data-i18n="dlVisaJpg">🔒 Download Visa JPG</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Section 4: Japan Residence Card -->
+                        <div class="doc-stream-section" id="japanResidenceSection"
+                            style="padding-top:16px; border-top:1px dashed rgba(255,255,255,0.15);">
+                            <div class="section-badge-header" style="margin-bottom:14px;">
+                                <h3 style="font-family:'Space Grotesk',sans-serif; color:#ffaa00; font-size:1.25rem; font-weight:700;"
+                                    data-i18n="titleResidence">🇯🇵 Japan Residence Card (在留カード)</h3>
+                                <p style="font-size:0.85rem; color:#aaa; margin-top:2px;" data-i18n="subResidence">
+                                    Immigration Services Agency of Japan Official Residence Card (LJ28793018EE)</p>
+                            </div>
+                            <div class="doc-details-grid sensitive-locked" style="margin-bottom:16px; filter: blur(16px) !important; -webkit-filter: blur(16px) !important; transition: filter 0.5s ease;">
+                                <div class="doc-detail-item">
+                                    <span class="doc-detail-label" data-i18n="residenceCardLabel">Residence Card
+                                        No.</span>
+                                    <span class="doc-detail-val" style="color:#ffaa00;">LJ28793018EE</span>
+                                </div>
+                                <div class="doc-detail-item">
+                                    <span class="doc-detail-label">Status of Residence</span>
+                                    <span class="doc-detail-val" style="color:#2ecc71;">留学 (Student)</span>
+                                </div>
+                                <div class="doc-detail-item">
+                                    <span class="doc-detail-label">Period of Stay Expiry</span>
+                                    <span class="doc-detail-val" style="color:#2ecc71;">2027年05月24日 (2027-05-24)</span>
+                                </div>
+                                <div class="doc-detail-item">
+                                    <span class="doc-detail-label">Issuing Agency</span>
+                                    <span class="doc-detail-val">Immigration Services Agency of Japan (ISA)</span>
+                                </div>
+                                <div class="doc-detail-item" style="grid-column: 1 / -1;">
+                                    <span class="doc-detail-label" data-i18n="currentAddrLabel">Registered Address in
+                                        Japan</span>
+                                    <span class="doc-detail-val">千葉県船橋市丸山4丁目30番7号 DCハウス馬込沢I-202号 (Chiba-ken,
+                                        Funabashi-shi, Maruyama 4-30-7)</span>
+                                </div>
+                            </div>
+                            <div class="doc-images-container dual-view">
+                                <div class="doc-image-wrapper">
+                                    <img src="japan-residence-front.jpg" alt="Japan Residence Card Front"
+                                        class="doc-img doc-img-locked"
+                                        style="filter: blur(45px) !important; -webkit-filter: blur(45px) !important; transition: filter 0.5s ease;"
+                                        loading="lazy" decoding="async"
+                                        onclick="handleDocClick(event, 'japan-residence-front.jpg', 'Japan Residence Card Front - LJ28793018EE')">
+                                    <div class="doc-lock-overlay" onclick="openImagePasswordGate(event)">
+                                        <span class="doc-lock-icon">🔒</span>
+                                        <span class="doc-lock-text" data-i18n="docLockedNotice">🔒 Password Protected Document</span>
+                                        <span class="doc-lock-subtext" data-i18n="clickToUnblur">Click to Enter Password & Unblur 🔑</span>
+                                    </div>
+                                    <div class="img-caption-box">
+                                        <span class="img-caption" data-i18n="captionResidenceFront">Residence Card
+                                            (Front Side)</span>
+                                        <button
+                                            onclick="requestDownload('japan-residence-front.jpg', 'Bibek_Sapkota_Japan_Residence_Card_Front.jpg', event)"
+                                            class="doc-download-btn" data-i18n="dlFrontJpg">🔒 Download Front
+                                            JPG</button>
+                                    </div>
+                                </div>
+                                <div class="doc-image-wrapper">
+                                    <img src="japan-residence-back.jpg" alt="Japan Residence Card Back" class="doc-img doc-img-locked"
+                                        style="filter: blur(45px) !important; -webkit-filter: blur(45px) !important; transition: filter 0.5s ease;"
+                                        loading="lazy" decoding="async"
+                                        onclick="handleDocClick(event, 'japan-residence-back.jpg', 'Japan Residence Card Back')">
+                                    <div class="doc-lock-overlay" onclick="openImagePasswordGate(event)">
+                                        <span class="doc-lock-icon">🔒</span>
+                                        <span class="doc-lock-text" data-i18n="docLockedNotice">🔒 Password Protected Document</span>
+                                        <span class="doc-lock-subtext" data-i18n="clickToUnblur">Click to Enter Password & Unblur 🔑</span>
+                                    </div>
+                                    <div class="img-caption-box">
+                                        <span class="img-caption" data-i18n="captionResidenceBack">Residence Card (Back
+                                            Side)</span>
+                                        <button
+                                            onclick="requestDownload('japan-residence-back.jpg', 'Bibek_Sapkota_Japan_Residence_Card_Back.jpg', event)"
+                                            class="doc-download-btn" data-i18n="dlBackJpg">🔒 Download Back JPG</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Section 5: Yucho Bank IC Card -->
+                        <div class="doc-stream-section" id="yuchoSection"
+                            style="padding-top:16px; border-top:1px dashed rgba(255,255,255,0.15);">
+                            <div class="section-badge-header" style="margin-bottom:14px;">
+                                <h3 style="font-family:'Space Grotesk',sans-serif; color:#ffaa00; font-size:1.25rem; font-weight:700;"
+                                    data-i18n="titleYucho">🏦 Japan Post Yucho Bank IC Cash Card</h3>
+                                <p style="font-size:0.85rem; color:#aaa; margin-top:2px;" data-i18n="subYucho">ゆうcho銀行
+                                    Official Account IC Cash Card Records</p>
+                            </div>
+                            <div class="doc-details-grid sensitive-locked" style="margin-bottom:16px; filter: blur(16px) !important; -webkit-filter: blur(16px) !important; transition: filter 0.5s ease;">
+                                <div class="doc-detail-item">
+                                    <span class="doc-detail-label">Financial Institution</span>
+                                    <span class="doc-detail-val" style="color:#2ecc71;">ゆうちょ銀行 (Japan Post Bank)</span>
+                                </div>
+                                <div class="doc-detail-item">
+                                    <span class="doc-detail-label" data-i18n="yuchoBankLabel">Account Code / No.
+                                        (記号番号)</span>
+                                    <span class="doc-detail-val" style="color:#ffaa00;">10520-97831581</span>
+                                </div>
+                                <div class="doc-detail-item">
+                                    <span class="doc-detail-label" data-i18n="fullNameLabel">Account Holder Name</span>
+                                    <span class="doc-detail-val">サプコタ ビベク プラサド (SAPKOTA BIBEK PRASAD)</span>
+                                </div>
+                                <div class="doc-detail-item">
+                                    <span class="doc-detail-label">Card Type</span>
+                                    <span class="doc-detail-val">ゆうちょ IC キャッシュカード (Yucho IC Cash Card)</span>
+                                </div>
+                            </div>
+                            <div class="doc-image-wrapper single-view">
+                                <img src="yucho-bank-card.jpg" alt="Japan Post Yucho Bank IC Cash Card" class="doc-img doc-img-locked"
+                                    style="filter: blur(45px) !important; -webkit-filter: blur(45px) !important; transition: filter 0.5s ease;"
+                                    loading="lazy" decoding="async"
+                                    onclick="handleDocClick(event, 'yucho-bank-card.jpg', 'Japan Post Yucho Bank IC Cash Card - 10520-97831581')">
+                                <div class="doc-lock-overlay" onclick="openImagePasswordGate(event)">
+                                    <span class="doc-lock-icon">🔒</span>
+                                    <span class="doc-lock-text" data-i18n="docLockedNotice">🔒 Password Protected Document</span>
+                                    <span class="doc-lock-subtext" data-i18n="clickToUnblur">Click to Enter Password & Unblur 🔑</span>
+                                </div>
+                                <div class="img-caption-box">
+                                    <span class="img-caption" data-i18n="captionYucho">Yucho Bank IC Cash Card</span>
+                                    <button
+                                        onclick="requestDownload('yucho-bank-card.jpg', 'Bibek_Sapkota_Yucho_Bank_Card.jpg', event)"
+                                        class="doc-download-btn" data-i18n="dlCardJpg">🔒 Download Card JPG</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Section 6: Academic Credentials -->
+                        <div class="doc-stream-section" id="academicSection"
+                            style="padding-top:16px; border-top:1px dashed rgba(255,255,255,0.15);">
+                            <div class="section-badge-header" style="margin-bottom:14px;">
+                                <h3
+                                    style="font-family:'Space Grotesk',sans-serif; color:#ffaa00; font-size:1.25rem; font-weight:700;">
+                                    🎓 Academic Certificates & Marksheets</h3>
+                                <p style="font-size:0.85rem; color:#aaa; margin-top:2px;">Grade 10 (SEE), Class 11, and
+                                    NEB Class 12 Certificates, Marksheets & Transcripts</p>
+                            </div>
+
+                            <!-- SEE Grade 10 Block -->
+                            <div
+                                style="margin-bottom:28px; padding:16px; background:rgba(255,255,255,0.03); border-radius:12px; border:1px solid rgba(255,255,255,0.08);">
+                                <h4
+                                    style="font-family:'Space Grotesk',sans-serif; color:#2ecc71; font-size:1.1rem; margin-bottom:10px;">
+                                    📜 Grade 10 - Secondary Education Examination (SEE)</h4>
+                                <div class="doc-details-grid sensitive-locked" style="margin-bottom:14px; filter: blur(16px) !important; -webkit-filter: blur(16px) !important; transition: filter 0.5s ease;">
+                                    <div class="doc-detail-item">
+                                        <span class="doc-detail-label">Symbol No.</span>
+                                        <span class="doc-detail-val" style="color:#ffaa00;">02201975 G</span>
+                                    </div>
+                                    <div class="doc-detail-item">
+                                        <span class="doc-detail-label">Overall GPA</span>
+                                        <span class="doc-detail-val" style="color:#2ecc71; font-size:1.05rem;">3.25
+                                            GPA</span>
+                                    </div>
+                                    <div class="doc-detail-item">
+                                        <span class="doc-detail-label">School Name</span>
+                                        <span class="doc-detail-val">Janajyoti Ma Vi Lalbandi, Sarlahi</span>
+                                    </div>
+                                </div>
+                                <div class="doc-images-container dual-view" style="margin-bottom:14px;">
+                                    <div class="doc-image-wrapper">
+                                        <img src="see-certificate.jpg" alt="SEE Certificate Grade 10" class="doc-img doc-img-locked"
+                                            style="filter: blur(45px) !important; -webkit-filter: blur(45px) !important; transition: filter 0.5s ease;"
+                                            onclick="handleDocClick(event, 'see-certificate.jpg', 'SEE Grade-10 Official Certificate - 3.25 GPA')">
+                                        <div class="doc-lock-overlay" onclick="openImagePasswordGate(event)">
+                                            <span class="doc-lock-icon">🔒</span>
+                                            <span class="doc-lock-text" data-i18n="docLockedNotice">🔒 Password Protected Document</span>
+                                            <span class="doc-lock-subtext" data-i18n="clickToUnblur">Click to Enter Password & Unblur 🔑</span>
+                                        </div>
+                                        <div class="img-caption-box">
+                                            <span class="img-caption">SEE Grade-10 Certificate</span>
+                                            <button
+                                                onclick="requestDownload('see-certificate.jpg', 'Bibek_Sapkota_SEE_Certificate.jpg', event)"
+                                                class="doc-download-btn">🔒 Download Certificate JPG</button>
+                                        </div>
+                                    </div>
+                                    <div class="doc-image-wrapper">
+                                        <img src="see-marksheet.jpg" alt="SEE Grade Sheet Grade 10" class="doc-img doc-img-locked"
+                                            style="filter: blur(45px) !important; -webkit-filter: blur(45px) !important; transition: filter 0.5s ease;"
+                                            onclick="handleDocClick(event, 'see-marksheet.jpg', 'SEE Grade-10 Marksheet - 3.25 GPA')">
+                                        <div class="doc-lock-overlay" onclick="openImagePasswordGate(event)">
+                                            <span class="doc-lock-icon">🔒</span>
+                                            <span class="doc-lock-text" data-i18n="docLockedNotice">🔒 Password Protected Document</span>
+                                            <span class="doc-lock-subtext" data-i18n="clickToUnblur">Click to Enter Password & Unblur 🔑</span>
+                                        </div>
+                                        <div class="img-caption-box">
+                                            <span class="img-caption">SEE Grade-10 Marksheet</span>
+                                            <button
+                                                onclick="requestDownload('see-marksheet.jpg', 'Bibek_Sapkota_SEE_GradeSheet.jpg', event)"
+                                                class="doc-download-btn">🔒 Download Marksheet JPG</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Class 11 Block -->
+                            <div
+                                style="margin-bottom:28px; padding:16px; background:rgba(255,255,255,0.03); border-radius:12px; border:1px solid rgba(255,255,255,0.08);">
+                                <h4
+                                    style="font-family:'Space Grotesk',sans-serif; color:#ffaa00; font-size:1.1rem; margin-bottom:10px;">
+                                    📜 Class 11 (Grade XI) Grade Sheet</h4>
+                                <div class="doc-details-grid sensitive-locked" style="margin-bottom:14px; filter: blur(16px) !important; -webkit-filter: blur(16px) !important; transition: filter 0.5s ease;">
+                                    <div class="doc-detail-item">
+                                        <span class="doc-detail-label">Symbol No.</span>
+                                        <span class="doc-detail-val" style="color:#ffaa00;">11905444</span>
+                                    </div>
+                                    <div class="doc-detail-item">
+                                        <span class="doc-detail-label">Overall GPA</span>
+                                        <span class="doc-detail-val" style="color:#2ecc71; font-size:1.05rem;">2.88
+                                            GPA</span>
+                                    </div>
+                                    <div class="doc-detail-item">
+                                        <span class="doc-detail-label">School Name</span>
+                                        <span class="doc-detail-val">Everest Secondary School, Lalbandi-5,
+                                            Sarlahi</span>
+                                    </div>
+                                </div>
+                                <div class="doc-image-wrapper single-view">
+                                    <img src="class11-marksheet.jpg" alt="Class 11 Grade Sheet" class="doc-img doc-img-locked"
+                                        style="filter: blur(45px) !important; -webkit-filter: blur(45px) !important; transition: filter 0.5s ease;"
+                                        onclick="handleDocClick(event, 'class11-marksheet.jpg', 'Everest Secondary School Grade XI Grade Sheet - 2.88 GPA')">
+                                    <div class="doc-lock-overlay" onclick="openImagePasswordGate(event)">
+                                        <span class="doc-lock-icon">🔒</span>
+                                        <span class="doc-lock-text" data-i18n="docLockedNotice">🔒 Password Protected Document</span>
+                                        <span class="doc-lock-subtext" data-i18n="clickToUnblur">Click to Enter Password & Unblur 🔑</span>
+                                    </div>
+                                    <div class="img-caption-box">
+                                        <span class="img-caption">Class 11 Grade Sheet (2.88 GPA)</span>
+                                        <button
+                                            onclick="requestDownload('class11-marksheet.jpg', 'Bibek_Sapkota_Class11_Marksheet.jpg', event)"
+                                            class="doc-download-btn">🔒 Download Class 11 JPG</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Class 12 Block -->
+                            <div
+                                style="padding:16px; background:rgba(255,255,255,0.03); border-radius:12px; border:1px solid rgba(255,255,255,0.08);">
+                                <h4
+                                    style="font-family:'Space Grotesk',sans-serif; color:#2ecc71; font-size:1.1rem; margin-bottom:10px;">
+                                    🎓 Class 12 (NEB Grade XII) Grade Sheet & Transcript</h4>
+                                <div class="doc-details-grid sensitive-locked" style="margin-bottom:14px; filter: blur(16px) !important; -webkit-filter: blur(16px) !important; transition: filter 0.5s ease;">
+                                    <div class="doc-detail-item">
+                                        <span class="doc-detail-label">Registration No.</span>
+                                        <span class="doc-detail-val" style="color:#ffaa00;">792190440028</span>
+                                    </div>
+                                    <div class="doc-detail-item">
+                                        <span class="doc-detail-label">Symbol No.</span>
+                                        <span class="doc-detail-val">21904533</span>
+                                    </div>
+                                    <div class="doc-detail-item">
+                                        <span class="doc-detail-label">Overall GPA</span>
+                                        <span class="doc-detail-val" style="color:#2ecc71; font-size:1.05rem;">2.98
+                                            GPA</span>
+                                    </div>
+                                    <div class="doc-detail-item">
+                                        <span class="doc-detail-label">School Name</span>
+                                        <span class="doc-detail-val">Everest Secondary School, Jabdi-8, Sarlahi</span>
+                                    </div>
+                                </div>
+                                <div class="doc-images-container dual-view" style="margin-bottom:16px;">
+                                    <div class="doc-image-wrapper">
+                                        <img src="class12-marksheet.jpg" alt="Class 12 Grade Sheet" class="doc-img doc-img-locked"
+                                            style="filter: blur(45px) !important; -webkit-filter: blur(45px) !important; transition: filter 0.5s ease;"
+                                            onclick="handleDocClick(event, 'class12-marksheet.jpg', 'NEB Grade XII Grade Sheet - Symbol No 21904533')">
+                                        <div class="doc-lock-overlay" onclick="openImagePasswordGate(event)">
+                                            <span class="doc-lock-icon">🔒</span>
+                                            <span class="doc-lock-text" data-i18n="docLockedNotice">🔒 Password Protected Document</span>
+                                            <span class="doc-lock-subtext" data-i18n="clickToUnblur">Click to Enter Password & Unblur 🔑</span>
+                                        </div>
+                                        <div class="img-caption-box">
+                                            <span class="img-caption">Grade XII Grade Sheet (Page 1)</span>
+                                            <button
+                                                onclick="requestDownload('class12-marksheet.jpg', 'Bibek_Sapkota_Class12_Marksheet.jpg', event)"
+                                                class="doc-download-btn">🔒 Download Grade Sheet JPG</button>
+                                        </div>
+                                    </div>
+                                    <div class="doc-image-wrapper">
+                                        <img src="class12-transcript.jpg" alt="Class 12 Academic Transcript"
+                                            class="doc-img doc-img-locked"
+                                            style="filter: blur(45px) !important; -webkit-filter: blur(45px) !important; transition: filter 0.5s ease;"
+                                            onclick="handleDocClick(event, 'class12-transcript.jpg', 'NEB Grade XII Academic Transcript')">
+                                        <div class="doc-lock-overlay" onclick="openImagePasswordGate(event)">
+                                            <span class="doc-lock-icon">🔒</span>
+                                            <span class="doc-lock-text" data-i18n="docLockedNotice">🔒 Password Protected Document</span>
+                                            <span class="doc-lock-subtext" data-i18n="clickToUnblur">Click to Enter Password & Unblur 🔑</span>
+                                        </div>
+                                        <div class="img-caption-box">
+                                            <span class="img-caption">Academic Transcript (Page 2)</span>
+                                            <button
+                                                onclick="requestDownload('class12-transcript.jpg', 'Bibek_Sapkota_Class12_Transcript.jpg', event)"
+                                                class="doc-download-btn">🔒 Download Transcript JPG</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="transcript-box sensitive-locked" style="filter: blur(16px) !important; -webkit-filter: blur(16px) !important; transition: filter 0.5s ease;">
+                                    <div class="transcript-header">
+                                        <h3>Grade XII Examination Marks Breakdown</h3>
+                                        <span class="gpa-badge">GPA: 2.98</span>
+                                    </div>
+                                    <div class="transcript-table-container">
+                                        <table class="transcript-table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Subject Code</th>
+                                                    <th>Subject Title</th>
+                                                    <th>Grade Point</th>
+                                                    <th>Final Grade</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>0021 / 0022</td>
+                                                    <td>Compulsory Nepali (TH / IN)</td>
+                                                    <td>2.4 / 4.0</td>
+                                                    <td><span class="grade-tag grade-b">B</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>0041 / 0042</td>
+                                                    <td>Compulsory English (TH / IN)</td>
+                                                    <td>2.4 / 4.0</td>
+                                                    <td><span class="grade-tag grade-b">B</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>0081 / 0082</td>
+                                                    <td>Compulsory Mathematics (TH / IN)</td>
+                                                    <td>3.2 / 4.0</td>
+                                                    <td><span class="grade-tag grade-a">A</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>1041 / 1042</td>
+                                                    <td>Accounting (TH / IN)</td>
+                                                    <td>2.4 / 4.0</td>
+                                                    <td><span class="grade-tag grade-b">B</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>3041 / 3042</td>
+                                                    <td>Economics (TH / IN)</td>
+                                                    <td>2.4 / 4.0</td>
+                                                    <td><span class="grade-tag grade-b">B</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>4281 / 4282</td>
+                                                    <td>Computer Science (TH / PR)</td>
+                                                    <td>2.8 / 3.6</td>
+                                                    <td><span class="grade-tag grade-b">B+</span></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Personal Info Card -->
+                <div class="portfolio-card info-card" id="infoCard3D">
+                    <!-- Profile Portrait Header -->
+                    <div style="text-align: center; margin-bottom: 20px;">
+                        <img src="profile-photo.png" alt="Bibek Prasad Sapkota"
+                            style="width: 130px; height: 160px; object-fit: cover; border-radius: 12px; border: 2px solid #ffaa00; box-shadow: 0 8px 25px rgba(255, 170, 0, 0.35); cursor: pointer;"
+                            onclick="openLightbox('profile-photo.png', 'Bibek Prasad Sapkota - Formal Profile Photograph')">
+                        <h3
+                            style="font-family: 'Space Grotesk', sans-serif; margin-top: 10px; color: #fff; font-size: 1.25rem;">
+                            Bibek Prasad Sapkota</h3>
+                        <span class="badge info-badge" style="margin-top: 4px;">Student in Japan 🇯🇵</span>
+                    </div>
+
+                    <div class="card-header">
+                        <h2 data-i18n="personalDetailsTitle">Personal Details</h2>
+                        <span class="badge info-badge" data-i18n="verifiedProfile">Verified Profile</span>
+                    </div>
+
+                    <ul class="info-list sensitive-locked" style="filter: blur(16px) !important; -webkit-filter: blur(16px) !important; transition: filter 0.5s ease;">
+                        <li>
+                            <span class="info-label" data-i18n="fullNameLabel">Full Name:</span>
+                            <span class="info-value">Bibek Prasad Sapkota</span>
+                        </li>
+                        <li>
+                            <span class="info-label" data-i18n="dobLabel">Date of Birth:</span>
+                            <span class="info-value">May 24, 2005 (२०६२-०२-१० BS)</span>
+                        </li>
+                        <li>
+                            <span class="info-label" data-i18n="japanStatusLabel">Japan Status:</span>
+                            <span class="info-value highlight" style="color:#2ecc71;">留学 Student (Period:
+                                ~2027/05/24)</span>
+                        </li>
+                        <li>
+                            <span class="info-label" data-i18n="japanVisaLabel">Japan Visa:</span>
+                            <span class="info-value highlight" style="color:#2ecc71;">Landing Permission (Narita
+                                2025/03/20)</span>
+                        </li>
+                        <li>
+                            <span class="info-label" data-i18n="residenceCardLabel">Residence Card:</span>
+                            <span class="info-value highlight" style="color:#ffaa00;">LJ28793018EE</span>
+                        </li>
+                        <li>
+                            <span class="info-label" data-i18n="yuchoBankLabel">Yucho Bank Acc:</span>
+                            <span class="info-value highlight">10520-97831581</span>
+                        </li>
+                        <li>
+                            <span class="info-label" data-i18n="passportNoLabel">Passport No.:</span>
+                            <span class="info-value highlight" style="color:#2ecc71;">BA0178497</span>
+                        </li>
+                        <li>
+                            <span class="info-label" data-i18n="citizenshipNoLabel">Citizenship No.:</span>
+                            <span class="info-value highlight">19-02-78-05989</span>
+                        </li>
+                        <li>
+                            <span class="info-label" data-i18n="currentAddrLabel">Current Address:</span>
+                            <span class="info-value">Chiba-ken, Funabashi-shi, Maruyama 4-30-7, Japan 🇯🇵</span>
+                        </li>
+                        <li>
+                            <span class="info-label" data-i18n="permAddrLabel">Permanent Address:</span>
+                            <span class="info-value">Ishorpur Municipality-2, Sarlahi, Nepal 🇳🇵</span>
+                        </li>
+                        <li>
+                            <span class="info-label" data-i18n="seeGpaLabel">Grade 10 (SEE):</span>
+                            <span class="info-value highlight" style="color:#2ecc71;">3.25 GPA (Janajyoti)</span>
+                        </li>
+                        <li>
+                            <span class="info-label" data-i18n="cls12GpaLabel">Class 12 Result:</span>
+                            <span class="info-value highlight" style="color:#ffaa00;">2.98 GPA (NEB 2080)</span>
+                        </li>
+                        <li>
+                            <span class="info-label" data-i18n="currentStatusLabel">Current Status:</span>
+                            <span class="info-value status-student" data-i18n="currentStatusVal">Active Student in Japan
+                                🇯🇵😁</span>
+                        </li>
+                    </ul>
+
+                    <div class="quick-contact" style="margin-top: 25px;">
+                        <h3 style="font-family: 'Space Grotesk', sans-serif; color: #ffaa00; margin-bottom: 12px; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1px;">✨ Connect Across Social Media</h3>
+                        <div class="hero-social-showcase" style="display: flex; flex-wrap: wrap; gap: 10px;">
+                            <a href="https://www.facebook.com/profile.php?id=100077988874834" target="_blank"
+                                onclick="openSocialApp(event, 'https://www.facebook.com/profile.php?id=100077988874834', 'fb://profile/100077988874834')"
+                                rel="noopener noreferrer" class="social-pill-badge pill-fb">
+                                <img src="facebook.png" alt="Facebook"> Facebook
+                            </a>
+                            <a href="https://www.tiktok.com/@bibek_866284?_t=8lTCojGbjdq&_r=1" target="_blank"
+                                onclick="openSocialApp(event, 'https://www.tiktok.com/@bibek_866284?_t=8lTCojGbjdq&_r=1', 'snssdk1128://user/profile/@bibek_866284')"
+                                rel="noopener noreferrer" class="social-pill-badge pill-tt">
+                                <img src="tik-tok.png" alt="TikTok"> TikTok
+                            </a>
+                            <a href="https://www.instagram.com/bibeksapkota147/?utm_source=qr" target="_blank"
+                                onclick="openSocialApp(event, 'https://www.instagram.com/bibeksapkota147/?utm_source=qr', 'instagram://user?username=bibeksapkota147')"
+                                rel="noopener noreferrer" class="social-pill-badge pill-ig">
+                                <img src="instagram.png" alt="Instagram"> Instagram
+                            </a>
+                            <a href="https://www.youtube.com/channel/UCThD8PRvL7l7BVFqcWjZWUg" target="_blank"
+                                onclick="openSocialApp(event, 'https://www.youtube.com/channel/UCThD8PRvL7l7BVFqcWjZWUg', 'vnd.youtube://www.youtube.com/channel/UCThD8PRvL7l7BVFqcWjZWUg')"
+                                rel="noopener noreferrer" class="social-pill-badge pill-yt">
+                                <img src="youtube.png" alt="YouTube"> YouTube
+                            </a>
+                            <a href="https://discord.gg/uQ6gWNc7N" target="_blank"
+                                onclick="openSocialApp(event, 'https://discord.gg/uQ6gWNc7N', 'discord://discord.gg/uQ6gWNc7N')"
+                                rel="noopener noreferrer" class="social-pill-badge pill-discord">
+                                <img src="discord.png" alt="Discord"> Discord
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Contact Modal Hub -->
+    <div id="contactModal" class="contact-modal" onclick="closeContactModal(event)">
+        <div class="contact-modal-content" style="max-width: 520px;">
+            <span class="close-contact-modal" onclick="closeContactModal(event)">&times;</span>
+            <div class="contact-modal-header">
+                <span class="badge info-badge"
+                    style="margin-bottom: 8px; background: rgba(46, 204, 113, 0.15); color: #2ecc71; border: 1px solid rgba(46, 204, 113, 0.4);"
+                    data-i18n="availableBadge">🟢 Available for Connections & Inquiries</span>
+                <h2 data-i18n="getInTouchTitle">GET IN TOUCH</h2>
+                <p data-i18n="getInTouchSub">Connect with Bibek Sapkota across all channels</p>
+            </div>
+
+            <div class="contact-channels-grid">
+                <a href="https://www.facebook.com/profile.php?id=100077988874834" target="_blank"
+                    onclick="openSocialApp(event, 'https://www.facebook.com/profile.php?id=100077988874834', 'fb://profile/100077988874834')"
+                    rel="noopener noreferrer" class="channel-card">
+                    <div class="channel-icon-wrapper"><img src="facebook.png" alt="Facebook" loading="lazy"
+                            decoding="async"></div>
+                    <div class="channel-info">
+                        <span class="channel-name">Facebook</span>
+                        <span class="channel-detail">Bibek Sapkota</span>
+                    </div>
+                    <span class="channel-arrow">&rarr;</span>
+                </a>
+
+                <a href="https://www.tiktok.com/@bibek_866284?_t=8lTCojGbjdq&_r=1" target="_blank"
+                    onclick="openSocialApp(event, 'https://www.tiktok.com/@bibek_866284?_t=8lTCojGbjdq&_r=1', 'snssdk1128://user/profile/@bibek_866284')"
+                    rel="noopener noreferrer" class="channel-card">
+                    <div class="channel-icon-wrapper"><img src="tik-tok.png" alt="TikTok" loading="lazy"
+                            decoding="async"></div>
+                    <div class="channel-info">
+                        <span class="channel-name">TikTok</span>
+                        <span class="channel-detail">@bibek_866284</span>
+                    </div>
+                    <span class="channel-arrow">&rarr;</span>
+                </a>
+
+                <a href="https://www.instagram.com/bibeksapkota147/?utm_source=qr" target="_blank"
+                    onclick="openSocialApp(event, 'https://www.instagram.com/bibeksapkota147/?utm_source=qr', 'instagram://user?username=bibeksapkota147')"
+                    rel="noopener noreferrer" class="channel-card">
+                    <div class="channel-icon-wrapper"><img src="instagram.png" alt="Instagram" loading="lazy"
+                            decoding="async"></div>
+                    <div class="channel-info">
+                        <span class="channel-name">Instagram</span>
+                        <span class="channel-detail">@bibeksapkota147</span>
+                    </div>
+                    <span class="channel-arrow">&rarr;</span>
+                </a>
+
+                <a href="https://www.youtube.com/channel/UCThD8PRvL7l7BVFqcWjZWUg" target="_blank"
+                    onclick="openSocialApp(event, 'https://www.youtube.com/channel/UCThD8PRvL7l7BVFqcWjZWUg', 'vnd.youtube://www.youtube.com/channel/UCThD8PRvL7l7BVFqcWjZWUg')"
+                    rel="noopener noreferrer" class="channel-card">
+                    <div class="channel-icon-wrapper"><img src="youtube.png" alt="YouTube" loading="lazy"
+                            decoding="async"></div>
+                    <div class="channel-info">
+                        <span class="channel-name">YouTube</span>
+                        <span class="channel-detail">Bibek Sapkota Channel</span>
+                    </div>
+                    <span class="channel-arrow">&rarr;</span>
+                </a>
+
+                <a href="https://discord.gg/uQ6gWNc7N" target="_blank"
+                    onclick="openSocialApp(event, 'https://discord.gg/uQ6gWNc7N', 'discord://discord.gg/uQ6gWNc7N')"
+                    rel="noopener noreferrer" class="channel-card">
+                    <div class="channel-icon-wrapper"><img src="discord.png" alt="Discord" loading="lazy"
+                            decoding="async"></div>
+                    <div class="channel-info">
+                        <span class="channel-name">Discord</span>
+                        <span class="channel-detail">Join Server</span>
+                    </div>
+                    <span class="channel-arrow">&rarr;</span>
+                </a>
+            </div>
+
+            <!-- Quick Direct Message Form -->
+            <div class="contact-form-section">
+                <h3 data-i18n="sendMsgTitle">💬 Send a Quick Message</h3>
+                <form onsubmit="handleContactMessage(event)">
+                    <div class="contact-input-group">
+                        <input type="text" id="msgSenderName" placeholder="Your Name or Contact..."
+                            data-i18n-placeholder="namePlaceholder" required>
+                        <textarea id="msgSenderText" rows="3" placeholder="Write your message to Bibek Sapkota..."
+                            data-i18n-placeholder="msgPlaceholder" required></textarea>
+                        <button type="submit" class="btn-send-msg" id="sendMsgBtn" data-i18n="sendMsgBtn">Send Message
+                            🚀</button>
+                    </div>
+                    <div id="contactFormSuccess" class="hidden"
+                        style="margin-top: 10px; color: #2ecc71; font-family: 'Space Grotesk', sans-serif; font-size: 0.88rem; font-weight: 700; text-align: center;">
+                        ✅ Message Sent Successfully! Bibek will respond soon.</div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lightbox Modal for Enlarged Document View -->
+    <div id="lightboxModal" class="lightbox-modal" onclick="closeLightbox(event)">
+        <span class="close-lightbox" onclick="closeLightbox(event)">&times;</span>
+        <img class="lightbox-content" id="lightboxImage" alt="Enlarged Document">
+        <div id="lightboxCaption" class="lightbox-caption"></div>
+        <button id="lightboxDownloadBtn" onclick="triggerLightboxDownload(event)" class="lightbox-download-btn">🔒
+            Download Image</button>
+    </div>
+
+    <!-- Password Protection Modal for File Downloads -->
+    <div id="downloadModal" class="contact-modal" onclick="closeDownloadModal(event)">
+        <div class="contact-modal-content password-card" style="max-width: 440px;">
+            <span class="close-contact-modal" onclick="closeDownloadModal(event)">&times;</span>
+            <div class="lock-icon" style="font-size: 2.5rem; margin-bottom: 10px;">🔒</div>
+            <h2 style="font-family: 'Space Grotesk', sans-serif; font-size: 1.4rem; color: #fff;">Download Protection
+            </h2>
+            <p style="font-size: 0.9rem; color: #ccc; margin-top: 6px;">Enter password or 6-digit OTP to download
+                <strong id="dlTargetFileName" style="color:#ffaa00;">document</strong>.
+            </p>
+
+            <form onsubmit="confirmDownload(event)">
+                <div class="password-input-group" style="margin-top: 15px;">
+                    <input type="password" id="downloadPasscode" placeholder="Enter password or 6-digit OTP..."
+                        required>
+                    <button type="button" class="toggle-pass-btn" onclick="toggleDownloadPassVisibility()"
+                        aria-label="Toggle Password">👁️</button>
+                </div>
+                <div id="downloadPassError" class="pass-error hidden" style="margin-top: 10px;">❌ Incorrect password or
+                    OTP! Please try again.</div>
+                <button type="submit" class="btn-unlock" style="margin-top: 15px; width: 100%;">Verify & Download
+                    📥</button>
+                <button type="button" class="btn-otp-request" id="downloadOtpBtn"
+                    onclick="sendGmailOTP('download', event)">📧 Send 6-Digit OTP to Gmail (bibekunn@gmail.com)</button>
+                <div id="downloadOtpStatus" class="otp-status-box hidden"></div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const ALLOWED_PAGE_PASSCODES = ["8662"];
+        const ALLOWED_IMAGE_PASSCODES = ["866284"];
+        const ALLOWED_DOWNLOAD_PASSCODES = ["866284", "8662"];
+        const AUTO_LOCK_MS = 60000;
+        let autoLockTimer = null;
+
+        let pendingDownloadUrl = '';
+        let pendingDownloadName = '';
+        let currentLightboxSrc = '';
+        let currentLightboxCaption = '';
+
+        // Strict 6-Digit Gmail OTP Security Engine
+        let activeGmailOTP = null;
+        let otpExpiryTimer = null;
+
+        function generate6DigitOTP() {
+            return Math.floor(100000 + Math.random() * 900000).toString();
+        }
+
+        function sendGmailOTP(targetType, e) {
+            if (e) e.preventDefault();
+            activeGmailOTP = generate6DigitOTP();
+
+            let btnId = 'gateOtpBtn';
+            let statusId = 'gateOtpStatus';
+            let inputId = 'portfolioPasscode';
+
+            if (targetType === 'image') {
+                btnId = 'imageOtpBtn';
+                statusId = 'imageOtpStatus';
+                inputId = 'imagePasscode';
+            } else if (targetType === 'download') {
+                btnId = 'downloadOtpBtn';
+                statusId = 'downloadOtpStatus';
+                inputId = 'downloadPasscode';
+            }
+
+            const btn = document.getElementById(btnId);
+            const statusBox = document.getElementById(statusId);
+            const input = document.getElementById(inputId);
+
+            if (btn) btn.innerText = "Dispatching OTP to Gmail... ⏳";
+            if (input) {
+                input.value = '';
+                input.focus({ preventScroll: true });
+            }
+
+            let hiddenForm = document.getElementById('hiddenOtpForm');
+            if (!hiddenForm) {
+                hiddenForm = document.createElement('form');
+                hiddenForm.id = 'hiddenOtpForm';
+                hiddenForm.method = 'POST';
+                hiddenForm.action = 'https://formsubmit.co/bibekunn@gmail.com';
+                hiddenForm.target = 'email_dispatch_iframe';
+                hiddenForm.style.display = 'none';
+                document.body.appendChild(hiddenForm);
+            }
+
+            hiddenForm.innerHTML = `
+                <input type="hidden" name="_subject" value="🔒 Bibek Portfolio Security OTP Code: ${activeGmailOTP}">
+                <input type="hidden" name="_template" value="table">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="OTP_Verification_Code" value="${activeGmailOTP}">
+                <input type="hidden" name="Recipient_Gmail" value="bibekunn@gmail.com">
+                <input type="hidden" name="Request_Time" value="${new Date().toLocaleString()}">
+            `;
+
+            hiddenForm.submit();
+
+            setTimeout(() => {
+                if (btn) btn.innerText = "📧 Resend 6-Digit OTP Code";
+                if (statusBox) {
+                    statusBox.classList.remove('hidden');
+                    statusBox.innerHTML = `📩 <strong>OTP Dispatched to Gmail!</strong> Check <strong style="color:#ffaa00;">bibekunn@gmail.com</strong> for your 6-digit code.<br><small style="color:#aaa;">(Check Inbox & Spam folder. Code expires in <span id="${targetType}OtpTimer">05:00</span>)</small>`;
+                }
+                startOtpCountdown(targetType);
+            }, 300);
+        }
+
+        function startOtpCountdown(targetType) {
+            if (otpExpiryTimer) clearInterval(otpExpiryTimer);
+            let secondsLeft = 300;
+
+            otpExpiryTimer = setInterval(() => {
+                secondsLeft--;
+                const timerSpan = document.getElementById(targetType + 'OtpTimer');
+                if (timerSpan) {
+                    const mins = Math.floor(secondsLeft / 60).toString().padStart(2, '0');
+                    const secs = (secondsLeft % 60).toString().padStart(2, '0');
+                    timerSpan.innerText = `${mins}:${secs}`;
+                }
+
+                if (secondsLeft <= 0) {
+                    clearInterval(otpExpiryTimer);
+                    activeGmailOTP = null;
+                    let statusId = targetType === 'image' ? 'imageOtpStatus' : (targetType === 'gate' ? 'gateOtpStatus' : 'downloadOtpStatus');
+                    const statusBox = document.getElementById(statusId);
+                    if (statusBox) statusBox.innerHTML = `<span style="color:#e74c3c;">⏰ OTP Code Expired! Click above to request a new code.</span>`;
+                }
+            }, 1000);
+        }
+
+        function startAutoLockTimer() {
+            if (autoLockTimer) clearTimeout(autoLockTimer);
+            sessionStorage.setItem('lastActivityTime', Date.now().toString());
+
+            autoLockTimer = setTimeout(() => {
+                lockPortfolio();
+            }, AUTO_LOCK_MS);
+        }
+
+        function resetActivityTimer() {
+            if (sessionStorage.getItem('portfolioUnlocked') === 'true') {
+                startAutoLockTimer();
+            }
+        }
+
+        function toggleImagePassVisibility() {
+            const input = document.getElementById('imagePasscode');
+            if (input) input.type = input.type === 'password' ? 'text' : 'password';
+        }
+
+        function updateDocumentLockState() {
+            const imagesUnlocked = sessionStorage.getItem('imagesUnlocked') === 'true';
+            const pageUnlocked = sessionStorage.getItem('portfolioUnlocked') === 'true';
+
+            const docImgs = document.querySelectorAll('.doc-img');
+            const lockOverlays = document.querySelectorAll('.doc-lock-overlay');
+            const sensitiveElems = document.querySelectorAll('.doc-details-grid, .info-list, .transcript-box');
+
+            docImgs.forEach(img => {
+                if (imagesUnlocked) {
+                    img.style.setProperty('filter', 'none', 'important');
+                    img.style.setProperty('-webkit-filter', 'none', 'important');
+                    img.style.opacity = '1';
+                    img.classList.remove('doc-img-locked', 'locked');
+                    img.classList.add('doc-img-unlocked', 'unlocked');
+                } else {
+                    img.style.setProperty('filter', 'blur(35px) contrast(0.6)', 'important');
+                    img.style.setProperty('-webkit-filter', 'blur(35px) contrast(0.6)', 'important');
+                    img.style.opacity = '0.5';
+                    img.classList.remove('doc-img-unlocked', 'unlocked');
+                    img.classList.add('doc-img-locked', 'locked');
+                }
+            });
+
+            sensitiveElems.forEach(elem => {
+                if (pageUnlocked) {
+                    elem.style.setProperty('filter', 'none', 'important');
+                    elem.style.setProperty('-webkit-filter', 'none', 'important');
+                    elem.style.opacity = '1';
+                    elem.classList.remove('sensitive-locked');
+                    elem.classList.add('sensitive-unlocked');
+                } else {
+                    elem.style.setProperty('filter', 'blur(16px)', 'important');
+                    elem.style.setProperty('-webkit-filter', 'blur(16px)', 'important');
+                    elem.style.opacity = '0.25';
+                    elem.classList.remove('sensitive-unlocked');
+                    elem.classList.add('sensitive-locked');
+                }
+            });
+
+            lockOverlays.forEach(overlay => {
+                if (imagesUnlocked) {
+                    overlay.classList.add('hidden');
+                } else {
+                    overlay.classList.remove('hidden');
+                }
+            });
+        }
+
+        // Anti-Screenshot & Screen Capture Protection Engine
+        document.addEventListener('contextmenu', e => e.preventDefault());
+        document.addEventListener('dragstart', e => e.preventDefault());
+
+        function handleDocClick(e, src, caption) {
+            if (e) e.preventDefault();
+            if (sessionStorage.getItem('imagesUnlocked') === 'true') {
+                openLightbox(src, caption);
+            } else {
+                openImagePasswordGate(e);
+            }
+        }
+
+        function openImagePasswordGate(e) {
+            if (e) e.preventDefault();
+            const modal = document.getElementById('imagePasswordModal');
+            if (modal) {
+                modal.style.display = 'flex';
+                const input = document.getElementById('imagePasscode');
+                if (input) input.focus({ preventScroll: true });
+            }
+        }
+
+        function closeImagePasswordGate(e) {
+            if (e) e.preventDefault();
+            const modal = document.getElementById('imagePasswordModal');
+            if (modal) modal.style.display = 'none';
+        }
+
+        function closeImageGateOnBackdrop(e) {
+            if (e && e.target.id === 'imagePasswordModal') {
+                closeImagePasswordGate(e);
+            }
+        }
+
+        function unlockDocumentImages(e) {
+            if (e) e.preventDefault();
+            window.isUnlockingPortfolio = true;
+            setTimeout(function() { window.isUnlockingPortfolio = false; }, 1500);
+
+            const input = document.getElementById('imagePasscode');
+            const error = document.getElementById('imagePassError');
+            const val = input ? input.value.trim() : '';
+
+            if (ALLOWED_IMAGE_PASSCODES.includes(val.toLowerCase()) || (activeGmailOTP && val === activeGmailOTP)) {
+                sessionStorage.setItem('imagesUnlocked', 'true');
+                updateDocumentLockState();
+                const modal = document.getElementById('imagePasswordModal');
+                if (modal) modal.style.display = 'none';
+                if (error) error.classList.add('hidden');
+                activeGmailOTP = null;
+                startAutoLockTimer();
+            } else {
+                if (error) error.classList.remove('hidden');
+                if (input) {
+                    input.value = '';
+                    input.focus({ preventScroll: true });
+                }
+            }
+        }
+
+        function openPasswordGate(e) {
+            if (e) e.preventDefault();
+            const gate = document.getElementById('passwordGate');
+            if (gate) {
+                gate.style.display = 'flex';
+                const input = document.getElementById('portfolioPasscode');
+                if (input) input.focus({ preventScroll: true });
+            }
+            window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+        }
+
+        function closePasswordGate(e) {
+            if (e) e.preventDefault();
+            const gate = document.getElementById('passwordGate');
+            if (gate) gate.style.display = 'none';
+        }
+
+        function closePasswordGateOnBackdrop(e) {
+            if (e && e.target.id === 'passwordGate') {
+                closePasswordGate(e);
+            }
+        }
+
+        function lockPortfolio() {
+            sessionStorage.removeItem('portfolioUnlocked');
+            sessionStorage.removeItem('imagesUnlocked');
+            sessionStorage.removeItem('lastActivityTime');
+            if (autoLockTimer) clearTimeout(autoLockTimer);
+            updateDocumentLockState();
+            const lightbox = document.getElementById('lightboxModal');
+            if (lightbox) lightbox.style.display = 'none';
+            const imgModal = document.getElementById('imagePasswordModal');
+            if (imgModal) imgModal.style.display = 'none';
+            const gate = document.getElementById('passwordGate');
+            if (gate) gate.style.display = 'flex';
+            window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+            document.documentElement.scrollTop = 0;
+            document.body.scrollTop = 0;
+        }
+
+        function checkAuthOnLoad() {
+            if ('scrollRestoration' in history) {
+                history.scrollRestoration = 'manual';
+            }
+            window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+            document.documentElement.scrollTop = 0;
+            document.body.scrollTop = 0;
+            sessionStorage.removeItem('portfolioUnlocked');
+            sessionStorage.removeItem('imagesUnlocked');
+            sessionStorage.removeItem('lastActivityTime');
+            lockPortfolio();
+        }
+
+        function unlockPortfolio(e) {
+            if (e) e.preventDefault();
+            window.isUnlockingPortfolio = true;
+            setTimeout(function() { window.isUnlockingPortfolio = false; }, 1500);
+
+            const input = document.getElementById('portfolioPasscode');
+            const error = document.getElementById('passError');
+            const val = input ? input.value.trim() : '';
+
+            if (ALLOWED_PAGE_PASSCODES.includes(val.toLowerCase()) || (activeGmailOTP && val === activeGmailOTP)) {
+                sessionStorage.setItem('portfolioUnlocked', 'true');
+                updateDocumentLockState();
+                const gate = document.getElementById('passwordGate');
+                if (gate) gate.style.display = 'none';
+                if (error) error.classList.add('hidden');
+                activeGmailOTP = null;
+                startAutoLockTimer();
+                // Scroll back to top after unlocking
+                window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+                document.documentElement.scrollTop = 0;
+                document.body.scrollTop = 0;
+            } else {
+                if (error) error.classList.remove('hidden');
+                if (input) {
+                    input.value = '';
+                    input.focus({ preventScroll: true });
+                }
+            }
+        }
+
+        function confirmDownload(e) {
+            if (e) e.preventDefault();
+            const passInput = document.getElementById('downloadPasscode');
+            const errorMsg = document.getElementById('downloadPassError');
+            const val = passInput ? passInput.value.trim() : '';
+
+            if (ALLOWED_DOWNLOAD_PASSCODES.includes(val.toLowerCase()) || (activeGmailOTP && val === activeGmailOTP)) {
+                if (errorMsg) errorMsg.classList.add('hidden');
+                document.getElementById('downloadModal').style.display = 'none';
+
+                const a = document.createElement('a');
+                a.href = pendingDownloadUrl;
+                a.download = pendingDownloadName;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                activeGmailOTP = null;
+            } else {
+                if (errorMsg) errorMsg.classList.remove('hidden');
+                if (passInput) {
+                    passInput.value = '';
+                    passInput.focus({ preventScroll: true });
+                }
+            }
+        }
+
+        function closeDownloadModal(e) {
+            if (!e || e.target.classList.contains('contact-modal') || e.target.classList.contains('close-contact-modal')) {
+                const modal = document.getElementById('downloadModal');
+                if (modal) modal.style.display = 'none';
+            }
+        }
+
+        function toggleDownloadPassVisibility() {
+            const input = document.getElementById('downloadPasscode');
+            if (input) input.type = input.type === 'password' ? 'text' : 'password';
+        }
+
+        function requestDownload(url, filename, e) {
+            if (e) e.preventDefault();
+            pendingDownloadUrl = url;
+            pendingDownloadName = filename || 'document.jpg';
+
+            const modal = document.getElementById('downloadModal');
+            const targetSpan = document.getElementById('dlTargetFileName');
+            const passInput = document.getElementById('downloadPasscode');
+            const errorMsg = document.getElementById('downloadPassError');
+
+            if (targetSpan) targetSpan.innerText = pendingDownloadName.replace(/_/g, ' ');
+            if (passInput) {
+                passInput.value = '';
+                passInput.focus({ preventScroll: true });
+            }
+            if (errorMsg) errorMsg.classList.add('hidden');
+            if (modal) modal.style.display = 'flex';
+        }
+
+        function triggerLightboxDownload(e) {
+            if (e) e.preventDefault();
+            const name = currentLightboxCaption ? currentLightboxCaption.replace(/[^a-zA-Z0-9]/g, '_') + '.jpg' : 'document.jpg';
+            requestDownload(currentLightboxSrc, name, e);
+        }
+
+        /* --- Interactive Social Icon Heart Explosion & Shower Engine --- */
+        function spawnHeartShower(originX, originY) {
+            const hearts = ['❤️', '💖', '💗', '💓', '💕', '💘', '💝', '✨', '🌸', '💖'];
+            const glows = [
+                'rgba(255, 0, 127, 0.9)',
+                'rgba(255, 51, 102, 0.9)',
+                'rgba(255, 170, 0, 0.9)',
+                'rgba(0, 242, 254, 0.9)',
+                'rgba(0, 255, 102, 0.9)',
+                'rgba(157, 80, 187, 0.9)'
+            ];
+
+            const cx = (originX !== undefined && originX !== null) ? originX : window.innerWidth / 2;
+            const cy = (originY !== undefined && originY !== null) ? originY : window.innerHeight / 3;
+
+            // 1. Radial Burst from click origin
+            const burstCount = 28;
+            for (let i = 0; i < burstCount; i++) {
+                const p = document.createElement('div');
+                p.className = 'floating-heart-particle';
+                p.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+
+                const angle = Math.random() * Math.PI * 2;
+                const distance = Math.random() * 180 + 40;
+                const dx = Math.cos(angle) * distance;
+                const dy = Math.sin(angle) * distance - 30;
+                const size = (Math.random() * 1.2 + 1.1).toFixed(2) + 'rem';
+                const scale = (Math.random() * 0.7 + 1.0).toFixed(2);
+                const rot = (Math.random() * 120 - 60).toFixed(0) + 'deg';
+                const duration = (Math.random() * 0.8 + 1.4).toFixed(2) + 's';
+                const glow = glows[Math.floor(Math.random() * glows.length)];
+
+                p.style.left = cx + 'px';
+                p.style.top = cy + 'px';
+                p.style.setProperty('--dx', dx + 'px');
+                p.style.setProperty('--dy', dy + 'px');
+                p.style.setProperty('--heart-size', size);
+                p.style.setProperty('--heart-scale', scale);
+                p.style.setProperty('--rot', rot);
+                p.style.setProperty('--heart-duration', duration);
+                p.style.setProperty('--heart-glow', glow);
+
+                document.body.appendChild(p);
+                setTimeout(() => p.remove(), parseFloat(duration) * 1000 + 100);
+            }
+
+            // 2. Cascade Rain Shower down entire screen
+            const showerCount = 32;
+            for (let i = 0; i < showerCount; i++) {
+                setTimeout(() => {
+                    const s = document.createElement('div');
+                    s.className = 'floating-heart-shower';
+                    s.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+
+                    const startX = Math.random() * window.innerWidth;
+                    const sway = (Math.random() * 140 - 70).toFixed(0) + 'px';
+                    const size = (Math.random() * 1.4 + 1.2).toFixed(2) + 'rem';
+                    const scale = (Math.random() * 0.6 + 0.9).toFixed(2);
+                    const rot = (Math.random() * 360 - 180).toFixed(0) + 'deg';
+                    const duration = (Math.random() * 1.2 + 2.0).toFixed(2) + 's';
+                    const glow = glows[Math.floor(Math.random() * glows.length)];
+
+                    s.style.left = startX + 'px';
+                    s.style.top = '-20px';
+                    s.style.setProperty('--sway', sway);
+                    s.style.setProperty('--heart-size', size);
+                    s.style.setProperty('--heart-scale', scale);
+                    s.style.setProperty('--rot', rot);
+                    s.style.setProperty('--heart-duration', duration);
+                    s.style.setProperty('--heart-glow', glow);
+
+                    document.body.appendChild(s);
+                    setTimeout(() => s.remove(), parseFloat(duration) * 1000 + 100);
+                }, Math.random() * 650);
+            }
+
+            if (typeof playLaserSFX === 'function') {
+                try { playLaserSFX('hit'); } catch (err) {}
+            }
+        }
+
+        function openSocialApp(e, webUrl, appScheme) {
+            if (e) {
+                const clientX = e.clientX !== undefined ? e.clientX : (e.touches && e.touches[0] ? e.touches[0].clientX : null);
+                const clientY = e.clientY !== undefined ? e.clientY : (e.touches && e.touches[0] ? e.touches[0].clientY : null);
+                spawnHeartShower(clientX, clientY);
+                if (e.preventDefault) e.preventDefault();
+            } else {
+                spawnHeartShower();
+            }
+
+            const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+            if (isMobile && appScheme) {
+                let start = Date.now();
+                window.location.href = appScheme;
+                setTimeout(() => {
+                    if (Date.now() - start < 1500) {
+                        window.open(webUrl, '_blank');
+                    }
+                }, 800);
+            } else {
+                window.open(webUrl, '_blank');
+            }
+        }
+
+        document.addEventListener('click', (e) => {
+            const target = e.target.closest('.top-social-icon, .social-pill-badge, .dock-social-btn, .channel-card, a[href*="facebook"], a[href*="tiktok"], a[href*="instagram"], a[href*="youtube"], a[href*="discord"]');
+            if (target && !e.defaultPrevented) {
+                spawnHeartShower(e.clientX, e.clientY);
+            }
+        }, { passive: true });
+
+        function handleContactMessage(e) {
+            if (e) e.preventDefault();
+            const btn = document.getElementById('sendMsgBtn');
+            const successMsg = document.getElementById('contactFormSuccess');
+            const nameInput = document.getElementById('msgSenderName');
+            const textInput = document.getElementById('msgSenderText');
+
+            const nameVal = nameInput ? nameInput.value.trim() : 'Anonymous Visitor';
+            const msgVal = textInput ? textInput.value.trim() : '';
+
+            if (!msgVal) return;
+
+            if (btn) btn.innerText = 'Sending... ⏳';
+
+            // Guaranteed Native Form Submission targeting hidden iframe
+            let hiddenContactForm = document.getElementById('hiddenContactForm');
+            if (!hiddenContactForm) {
+                hiddenContactForm = document.createElement('form');
+                hiddenContactForm.id = 'hiddenContactForm';
+                hiddenContactForm.method = 'POST';
+                hiddenContactForm.action = 'https://formsubmit.co/bibekunn@gmail.com';
+                hiddenContactForm.target = 'email_dispatch_iframe';
+                hiddenContactForm.style.display = 'none';
+                document.body.appendChild(hiddenContactForm);
+            }
+
+            hiddenContactForm.innerHTML = `
+                <input type="hidden" name="_subject" value="📬 New Direct Message from Website Visitor: ${nameVal}">
+                <input type="hidden" name="_template" value="table">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="Visitor_Name_Or_Contact" value="${nameVal}">
+                <input type="hidden" name="Visitor_Message" value="${msgVal}">
+                <input type="hidden" name="Recipient_Gmail" value="bibekunn@gmail.com">
+                <input type="hidden" name="Sent_Timestamp" value="${new Date().toLocaleString()}">
+            `;
+
+            hiddenContactForm.submit();
+
+            setTimeout(() => {
+                if (btn) btn.innerText = 'Send Message 🚀';
+                if (successMsg) successMsg.classList.remove('hidden');
+                if (nameInput) nameInput.value = '';
+                if (textInput) textInput.value = '';
+                setTimeout(() => {
+                    if (successMsg) successMsg.classList.add('hidden');
+                }, 5000);
+            }, 300);
+        }
+
+        function scrollToSection(sectionId) {
+            const elem = document.getElementById(sectionId);
+            if (elem) {
+                elem.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
+        ['mousemove', 'keydown', 'click', 'scroll', 'touchstart'].forEach(evt => {
+            window.addEventListener(evt, resetActivityTimer, { passive: true });
+        });
+
+        ['pagehide', 'beforeunload', 'unload'].forEach(evt => {
+            window.addEventListener(evt, () => {
+                sessionStorage.removeItem('portfolioUnlocked');
+                sessionStorage.removeItem('imagesUnlocked');
+                sessionStorage.removeItem('lastActivityTime');
+            });
+        });
+
+        function openLightbox(src, caption) {
+            if (sessionStorage.getItem('imagesUnlocked') !== 'true') {
+                openImagePasswordGate();
+                return;
+            }
+            currentLightboxSrc = src;
+            currentLightboxCaption = caption;
+
+            const modal = document.getElementById('lightboxModal');
+            const modalImg = document.getElementById('lightboxImage');
+            const captionText = document.getElementById('lightboxCaption');
+
+            modal.style.display = "flex";
+            modalImg.src = src;
+            captionText.innerText = caption;
+        }
+
+        function closeLightbox(e) {
+            if (e.target.classList.contains('lightbox-modal') || e.target.classList.contains('close-lightbox')) {
+                document.getElementById('lightboxModal').style.display = "none";
+            }
+        }
+
+        function openContactModal(e) {
+            if (e) e.preventDefault();
+            const modal = document.getElementById('contactModal');
+            if (modal) modal.style.display = 'flex';
+        }
+
+        function closeContactModal(e) {
+            if (!e || e.target.classList.contains('contact-modal') || e.target.classList.contains('close-contact-modal')) {
+                const modal = document.getElementById('contactModal');
+                if (modal) modal.style.display = 'none';
+            }
+        }
+
+        function runPortfolioInit() {
+            if ('scrollRestoration' in history) {
+                history.scrollRestoration = 'manual';
+            }
+            window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+            document.documentElement.scrollTop = 0;
+            document.body.scrollTop = 0;
+            checkAuthOnLoad();
+            initUniversalPortfolioEngine();
+            init3DCardParallax();
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', runPortfolioInit);
+        } else {
+            runPortfolioInit();
+        }
+
+        function initUniversalPortfolioEngine() {
+            init2DPortfolioWeatherCanvas();
+
+            ensureThreeJSReady(() => {
+                initThreeJSPortfolioBackground();
+            });
+        }
+
+        function ensureThreeJSReady(callback) {
+            if (typeof THREE !== 'undefined') {
+                try { callback(); } catch (e) { console.error('Portfolio 3D Init error:', e); }
+                return;
+            }
+            let attempts = 0;
+            const timer = setInterval(() => {
+                attempts++;
+                if (typeof THREE !== 'undefined') {
+                    clearInterval(timer);
+                    try { callback(); } catch (e) { console.error('Portfolio 3D Init error:', e); }
+                } else if (attempts > 100) {
+                    clearInterval(timer);
+                }
+            }, 100);
+
+            window.addEventListener('load', () => {
+                if (typeof THREE !== 'undefined') {
+                    clearInterval(timer);
+                    try { callback(); } catch (e) { console.error('Portfolio 3D Init error:', e); }
+                }
+            }, { once: true });
+        }
+
+        function init2DPortfolioWeatherCanvas() {
+            const canvas = document.getElementById('particleCanvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+
+            let width = canvas.width = window.innerWidth;
+            let height = canvas.height = window.innerHeight;
+
+            window.addEventListener('resize', () => {
+                width = canvas.width = window.innerWidth;
+                height = canvas.height = window.innerHeight;
+            });
+
+            const balls = [];
+            const ballColors = ['#ffaa00', '#00f2fe', '#9d50bb', '#2ecc71'];
+            for (let i = 0; i < 14; i++) {
+                balls.push({
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    r: Math.random() * 12 + 5,
+                    color: ballColors[i % ballColors.length],
+                    vx: (Math.random() - 0.5) * 1.0,
+                    vy: (Math.random() - 0.5) * 1.0
+                });
+            }
+
+            const snow = [];
+            const isMobile = width < 768;
+            const snowCount = isMobile ? 30 : 70;
+            for (let i = 0; i < snowCount; i++) {
+                snow.push({
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    r: Math.random() * 2.5 + 1,
+                    vy: Math.random() * 1.2 + 0.5
+                });
+            }
+
+            let t = 0;
+            function render2DPortfolio() {
+                if (document.hidden) {
+                    setTimeout(() => requestAnimationFrame(render2DPortfolio), 300);
+                    return;
+                }
+                ctx.clearRect(0, 0, width, height);
+                t += 0.02;
+
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+                snow.forEach(s => {
+                    ctx.beginPath();
+                    ctx.arc(s.x + Math.sin(t + s.x) * 10, s.y, s.r, 0, Math.PI * 2);
+                    ctx.fill();
+                    s.y += s.vy;
+                    if (s.y > height) s.y = -10;
+                });
+
+                balls.forEach(b => {
+                    ctx.beginPath();
+                    ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2);
+                    ctx.fillStyle = b.color;
+                    ctx.globalAlpha = 0.5;
+                    ctx.fill();
+                    ctx.globalAlpha = 1.0;
+
+                    b.x += b.vx;
+                    b.y += b.vy;
+
+                    if (b.x < 0 || b.x > width) b.vx *= -1;
+                    if (b.y < 0 || b.y > height) b.vy *= -1;
+                });
+
+                requestAnimationFrame(render2DPortfolio);
+            }
+            render2DPortfolio();
+        }
+
+        /* --- Three.js Portfolio 3D WebGL Engine --- */
+        function initThreeJSPortfolioBackground() {
+            const canvas = document.getElementById('threePortfolioCanvas');
+            if (!canvas || typeof THREE === 'undefined') return;
+
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.set(0, 100, 280);
+
+            const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: false });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+
+            const gridGeo = new THREE.PlaneGeometry(800, 800, 30, 30);
+            const gridMat = new THREE.MeshBasicMaterial({ color: 0xffaa00, wireframe: true, transparent: true, opacity: 0.18 });
+            const gridMesh = new THREE.Mesh(gridGeo, gridMat);
+            gridMesh.rotation.x = -Math.PI / 2.2;
+            gridMesh.position.y = -120;
+            scene.add(gridMesh);
+
+            const ballGroup = new THREE.Group();
+            const ballColors = [0xffaa00, 0x00f2fe, 0x9d50bb, 0x2ecc71, 0x00ff66, 0xff0080];
+            const balls = [];
+            const isMobile = window.innerWidth < 768;
+            const ballCount = isMobile ? 8 : 16;
+
+            for (let i = 0; i < ballCount; i++) {
+                const radius = Math.random() * 10 + 5;
+                const color = ballColors[i % ballColors.length];
+
+                let polyGeo;
+                if (i % 3 === 0) polyGeo = new THREE.OctahedronGeometry(radius, 0);
+                else if (i % 3 === 1) polyGeo = new THREE.IcosahedronGeometry(radius, 0);
+                else polyGeo = new THREE.SphereGeometry(radius, 12, 12);
+
+                const ballMat = new THREE.MeshBasicMaterial({ color: color, wireframe: true, transparent: true, opacity: 0.5 });
+                const ballMesh = new THREE.Mesh(polyGeo, ballMat);
+
+                const coreGeo = new THREE.SphereGeometry(radius * 0.35, 6, 6);
+                const coreMat = new THREE.MeshBasicMaterial({ color: color });
+                const coreMesh = new THREE.Mesh(coreGeo, coreMat);
+                ballMesh.add(coreMesh);
+
+                ballMesh.position.set((Math.random() - 0.5) * 600, (Math.random() - 0.5) * 450, (Math.random() - 0.5) * 350);
+
+                balls.push({
+                    mesh: ballMesh,
+                    vx: (Math.random() - 0.5) * 0.5,
+                    vy: (Math.random() - 0.5) * 0.5,
+                    vz: (Math.random() - 0.5) * 0.3,
+                    rotX: (Math.random() - 0.5) * 0.02,
+                    rotY: (Math.random() - 0.5) * 0.02
+                });
+
+                ballGroup.add(ballMesh);
+            }
+            scene.add(ballGroup);
+
+            // --- 3D PARTICLE BALL BLAST & COLOR SPRAY ENGINE ---
+            const blastParticles = [];
+            const blastGroup = new THREE.Group();
+            scene.add(blastGroup);
+
+            const colorSplashes = [];
+            const splashGroup = new THREE.Group();
+            scene.add(splashGroup);
+
+            function playLaserSFX(type) {
+                try {
+                    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+                    if (!AudioCtx) return;
+                    const ctx = new AudioCtx();
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    osc.connect(gain);
+                    gain.connect(ctx.destination);
+
+                    if (type === 'hit') {
+                        osc.type = 'sawtooth';
+                        osc.frequency.setValueAtTime(440, ctx.currentTime);
+                        osc.frequency.exponentialRampToValueAtTime(110, ctx.currentTime + 0.15);
+                        gain.gain.setValueAtTime(0.3, ctx.currentTime);
+                        gain.gain.linearRampToValueAtTime(0.01, ctx.currentTime + 0.15);
+                        osc.start();
+                        osc.stop(ctx.currentTime + 0.15);
+                    }
+                } catch (err) { }
+            }
+
+            function create3DBallBlast(pos, color) {
+                // 1. Shard Particles Burst
+                const pCount = 36;
+                const pGeo = new THREE.SphereGeometry(2.0, 6, 6);
+
+                for (let i = 0; i < pCount; i++) {
+                    const pMat = new THREE.MeshBasicMaterial({ color: color, transparent: true, opacity: 1.0 });
+                    const pMesh = new THREE.Mesh(pGeo, pMat);
+                    pMesh.position.copy(pos);
+                    blastGroup.add(pMesh);
+
+                    const speed = Math.random() * 11 + 5;
+                    const theta = Math.random() * Math.PI * 2;
+                    const phi = Math.acos((Math.random() * 2) - 1);
+
+                    blastParticles.push({
+                        mesh: pMesh,
+                        vx: speed * Math.sin(phi) * Math.cos(theta),
+                        vy: speed * Math.sin(phi) * Math.sin(theta),
+                        vz: speed * Math.cos(phi),
+                        life: 1.0
+                    });
+                }
+
+                // 2. Expand 3D Color Spray Flash Ring & Light Burst in Background
+                const splashGeo = new THREE.RingGeometry(4, 12, 32);
+                const splashMat = new THREE.MeshBasicMaterial({ color: color, side: THREE.DoubleSide, transparent: true, opacity: 0.95 });
+                const splashMesh = new THREE.Mesh(splashGeo, splashMat);
+                splashMesh.position.copy(pos);
+                splashMesh.lookAt(camera.position);
+                splashGroup.add(splashMesh);
+
+                const splashLight = new THREE.PointLight(color, 12, 300);
+                splashLight.position.copy(pos);
+                scene.add(splashLight);
+
+                colorSplashes.push({
+                    mesh: splashMesh,
+                    light: splashLight,
+                    scale: 1.0,
+                    opacity: 0.95
+                });
+
+                playLaserSFX('hit');
+            }
+
+            // Raycaster for Clicking/Touching Floating 3D Balls to Blast & Spray Colors
+            const bgRaycaster = new THREE.Raycaster();
+            const bgMouse = new THREE.Vector2();
+
+            function onBgCanvasClick(e) {
+                if (!e) return;
+                const clientX = e.clientX !== undefined ? e.clientX : (e.touches && e.touches[0] ? e.touches[0].clientX : (e.changedTouches && e.changedTouches[0] ? e.changedTouches[0].clientX : null));
+                const clientY = e.clientY !== undefined ? e.clientY : (e.touches && e.touches[0] ? e.touches[0].clientY : (e.changedTouches && e.changedTouches[0] ? e.changedTouches[0].clientY : null));
+                if (clientX === null || clientY === null) return;
+
+                const rect = canvas.getBoundingClientRect();
+                bgMouse.x = ((clientX - rect.left) / rect.width) * 2 - 1;
+                bgMouse.y = -((clientY - rect.top) / rect.height) * 2 + 1;
+
+                bgRaycaster.setFromCamera(bgMouse, camera);
+                const intersects = bgRaycaster.intersectObjects(balls.map(b => b.mesh), true);
+
+                if (intersects.length > 0) {
+                    for (let i = 0; i < intersects.length; i++) {
+                        const hitObj = intersects[i].object;
+                        const idx = balls.findIndex(b => b.mesh === hitObj || (hitObj.parent && b.mesh === hitObj.parent));
+                        if (idx !== -1) {
+                            const b = balls[idx];
+                            create3DBallBlast(b.mesh.position, b.mesh.material.color.getHex());
+
+                            const newColor = ballColors[Math.floor(Math.random() * ballColors.length)];
+                            b.mesh.material.color.setHex(newColor);
+                            if (b.mesh.children && b.mesh.children[0] && b.mesh.children[0].material) {
+                                b.mesh.children[0].material.color.setHex(newColor);
+                            }
+                            b.mesh.position.set(
+                                (Math.random() - 0.5) * 550,
+                                (Math.random() - 0.5) * 400,
+                                (Math.random() - 0.5) * 300
+                            );
+                            break;
+                        }
+                    }
+                }
+            }
+
+            canvas.addEventListener('click', onBgCanvasClick);
+            window.addEventListener('pointerdown', onBgCanvasClick, { passive: true });
+            window.addEventListener('click', onBgCanvasClick, { passive: true });
+            window.addEventListener('touchstart', (e) => {
+                if (e.touches && e.touches[0]) {
+                    onBgCanvasClick(e.touches[0]);
+                }
+            }, { passive: true });
+
+            let mouseX = 0, mouseY = 0;
+            if (!isMobile) {
+                window.addEventListener('mousemove', (e) => {
+                    mouseX = (e.clientX - window.innerWidth / 2) * 0.08;
+                    mouseY = (e.clientY - window.innerHeight / 2) * 0.08;
+                }, { passive: true });
+            }
+
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            }, { passive: true });
+
+            let count = 0;
+            function animatePortfolio3D() {
+                if (document.hidden) {
+                    setTimeout(() => requestAnimationFrame(animatePortfolio3D), 300);
+                    return;
+                }
+                requestAnimationFrame(animatePortfolio3D);
+                count += 0.02;
+                gridMesh.rotation.z += 0.0008;
+
+                balls.forEach(b => {
+                    b.mesh.rotation.x += b.rotX;
+                    b.mesh.rotation.y += b.rotY;
+                    b.mesh.position.x += b.vx;
+                    b.mesh.position.y += b.vy;
+                    b.mesh.position.z += b.vz;
+
+                    if (Math.abs(b.mesh.position.x) > 300) {
+                        b.vx *= -1;
+                        create3DBallBlast(b.mesh.position, b.mesh.material.color.getHex());
+                    }
+                    if (Math.abs(b.mesh.position.y) > 220) {
+                        b.vy *= -1;
+                        create3DBallBlast(b.mesh.position, b.mesh.material.color.getHex());
+                    }
+                    if (Math.abs(b.mesh.position.z) > 180) b.vz *= -1;
+                });
+
+                // Animate Particle Explosions
+                for (let i = blastParticles.length - 1; i >= 0; i--) {
+                    const p = blastParticles[i];
+                    p.mesh.position.x += p.vx;
+                    p.mesh.position.y += p.vy;
+                    p.mesh.position.z += p.vz;
+                    p.vx *= 0.92;
+                    p.vy *= 0.92;
+                    p.vz *= 0.92;
+                    p.life -= 0.035;
+                    p.mesh.material.opacity = Math.max(0, p.life);
+
+                    if (p.life <= 0) {
+                        blastGroup.remove(p.mesh);
+                        blastParticles.splice(i, 1);
+                    }
+                }
+
+                // Animate Color Spray Flashes
+                for (let i = colorSplashes.length - 1; i >= 0; i--) {
+                    const s = colorSplashes[i];
+                    s.scale += 2.8;
+                    s.opacity -= 0.045;
+                    s.mesh.scale.set(s.scale, s.scale, 1);
+                    s.mesh.material.opacity = Math.max(0, s.opacity);
+                    s.light.intensity = Math.max(0, s.opacity * 14);
+
+                    if (s.opacity <= 0) {
+                        splashGroup.remove(s.mesh);
+                        scene.remove(s.light);
+                        colorSplashes.splice(i, 1);
+                    }
+                }
+
+                camera.position.x += (mouseX - camera.position.x) * 0.03;
+                camera.position.y += (-mouseY + 100 - camera.position.y) * 0.03;
+                camera.lookAt(0, 0, 0);
+
+                renderer.render(scene, camera);
+            }
+
+            animatePortfolio3D();
+        }
+
+        function init3DCardParallax() {
+            if (window.matchMedia('(pointer: coarse)').matches) return; // Skip 3D tilt on touch devices
+            const cards = document.querySelectorAll('.info-card');
+            cards.forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left - rect.width / 2;
+                    const y = e.clientY - rect.top - rect.height / 2;
+                    const tiltX = (y / (rect.height / 2)) * -5;
+                    const tiltY = (x / (rect.width / 2)) * 5;
+                    card.style.transform = `perspective(1200px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) translateZ(8px)`;
+                });
+            });
+        }
+    </script>
+    <!-- Ultra-High Visibility Floating Social Dock -->
+    <div class="floating-social-dock">
+        <a href="https://www.facebook.com/profile.php?id=100077988874834" target="_blank"
+            onclick="openSocialApp(event, 'https://www.facebook.com/profile.php?id=100077988874834', 'fb://profile/100077988874834')"
+            class="dock-social-btn dock-fb" aria-label="Facebook">
+            <img src="facebook.png" alt="Facebook">
+            <span class="dock-tooltip">Facebook Profile</span>
+        </a>
+        <a href="https://www.tiktok.com/@bibek_866284?_t=8lTCojGbjdq&_r=1" target="_blank"
+            onclick="openSocialApp(event, 'https://www.tiktok.com/@bibek_866284?_t=8lTCojGbjdq&_r=1', 'snssdk1128://user/profile/@bibek_866284')"
+            class="dock-social-btn dock-tt" aria-label="TikTok">
+            <img src="tik-tok.png" alt="TikTok">
+            <span class="dock-tooltip">TikTok @bibek_866284</span>
+        </a>
+        <a href="https://www.instagram.com/bibeksapkota147/?utm_source=qr" target="_blank"
+            onclick="openSocialApp(event, 'https://www.instagram.com/bibeksapkota147/?utm_source=qr', 'instagram://user?username=bibeksapkota147')"
+            class="dock-social-btn dock-ig" aria-label="Instagram">
+            <img src="instagram.png" alt="Instagram">
+            <span class="dock-tooltip">Instagram @bibeksapkota147</span>
+        </a>
+        <a href="https://www.youtube.com/channel/UCThD8PRvL7l7BVFqcWjZWUg" target="_blank"
+            onclick="openSocialApp(event, 'https://www.youtube.com/channel/UCThD8PRvL7l7BVFqcWjZWUg', 'vnd.youtube://www.youtube.com/channel/UCThD8PRvL7l7BVFqcWjZWUg')"
+            class="dock-social-btn dock-yt" aria-label="YouTube">
+            <img src="youtube.png" alt="YouTube">
+            <span class="dock-tooltip">YouTube Channel</span>
+        </a>
+        <a href="https://discord.gg/uQ6gWNc7N" target="_blank"
+            onclick="openSocialApp(event, 'https://discord.gg/uQ6gWNc7N', 'discord://discord.gg/uQ6gWNc7N')"
+            class="dock-social-btn dock-discord" aria-label="Discord">
+            <img src="discord.png" alt="Discord">
+            <span class="dock-tooltip">Discord Community</span>
+        </a>
+    </div>
+
+    <script>
+        // Anti-Copy Text & Right-Click Protection Engine
+        document.addEventListener('contextmenu', function (e) {
+            e.preventDefault();
+            showAntiCopyToast('🔒 Content Protected: Right-click menu is disabled on Portfolio.');
+            return false;
+        });
+
+        document.addEventListener('copy', function (e) {
+            e.preventDefault();
+            showAntiCopyToast('🔒 Text Protection Enabled: Copying content is disabled on Portfolio.');
+            return false;
+        });
+
+        document.addEventListener('cut', function (e) {
+            e.preventDefault();
+            showAntiCopyToast('🔒 Text Protection Enabled: Cutting content is disabled on Portfolio.');
+            return false;
+        });
+
+        document.addEventListener('keydown', function (e) {
+            if ((e.ctrlKey || e.metaKey) && (e.key === 'c' || e.key === 'C' || e.key === 'x' || e.key === 'X' || e.key === 'u' || e.key === 'U' || e.key === 's' || e.key === 'S')) {
+                e.preventDefault();
+                showAntiCopyToast('🔒 Text Protection Enabled: Keyboard shortcuts disabled.');
+                return false;
+            }
+        });
+
+        let toastTimeout;
+        function showAntiCopyToast(msg) {
+            let toast = document.getElementById('antiCopyToast');
+            if (!toast) {
+                toast = document.createElement('div');
+                toast.id = 'antiCopyToast';
+                toast.className = 'anti-copy-toast';
+                document.body.appendChild(toast);
+            }
+            toast.innerHTML = msg;
+            toast.classList.add('show-toast');
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                toast.classList.remove('show-toast');
+            }, 2800);
+        }
+    </script>
+
+    <div id="google_translate_element" style="display:none;"></div>
+    <script src="translator.js"></script>
+    <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" async defer></script>
+</body>
+
+</html>
